@@ -14,15 +14,15 @@ const StyledQuestionsList = styled.div`
 `;
 
 const QuestionsList: FC<QuestionsListProps> = ({ items }) => {
-  return (
-    <StyledQuestionsList>
+  return <></>;
+};
+
+/* <StyledQuestionsList>
       {items &&
         items.map((item) => {
           return <QuestionItem key={item.id} item={item} />;
         })}
       <hr style={{ width: "100%" }} />
-    </StyledQuestionsList>
-  );
-};
+    </StyledQuestionsList> */
 
 export default QuestionsList;

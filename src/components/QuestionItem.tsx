@@ -1,7 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { IQuestion } from "../redux/interfaces";
+import { quizSelector } from "../redux/selectors";
 import AnswersList from "./AnswersList";
 
 const StyledQuestionItem = styled.div`
@@ -10,24 +12,22 @@ const StyledQuestionItem = styled.div`
 `;
 
 const StyledQuestionText = styled.h4`
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
   margin: 0;
   margin-bottom: 30px;
   max-width: 90%;
 `;
 
-interface QuestionItemProps {
-  item: IQuestion;
-}
+interface QuestionItemProps {}
 
-const QuestionItem: FC<QuestionItemProps> = ({ item }) => {
-  const { text, answers } = item;
+const QuestionItem: FC<QuestionItemProps> = () => {
+  const {} = useSelector(quizSelector);
 
   return (
     <StyledQuestionItem>
-      <StyledQuestionText>{text}</StyledQuestionText>
-      <AnswersList items={answers} />
+      <StyledQuestionText>{""}</StyledQuestionText>
+      <AnswersList items={[]} />
     </StyledQuestionItem>
   );
 };

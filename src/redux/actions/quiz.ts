@@ -21,6 +21,6 @@ export const fetchQuizes = () => async (dispatch: any) => {
   const { data } = await axios.get(
     "https://my-json-server.typicode.com/seriksk1/api-quiz-app/quizes"
   );
-  console.log(data);
+
   dispatch(setQuizes(data));
 };
