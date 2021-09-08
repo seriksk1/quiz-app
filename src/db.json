@@ -1,0 +1,56 @@
+{
+  "quizes": [
+    {
+      "id": "1",
+      "name": "History Quiz",
+      "questions": [
+        {
+          "id": "1",
+          "text": "Who is the best Dota 2 player?",
+          "answers": [
+            { "id": "1", "text": "Dendi" },
+            { "id": "2", "text": "s4" },
+            { "id": "3", "text": "Miracle" },
+            { "id": "4", "text": "Ya" }
+          ],
+          "rightAnswerId": "4"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Math Quiz",
+      "questions": [
+        {
+          "id": "1",
+          "text": "2+2=...?",
+          "answers": [
+            { "id": "1", "text": "5" },
+            { "id": "2", "text": "2" },
+            { "id": "3", "text": "4" },
+            { "id": "4", "text": "22" }
+          ],
+          "rightAnswerId": "3"
+        }
+      ]
+    },
+
+    {
+      "id": "3",
+      "name": "Ukrainian Quiz",
+      "questions": [
+        {
+          "id": "1",
+          "text": "How many letters in ukrainian alphabet?",
+          "answers": [
+            { "id": "1", "text": 30 },
+            { "id": "2", "text": 33 },
+            { "id": "3", "text": 29 },
+            { "id": "4", "text": 31 }
+          ],
+          "rightAnswerId": "2"
+        }
+      ]
+    }
+  ]
+}
