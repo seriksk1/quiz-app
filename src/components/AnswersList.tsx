@@ -12,7 +12,7 @@ const AnswersList: FC<AnswersListProps> = ({ items }) => {
     <div>
       {items &&
         items.map((item) => {
-          return <AnswerItem key={item.id} item={item} />;
+          return <AnswerItem key={`${item.id}`} item={item} />;
         })}
     </div>
   );

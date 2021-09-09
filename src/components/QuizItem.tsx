@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import { startQuiz, setCurrentQuestion } from "../redux/actions/quiz";
+import { startQuiz } from "../redux/actions/quiz";
 import { IQuiz } from "../redux/interfaces";
 
 const StyledQuizItem = styled.div`
@@ -38,7 +38,7 @@ const QuizItem: FC<QuizItemProps> = ({ children, item }) => {
   const history = useHistory();
 
   const handleClick = () => {
-    dispatch([startQuiz(item), setCurrentQuestion(item.questions[0])]);
+    dispatch(startQuiz(item));
     history.push("/quiz");
   };
 

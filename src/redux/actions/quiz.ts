@@ -1,5 +1,5 @@
 import { ACTION_QUIZ } from "../contants";
-import { IQuestion, IQuiz } from "../interfaces";
+import { IQuiz } from "../interfaces";
 import axios from "axios";
 
 export const startQuiz = (quiz: IQuiz) => ({
@@ -7,14 +7,22 @@ export const startQuiz = (quiz: IQuiz) => ({
   payload: quiz,
 });
 
-export const setCurrentQuestion = (question: IQuestion) => ({
-  type: ACTION_QUIZ.SET_QUESTION,
-  payload: question,
+export const setNextQuestion = (index: number) => ({
+  type: ACTION_QUIZ.SET_NEXT_QUESTION,
+  payload: index,
 });
 
 export const setQuizes = (quizes: IQuiz[]) => ({
   type: ACTION_QUIZ.SET_QUIZES,
   payload: quizes,
+});
+
+export const setIsAnswered = () => ({
+  type: ACTION_QUIZ.SET_IS_ANSWERED,
+});
+
+export const clearQuiz = () => ({
+  type: ACTION_QUIZ.CLEAR_QUIZ,
 });
 
 export const fetchQuizes = () => async (dispatch: any) => {

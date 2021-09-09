@@ -1,8 +1,8 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { IQuestion } from "../redux/interfaces";
+import { IQuizState } from "../redux/reducers/quiz";
 import { quizSelector } from "../redux/selectors";
 import AnswersList from "./AnswersList";
 
@@ -22,12 +22,12 @@ const StyledQuestionText = styled.h4`
 interface QuestionItemProps {}
 
 const QuestionItem: FC<QuestionItemProps> = () => {
-  const {} = useSelector(quizSelector);
+  const { currentQuestion }: IQuizState = useSelector(quizSelector);
 
   return (
     <StyledQuestionItem>
-      <StyledQuestionText>{""}</StyledQuestionText>
-      <AnswersList items={[]} />
+      <StyledQuestionText>{currentQuestion?.text}</StyledQuestionText>
+      <AnswersList items={currentQuestion!.answers} />
     </StyledQuestionItem>
   );
 };

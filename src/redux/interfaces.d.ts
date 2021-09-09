@@ -4,6 +4,7 @@ export interface IQuiz {
   id: ID;
   name: string;
   questions: IQuestion[];
+  numberOfQuestions?: number;
 }
 
 export interface IQuestion {
@@ -11,4 +12,5 @@ export interface IQuestion {
   text: Text;
   answers: Answer[];
   rightAnswerId: ID;
+  isAnswered?: boolean;
 }
