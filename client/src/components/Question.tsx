@@ -21,7 +21,7 @@ const StyledQuestionText = styled.h4`
 
 interface QuestionItemProps {}
 
-const QuestionItem: FC<QuestionItemProps> = () => {
+const Question: FC<QuestionItemProps> = () => {
   const { currentQuestion }: IQuizState = useSelector(quizSelector);
 
   return (
@@ -32,4 +32,4 @@ const QuestionItem: FC<QuestionItemProps> = () => {
   );
 };
 
-export default QuestionItem;
+export default Question;

@@ -1,33 +1,11 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
 
 import { startQuiz } from "../redux/actions/quiz";
 import { IQuiz } from "../redux/interfaces";
 
-const StyledQuizItem = styled.div`
-  width: 80%;
-  max-width: 500px;
-  padding: 10px 0;
-  box-sizing: border-box;
-  background-color: #2a9d8f;
-  margin: 15px 0;
-  border-radius: 12px;
-  cursor: pointer;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-weight: 500;
-  font-size: 20px;
-  color: #fff;
-
-  &:hover {
-    background-color: #28776e;
-  }
-`;
+import { StyledQuizItem } from "./styled-components";
 
 interface QuizItemProps {
   item: IQuiz;

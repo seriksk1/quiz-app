@@ -1,6 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
 
 import { IQuizState } from "../redux/reducers/quiz";
 import { setIsAnswered } from "../redux/actions/quiz";
@@ -9,45 +8,7 @@ import { addAnswer } from "../redux/actions/user";
 import { quizSelector } from "../redux/selectors";
 import { Answer } from "../redux/types";
 
-const StyledAnswerItem = styled.div`
-  margin-bottom: 30px;
-
-  &:last-of-type {
-    margin-bottom: 15px;
-  }
-`;
-
-const StyledAnswerText = styled.p`
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0 0 10px;
-`;
-
-const StyledButton = styled.button(
-  ({ color }: any) => `
-  width: 120px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  border: none;
-  max-width: 500px;
-  padding: 10px 0;
-  box-sizing: border-box;
-
-  background-color: ${color || "#2a9d8f"} ;
-
-  margin: 0;
-  border-radius: 12px;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 1px 1px 1px 2px #d6d6d6;
-  }
-`
-);
-
-// background-color: #ff5151; - wrong
-// background-color: #53da4a; - right
+import { StyledAnswerItem, StyledButton } from "./styled-components";
 
 interface AnswerItemProps {
   item: Answer;
@@ -55,7 +16,6 @@ interface AnswerItemProps {
 
 const AnswerItem: FC<AnswerItemProps> = ({ item }) => {
   const dispatch = useDispatch();
-
   const { currentQuestion }: IQuizState = useSelector(quizSelector)!;
 
   const handleClick = () => {
@@ -74,9 +34,8 @@ const AnswerItem: FC<AnswerItemProps> = ({ item }) => {
 
   return (
     <StyledAnswerItem>
-      <StyledAnswerText>{item.text}</StyledAnswerText>
       <StyledButton color={getAnswerBtnColor()} onClick={handleClick}>
-        Answer
+        {item.text}
       </StyledButton>
     </StyledAnswerItem>
   );

@@ -40,12 +40,18 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
     case ACTION_QUIZ.SET_IS_ANSWERED: {
       return {
         ...state,
-        currentQuestion: { ...state.currentQuestion, isAnswered: true },
+        currentQuestion: {
+          ...state.currentQuestion,
+          isAnswered: true,
+        },
       };
     }
 
     case ACTION_QUIZ.CLEAR_QUIZ: {
-      return { ...state, ...initialState };
+      return {
+        ...state,
+        ...initialState,
+      };
     }
 
     default:
