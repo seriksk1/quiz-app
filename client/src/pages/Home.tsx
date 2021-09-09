@@ -23,7 +23,6 @@ function Home() {
 
   return (
     <>
-      <StyledTitle>List of Quizes: </StyledTitle>
       <QuizesList items={quizes} />
     </>
   );

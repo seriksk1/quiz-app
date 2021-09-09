@@ -15,6 +15,8 @@ export const StyledLink = styled(Link)`
 `;
 
 export const StyledAnswerItem = styled.div`
+  width: 85%;
+  max-width: 300px;
   margin-bottom: 30px;
 
   &:last-of-type {
@@ -24,7 +26,7 @@ export const StyledAnswerItem = styled.div`
 
 export const StyledButton = styled.button(
   ({ color }: any) => `
-  width: 200px;
+  width: 100%;
   font-size: 16px;
   font-weight: 700;
   color: #fff;

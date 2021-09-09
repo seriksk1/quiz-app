@@ -13,3 +13,5 @@ export const ACTION_USER = {
   FINISH_QUIZ: "FINISH_QUIZ",
   SET_RESULTS: "SET_RESULTS",
 };
+
+export const TIME_TO_ANSWER = 10;

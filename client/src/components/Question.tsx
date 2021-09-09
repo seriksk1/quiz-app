@@ -6,9 +6,16 @@ import { IQuizState } from "../redux/reducers/quiz";
 import { quizSelector } from "../redux/selectors";
 import AnswersList from "./AnswersList";
 
+import { TIME_TO_ANSWER } from "../redux/contants";
+import TimeCounter from "./TimeCounter";
+
 const StyledQuestionItem = styled.div`
+  display: flex;
+  flex-direction: column;
+
   font-family: "Roboto", sans-serif;
-  margin: 10px 0;
+  margin: 10px auto;
+  max-width: 90%;
 `;
 
 const StyledQuestionText = styled.h4`
@@ -16,7 +23,7 @@ const StyledQuestionText = styled.h4`
   font-weight: 400;
   margin: 0;
   margin-bottom: 30px;
-  max-width: 90%;
+  text-align: center;
 `;
 
 interface QuestionItemProps {}
@@ -27,6 +34,9 @@ const Question: FC<QuestionItemProps> = () => {
   return (
     <StyledQuestionItem>
       <StyledQuestionText>{currentQuestion?.text}</StyledQuestionText>
+      <StyledQuestionText>
+        <TimeCounter />
+      </StyledQuestionText>
       <AnswersList items={currentQuestion!.answers} />
     </StyledQuestionItem>
   );
