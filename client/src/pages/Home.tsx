@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { QuizesList } from "../components";
-import { fetchQuizes } from "../redux/actions/quiz";
+import { clearQuiz, fetchQuizes } from "../redux/actions/quiz";
 import { IQuizState } from "../redux/reducers/quiz";
 import { quizSelector } from "../redux/selectors";
 
@@ -18,6 +18,7 @@ function Home() {
   const { quizes }: IQuizState = useSelector(quizSelector);
 
   useEffect(() => {
+    dispatch(clearQuiz());
     dispatch(fetchQuizes());
   }, []);
 

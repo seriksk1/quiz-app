@@ -12,14 +12,16 @@ import { StyledAnswerItem, StyledButton } from "./styled-components";
 
 interface AnswerItemProps {
   item: Answer;
+  updateCurrentQuestion: Function;
 }
 
-const AnswerItem: FC<AnswerItemProps> = ({ item }) => {
+const AnswerItem: FC<AnswerItemProps> = ({ item, updateCurrentQuestion }) => {
   const dispatch = useDispatch();
   const { currentQuestion }: IQuizState = useSelector(quizSelector)!;
 
   const handleClick = () => {
-    dispatch([setIsAnswered(), addAnswer(item.id)]);
+    dispatch([addAnswer(item.id)]);
+    updateCurrentQuestion();
   };
 
   const isAnswerRight = () => {

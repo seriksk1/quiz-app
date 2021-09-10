@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import { quizSelector, userSelector } from "../redux/selectors";
 import { IQuizState } from "../redux/reducers/quiz";
@@ -33,9 +34,15 @@ const Results = () => {
   };
 
   return (
-    <StyledTitleCentre>
-      Your score: {getResults()} of {currentQuiz?.questions.length}
-    </StyledTitleCentre>
+    <>
+      {currentQuiz ? (
+        <StyledTitleCentre>
+          Your score: {getResults()} of {currentQuiz?.questions.length}
+        </StyledTitleCentre>
+      ) : (
+        <Redirect to="/" />
+      )}
+    </>
   );
 };
 

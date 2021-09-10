@@ -6,12 +6,14 @@ const initialState: IQuizState = {
   currentQuestion: null,
   currentQuiz: null,
   quizes: null,
+  currentQuestionIndex: 0,
 };
 
 export interface IQuizState {
   currentQuiz: IQuiz | null;
   currentQuestion: IQuestion | null;
   quizes: IQuiz[] | null;
+  currentQuestionIndex: number;
 }
 
 const quiz = (state = initialState, { type, payload }: AnyAction) => {
@@ -31,9 +33,12 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
       };
 
     case ACTION_QUIZ.SET_NEXT_QUESTION: {
+      const prevIndex = state.currentQuestionIndex;
+      const nextIndex = prevIndex + 1;
       return {
         ...state,
-        currentQuestion: state.currentQuiz?.questions[payload],
+        currentQuestion: state.currentQuiz?.questions[nextIndex],
+        currentQuestionIndex: nextIndex,
       };
     }
 

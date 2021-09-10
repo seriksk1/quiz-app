@@ -1,42 +1,46 @@
-import React, { useState, useRef } from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setNextQuestion } from "../redux/actions/quiz";
+import React, { FC, useEffect, useState, useRef } from "react";
 import { TIME_TO_ANSWER } from "../redux/contants";
+import { getDeadTime, getTimeRemaining } from "../redux/helpers/timer";
 
-const TimeCounter = () => {
-  const dispatch = useDispatch();
-  const [time, setTime] = useState(TIME_TO_ANSWER);
+interface TimeCounterProps {
+  nextQuestion: any;
+}
 
-  const timerRef = useRef<any>();
+const TimeCounter: FC<TimeCounterProps> = ({ nextQuestion }) => {
+  const [time, setTime] = useState<any>("00:00:10");
+  const ref = useRef<any>();
 
-  const decreaseTime = () => {
-    setTime((prev) => prev - 1);
-  };
-
-  const stopTimer = () => {
-    if (time === 0) {
-      clearInterval(timerRef.current);
-      dispatch(setNextQuestion(1));
+  const getTimer = (e: any) => {
+    let { total, hours, minutes, seconds } = getTimeRemaining(e);
+    if (total >= 0) {
+      const timer =
+        (hours > 9 ? hours : "0" + hours) +
+        ":" +
+        (minutes > 9 ? minutes : "0" + minutes) +
+        ":" +
+        (seconds > 9 ? seconds : "0" + seconds);
+      return timer;
     } else {
-      console.log("time:", time);
+      nextQuestion();
+      clearTimer(getDeadTime());
     }
   };
 
-  useEffect(() => {
-    timerRef.current = setInterval(decreaseTime, 1000);
-    return () => {
-      clearInterval(timerRef.current);
-    };
-  }, []);
+  const clearTimer = (currentTime: any) => {
+    setTime("00:00:10");
 
-  useEffect(() => {
-    stopTimer();
-  }, [time]);
+    if (ref.current) {
+      clearInterval(ref.current);
+    }
 
-  const showTime = (time: number) => {
-    return time;
+    ref.current = setInterval(() => {
+      setTime(getTimer(currentTime));
+    });
   };
+
+  useEffect(() => {
+    clearTimer(getDeadTime());
+  }, []);
 
   return <div>{time}</div>;
 };

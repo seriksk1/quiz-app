@@ -7,9 +7,8 @@ export const startQuiz = (quiz: IQuiz) => ({
   payload: quiz,
 });
 
-export const setNextQuestion = (index: number) => ({
+export const setNextQuestion = () => ({
   type: ACTION_QUIZ.SET_NEXT_QUESTION,
-  payload: index,
 });
 
 export const setQuizes = (quizes: IQuiz[]) => ({

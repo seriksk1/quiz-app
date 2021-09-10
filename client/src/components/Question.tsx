@@ -1,12 +1,14 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import React, { FC, useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { IQuizState } from "../redux/reducers/quiz";
 import { quizSelector } from "../redux/selectors";
-import AnswersList from "./AnswersList";
 
-import { TIME_TO_ANSWER } from "../redux/contants";
+import { setNextQuestion } from "../redux/actions/quiz";
+
+import AnswersList from "./AnswersList";
 import TimeCounter from "./TimeCounter";
 
 const StyledQuestionItem = styled.div`
@@ -29,15 +31,29 @@ const StyledQuestionText = styled.h4`
 interface QuestionItemProps {}
 
 const Question: FC<QuestionItemProps> = () => {
-  const { currentQuestion }: IQuizState = useSelector(quizSelector);
+  const { currentQuiz, currentQuestion, currentQuestionIndex }: IQuizState =
+    useSelector(quizSelector);
+
+  const dispatch = useDispatch();
+
+  const showNextQuestion = () => {
+    dispatch(setNextQuestion());
+  };
 
   return (
     <StyledQuestionItem>
       <StyledQuestionText>{currentQuestion?.text}</StyledQuestionText>
       <StyledQuestionText>
-        <TimeCounter />
+        {currentQuestionIndex < currentQuiz!.questions.length ? (
+          <TimeCounter nextQuestion={showNextQuestion} />
+        ) : (
+          <div>Results</div>
+        )}
       </StyledQuestionText>
-      <AnswersList items={currentQuestion!.answers} />
+      <AnswersList
+        items={currentQuestion!.answers}
+        updateCurrentQuestion={showNextQuestion}
+      />
     </StyledQuestionItem>
   );
 };
