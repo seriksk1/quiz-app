@@ -19,3 +19,17 @@ export const getDeadTime = () => {
   deadline.setSeconds(deadline.getSeconds() + TIME_TO_ANSWER);
   return deadline;
 };
+
+export const getTransformedTime = (
+  hours: number,
+  minutes: number,
+  seconds: number
+) => {
+  return (
+    (hours > 9 ? hours : "0" + hours) +
+    ":" +
+    (minutes > 9 ? minutes : "0" + minutes) +
+    ":" +
+    (seconds > 9 ? seconds : "0" + seconds)
+  );
+};

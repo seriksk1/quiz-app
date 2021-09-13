@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { IQuizState } from "../redux/reducers/quiz";
-import { setIsAnswered } from "../redux/actions/quiz";
 import { addAnswer } from "../redux/actions/user";
 
 import { quizSelector } from "../redux/selectors";

@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useEffect } from "react";
+import React, { FC, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -31,24 +31,31 @@ const StyledQuestionText = styled.h4`
 interface QuestionItemProps {}
 
 const Question: FC<QuestionItemProps> = () => {
-  const { currentQuiz, currentQuestion, currentQuestionIndex }: IQuizState =
+  const { currentQuiz, currentQuestion }: IQuizState =
     useSelector(quizSelector);
 
   const dispatch = useDispatch();
+  const history = useHistory();
+  const refIndex = useRef<any>(0);
+
+  const isNextIndexValid = () => {
+    return refIndex.current !== currentQuiz?.questions.length! - 1;
+  };
 
   const showNextQuestion = () => {
-    dispatch(setNextQuestion());
+    if (isNextIndexValid()) {
+      refIndex.current++;
+      dispatch(setNextQuestion());
+    } else {
+      history.push("/results");
+    }
   };
 
   return (
     <StyledQuestionItem>
       <StyledQuestionText>{currentQuestion?.text}</StyledQuestionText>
       <StyledQuestionText>
-        {currentQuestionIndex < currentQuiz!.questions.length ? (
-          <TimeCounter nextQuestion={showNextQuestion} />
-        ) : (
-          <div>Results</div>
-        )}
+        <TimeCounter nextQuestion={showNextQuestion} />
       </StyledQuestionText>
       <AnswersList
         items={currentQuestion!.answers}

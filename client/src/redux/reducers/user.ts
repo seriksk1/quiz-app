@@ -25,10 +25,10 @@ const user = (state = initialState, { type, payload }: AnyAction) => {
         answers: [...state.answers, payload],
       };
 
-    case ACTION_USER.FINISH_QUIZ:
+    case ACTION_USER.CLEAR_ANSWERS:
       return {
         ...state,
-        ...payload,
+        ...initialState,
       };
 
     case ACTION_USER.SET_RESULTS: {

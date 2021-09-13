@@ -1,6 +1,9 @@
 import React, { FC, useEffect, useState, useRef } from "react";
-import { TIME_TO_ANSWER } from "../redux/contants";
-import { getDeadTime, getTimeRemaining } from "../redux/helpers/timer";
+import {
+  getDeadTime,
+  getTimeRemaining,
+  getTransformedTime,
+} from "../redux/helpers/timer";
 
 interface TimeCounterProps {
   nextQuestion: any;
@@ -13,17 +16,15 @@ const TimeCounter: FC<TimeCounterProps> = ({ nextQuestion }) => {
   const getTimer = (e: any) => {
     let { total, hours, minutes, seconds } = getTimeRemaining(e);
     if (total >= 0) {
-      const timer =
-        (hours > 9 ? hours : "0" + hours) +
-        ":" +
-        (minutes > 9 ? minutes : "0" + minutes) +
-        ":" +
-        (seconds > 9 ? seconds : "0" + seconds);
-      return timer;
+      return getTransformedTime(hours, minutes, seconds);
     } else {
-      nextQuestion();
-      clearTimer(getDeadTime());
+      restart();
     }
+  };
+
+  const restart = () => {
+    clearTimer(getDeadTime());
+    nextQuestion();
   };
 
   const clearTimer = (currentTime: any) => {
@@ -35,12 +36,13 @@ const TimeCounter: FC<TimeCounterProps> = ({ nextQuestion }) => {
 
     ref.current = setInterval(() => {
       setTime(getTimer(currentTime));
-    });
+    }, 1000);
   };
 
   useEffect(() => {
     clearTimer(getDeadTime());
-  }, []);
+    return () => clearInterval(ref.current);
+  }, [nextQuestion]);
 
   return <div>{time}</div>;
 };
