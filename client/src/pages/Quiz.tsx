@@ -1,14 +1,11 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
-
 import styled from "styled-components";
 
-import { IQuizState } from "../redux/reducers/quiz";
 import { quizSelector } from "../redux/selectors";
+import { IQuizState } from "../redux/interfaces";
 
 import { Question } from "../components";
-
-interface QuizProps {}
 
 const StyledSecondaryText = styled.p`
   font-size: 16px;
@@ -17,7 +14,7 @@ const StyledSecondaryText = styled.p`
   text-align: center;
 `;
 
-const Quiz: FC<QuizProps> = () => {
+const Quiz: FC = () => {
   const { currentQuiz, currentQuestionIndex }: IQuizState =
     useSelector(quizSelector);
 

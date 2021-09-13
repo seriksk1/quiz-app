@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { FC } from "react";
 import styled from "styled-components";
 
 import { StyledLink } from "./styled-components";
@@ -16,12 +15,12 @@ const StyledLinkTitle = styled(StyledLink)`
   color: #fff;
 `;
 
-function Header() {
+const Header: FC = () => {
   return (
     <StyledHeader>
       <StyledLinkTitle to="/">Quiz Time</StyledLinkTitle>
     </StyledHeader>
   );
-}
+};
 
 export default Header;

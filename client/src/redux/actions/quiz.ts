@@ -16,8 +16,9 @@ export const setQuizes = (quizes: IQuiz[]) => ({
   payload: quizes,
 });
 
-export const setIsAnswered = () => ({
+export const setIsAnswered = (isAnswered: boolean) => ({
   type: ACTION_QUIZ.SET_IS_ANSWERED,
+  payload: isAnswered,
 });
 
 export const clearQuiz = () => ({

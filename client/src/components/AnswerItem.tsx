@@ -1,16 +1,14 @@
 import React, { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { IQuizState } from "../redux/reducers/quiz";
 import { addAnswer } from "../redux/actions/user";
-
 import { quizSelector } from "../redux/selectors";
-import { Answer } from "../redux/types";
+import { IQuizState, IAnswer } from "../redux/interfaces";
 
 import { StyledAnswerItem, StyledButton } from "./styled-components";
 
 interface AnswerItemProps {
-  item: Answer;
+  item: IAnswer;
   updateCurrentQuestion: Function;
 }
 

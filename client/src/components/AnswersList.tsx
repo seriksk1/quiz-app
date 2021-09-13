@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 
-import { Answer } from "../redux/types";
+import { IAnswer } from "../redux/interfaces";
 import AnswerItem from "./AnswerItem";
 
 interface AnswersListProps {
-  items: Answer[];
+  items: IAnswer[];
   updateCurrentQuestion: Function;
 }
 

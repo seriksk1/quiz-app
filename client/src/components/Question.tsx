@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import { IQuizState } from "../redux/reducers/quiz";
-import { quizSelector } from "../redux/selectors";
+import { setIsAnswered, setNextQuestion } from "../redux/actions/quiz";
 
-import { setNextQuestion } from "../redux/actions/quiz";
+import { quizSelector } from "../redux/selectors";
+import { IQuizState } from "../redux/interfaces";
 
 import AnswersList from "./AnswersList";
 import TimeCounter from "./TimeCounter";
@@ -36,19 +36,25 @@ const Question: FC<QuestionItemProps> = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const refIndex = useRef<any>(0);
+  const refIndex = useRef<number>(0);
 
   const isNextIndexValid = () => {
     return refIndex.current !== currentQuiz?.questions.length! - 1;
   };
 
   const showNextQuestion = () => {
-    if (isNextIndexValid()) {
-      refIndex.current++;
-      dispatch(setNextQuestion());
-    } else {
-      history.push("/results");
-    }
+    dispatch(setIsAnswered(true));
+
+    setTimeout(() => {
+      dispatch(setIsAnswered(false));
+
+      if (isNextIndexValid()) {
+        refIndex.current++;
+        dispatch(setNextQuestion());
+      } else {
+        history.push("/results");
+      }
+    }, 1000);
   };
 
   return (

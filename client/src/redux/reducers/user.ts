@@ -1,15 +1,11 @@
 import { ACTION_USER } from "../contants";
 import { AnyAction } from "../types";
+import { IUserState } from "../interfaces";
 
-const initialState = {
+const initialState: IUserState = {
   answers: [],
   result: null,
 };
-
-export interface IUserState {
-  answers: [] | undefined;
-  result: number | null;
-}
 
 const user = (state = initialState, { type, payload }: AnyAction) => {
   switch (type) {

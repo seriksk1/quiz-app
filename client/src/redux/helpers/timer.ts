@@ -1,8 +1,10 @@
 import { TIME_TO_ANSWER } from "../contants";
 
-export const getTimeRemaining = (e: any) => {
-  const newDate = new Date();
-  const total = Date.parse(e) - Date.parse(newDate.toString());
+export const getTimeRemaining = (deadTime: Date) => {
+  const currentTime = new Date();
+
+  const total =
+    Date.parse(deadTime.toString()) - Date.parse(currentTime.toString());
   const seconds = Math.floor((total / 1000) % 60);
   const minutes = Math.floor((total / 1000 / 60) % 60);
   const hours = Math.floor(((total / 1000) * 60 * 60) % 24);

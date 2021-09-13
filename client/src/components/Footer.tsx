@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 
 const StyledFooter = styled.footer`
@@ -11,8 +11,8 @@ const StyledFooter = styled.footer`
   background-color: #2a9d8f;
 `;
 
-function Footer() {
+const Footer: FC = () => {
   return <StyledFooter>Footer</StyledFooter>;
-}
+};
 
 export default Footer;

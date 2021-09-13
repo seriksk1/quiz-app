@@ -1,20 +1,19 @@
-import React from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { quizSelector, userSelector } from "../redux/selectors";
-import { IQuizState } from "../redux/reducers/quiz";
-import { IUserState } from "../redux/reducers/user";
-
 import { StyledTitle } from "../components/styled-components";
+
+import { quizSelector, userSelector } from "../redux/selectors";
+import { IQuizState, IUserState } from "../redux/interfaces";
 
 const StyledTitleCentre = styled(StyledTitle)`
   font-size: 28px;
   text-align: center;
 `;
 
-const Results = () => {
+const Results: FC = () => {
   const { currentQuiz }: IQuizState = useSelector(quizSelector);
   const { answers }: IUserState = useSelector(userSelector);
 

@@ -1,5 +1,17 @@
 import { Text, Answer } from "./types";
 
+export interface IQuizState {
+  currentQuiz: IQuiz | null;
+  currentQuestion: IQuestion | null;
+  quizes: IQuiz[] | null;
+  currentQuestionIndex: number;
+}
+
+export interface IUserState {
+  answers: any[];
+  result: number | null;
+}
+
 export interface IQuiz {
   id: ID;
   name: string;
@@ -13,4 +25,9 @@ export interface IQuestion {
   answers: Answer[];
   rightAnswerId: ID;
   isAnswered?: boolean;
+}
+
+export interface IAnswer {
+  id: ID;
+  text: Text;
 }

@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState, useRef } from "react";
+
 import {
   getDeadTime,
   getTimeRemaining,
@@ -6,28 +7,29 @@ import {
 } from "../redux/helpers/timer";
 
 interface TimeCounterProps {
-  nextQuestion: any;
+  nextQuestion: Function;
 }
 
 const TimeCounter: FC<TimeCounterProps> = ({ nextQuestion }) => {
-  const [time, setTime] = useState<any>("00:00:10");
+  const [time, setTime] = useState<string>("00:00:10");
   const ref = useRef<any>();
 
-  const getTimer = (e: any) => {
-    let { total, hours, minutes, seconds } = getTimeRemaining(e);
+  const getTimer = (deadTime: Date) => {
+    let { total, hours, minutes, seconds } = getTimeRemaining(deadTime);
     if (total >= 0) {
       return getTransformedTime(hours, minutes, seconds);
     } else {
       restart();
+      return "00:00:10";
     }
   };
 
   const restart = () => {
-    clearTimer(getDeadTime());
     nextQuestion();
+    clearTimer(getDeadTime());
   };
 
-  const clearTimer = (currentTime: any) => {
+  const clearTimer = (deadTime: Date) => {
     setTime("00:00:10");
 
     if (ref.current) {
@@ -35,7 +37,7 @@ const TimeCounter: FC<TimeCounterProps> = ({ nextQuestion }) => {
     }
 
     ref.current = setInterval(() => {
-      setTime(getTimer(currentTime));
+      setTime(getTimer(deadTime));
     }, 1000);
   };
 

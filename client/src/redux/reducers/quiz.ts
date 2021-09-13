@@ -1,5 +1,5 @@
 import { ACTION_QUIZ } from "../contants";
-import { IQuestion, IQuiz } from "../interfaces";
+import { IQuizState } from "../interfaces";
 import { AnyAction } from "../types";
 
 const initialState: IQuizState = {
@@ -8,13 +8,6 @@ const initialState: IQuizState = {
   quizes: null,
   currentQuestionIndex: 0,
 };
-
-export interface IQuizState {
-  currentQuiz: IQuiz | null;
-  currentQuestion: IQuestion | null;
-  quizes: IQuiz[] | null;
-  currentQuestionIndex: number;
-}
 
 const quiz = (state = initialState, { type, payload }: AnyAction) => {
   switch (type) {
