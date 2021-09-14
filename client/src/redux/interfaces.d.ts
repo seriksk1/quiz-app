@@ -13,7 +13,7 @@ export interface IUserState {
 }
 
 export interface IQuiz {
-  id: ID;
+  _id: ID;
   name: string;
   questions: IQuestion[];
   numberOfQuestions?: number;

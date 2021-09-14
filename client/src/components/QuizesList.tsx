@@ -23,7 +23,7 @@ const QuizesList: FC<QuizesListProps> = ({ items }) => {
       {items &&
         items.map((item) => {
           return (
-            <QuizItem key={item.id} item={item}>
+            <QuizItem key={item._id} item={item}>
               {item.name}
             </QuizItem>
           );

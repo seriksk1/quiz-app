@@ -6,8 +6,6 @@ const router = express.Router();
 router.post("/quiz", QuizCtrl.createQuiz);
 router.patch("/quiz/:id", QuizCtrl.updateQuiz);
 router.delete("/quiz/:id", QuizCtrl.deleteQuiz);
-router.get("/quizes", QuizCtrl.getQuizes);
+router.get("/quizzes", QuizCtrl.getQuizzes);
 
 module.exports = router;
-
-export {};

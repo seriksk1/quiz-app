@@ -2,6 +2,13 @@ import { ACTION_QUIZ } from "../contants";
 import { IQuiz } from "../interfaces";
 import axios from "axios";
 
+const API_URI = process.env.API_URI;
+console.log(API_URI);
+
+const api = axios.create({
+  baseURL: `http://localhost:3001/api`,
+});
+
 export const startQuiz = (quiz: IQuiz) => ({
   type: ACTION_QUIZ.START_QUIZ,
   payload: quiz,
@@ -26,9 +33,13 @@ export const clearQuiz = () => ({
 });
 
 export const fetchQuizes = () => async (dispatch: any) => {
-  const { data } = await axios.get(
-    "https://my-json-server.typicode.com/seriksk1/api-quiz-app/quizes"
-  );
+  try {
+    const { data } = await api.get(`/quizzes`);
+    const items = data.data;
+    console.log(items);
 
-  dispatch(setQuizes(data));
+    dispatch(setQuizes(items));
+  } catch (err) {
+    console.log(err);
+  }
 };

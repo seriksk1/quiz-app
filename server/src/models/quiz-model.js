@@ -1,10 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
-// id: ID;
-// name: string;
-// questions: IQuestion[];
-// numberOfQuestions?: number;
+const { Schema, model } = require("mongoose");
 
 const Quiz = new Schema(
   {
@@ -15,4 +9,9 @@ const Quiz = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("quizes", Quiz);
+module.exports = model("quizzes", Quiz);
+
+// id: ID;
+// name: string;
+// questions: IQuestion[];
+// numberOfQuestions?: number;
