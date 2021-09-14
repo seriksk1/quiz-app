@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import { Header, Footer } from "./components";
-import { Home, Quiz, Results } from "./pages";
+import { Home, Quiz, Results, CreateQuiz } from "./pages";
 
 import styled from "styled-components";
 
@@ -21,6 +21,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/quiz" component={Quiz} />
           <Route exact path="/results" component={Results} />
+          <Route exact path="/create" component={CreateQuiz} />
         </Switch>
       </StyledContainer>
       <Footer />

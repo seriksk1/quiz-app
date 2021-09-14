@@ -1,6 +1,7 @@
 import { Text, Answer } from "./types";
 
 export interface IQuizState {
+  quizToCreate: IQuiz | null;
   currentQuiz: IQuiz | null;
   currentQuestion: IQuestion | null;
   quizes: IQuiz[] | null;

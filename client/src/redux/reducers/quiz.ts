@@ -3,6 +3,7 @@ import { IQuizState } from "../interfaces";
 import { AnyAction } from "../types";
 
 const initialState: IQuizState = {
+  quizToCreate: null,
   currentQuestion: null,
   currentQuiz: null,
   quizes: null,
