@@ -27,7 +27,6 @@ const Results: FC = () => {
     const rightAnswers = getAllRightAnswers();
 
     return rightAnswers?.reduce((sum, item, i) => {
-      console.log(item, answers![i]);
       return item === answers![i] ? sum + 1 : sum;
     }, 0);
   };

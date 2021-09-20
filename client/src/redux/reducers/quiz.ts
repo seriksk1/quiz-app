@@ -53,6 +53,32 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
       };
     }
 
+    case ACTION_QUIZ.CREATE_NEW_QUIZ: {
+      return {
+        ...state,
+        quizToCreate: {},
+      };
+    }
+
+    case ACTION_QUIZ.NEW_QUESTION: {
+      return {
+        ...state,
+        quizToCreate: {
+          ...state.quizToCreate,
+          questions: [...state.quizToCreate?.questions!, 1],
+        },
+      };
+    }
+
+    case ACTION_QUIZ.NEW_ANSWER: {
+      return {
+        ...state,
+        quizToCreate: {
+          ...state.quizToCreate,
+        },
+      };
+    }
+
     default:
       return state;
   }

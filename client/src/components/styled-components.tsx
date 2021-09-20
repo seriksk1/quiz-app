@@ -45,6 +45,23 @@ export const StyledButton = styled.button(
 `
 );
 
+export const StyledCreateBtn = styled(StyledButton)`
+  display: flex;
+  padding: 10px;
+  width: fit-content;
+
+  font-size: 28px;
+  padding: 0 8px;
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 50%;
+
+  &:hover {
+    filter: none;
+    background-color: #312e2e;
+  }
+`;
+
 export const StyledIconContainer = styled.div`
   font-size: 16px;
   color: #000;

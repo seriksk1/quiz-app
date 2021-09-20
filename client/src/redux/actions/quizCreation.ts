@@ -1,5 +1,13 @@
 import { ACTION_QUIZ } from "../contants";
 
+export const newQuestion = (data: any) => ({
+  type: ACTION_QUIZ.NEW_QUESTION,
+});
+
+export const newAnswer = (data: any) => ({
+  type: ACTION_QUIZ.NEW_ANSWER,
+});
+
 export const addQuestion = (data: any) => ({
   type: ACTION_QUIZ.ADD_QUESTION,
   payload: data,

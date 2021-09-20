@@ -3,7 +3,6 @@ import { IQuiz } from "../interfaces";
 import axios from "axios";
 
 const API_URI = process.env.API_URI;
-console.log(API_URI);
 
 const api = axios.create({
   baseURL: `http://localhost:3001/api`,
@@ -36,7 +35,6 @@ export const fetchQuizes = () => async (dispatch: any) => {
   try {
     const { data } = await api.get(`/quizzes`);
     const items = data.data;
-    console.log(items);
 
     dispatch(setQuizes(items));
   } catch (err) {

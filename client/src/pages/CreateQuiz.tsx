@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { TextField } from "@material-ui/core";
-
-import { StyledButton } from "../components/styled-components";
+import { StyledCreateBtn } from "../components/styled-components";
 import { AddQuestionList } from "../components";
 
 const StyledForm = styled.form`
@@ -18,41 +17,34 @@ const StyledTitle = styled.h1`
   text-align: center;
 `;
 
-const StyledInput = styled(TextField)`
-  padding: 15px;
-`;
-
-const StyledCreateBtn = styled(StyledButton)`
+const Column = styled.div`
   display: flex;
-  padding: 10px;
-  width: fit-content;
-
-  font-size: 28px;
-  padding: 0 8px;
-  margin: 0 auto;
-  border-radius: 50%;
-
-  &:hover {
-    filter: none;
-    background-color: #312e2e;
-  }
+  flex-direction: column;
 `;
+
+const emptyQuestion = {
+  answers: ["Вариант 1"],
+};
 
 function CreateQuiz() {
+  const [questions, setQuestions] = useState<any>([]);
+
   const handleAddQuestion = (e: React.FormEvent) => {
     e.preventDefault();
-  };
 
-  const items = [1];
+    setQuestions((prev: any) => [...prev, emptyQuestion]);
+  };
 
   return (
     <>
-      <StyledTitle>Create Quiz</StyledTitle>
-      <StyledForm>
-        <StyledInput id="name" type="text" name="name" label="Type quiz name" />
-        <AddQuestionList items={items} />
-        <StyledCreateBtn onClick={handleAddQuestion}>+</StyledCreateBtn>
-      </StyledForm>
+      <Column>
+        <StyledTitle>Create Quiz</StyledTitle>
+        <StyledForm>
+          <TextField id="name" type="text" name="name" label="Type quiz name" />
+          <AddQuestionList items={questions} />
+          <StyledCreateBtn onClick={handleAddQuestion}>+</StyledCreateBtn>
+        </StyledForm>
+      </Column>
     </>
   );
 }
