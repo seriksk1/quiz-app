@@ -12,3 +12,4 @@ export { default as AddQuestionItem } from "./AddQuestionItem";
 
 export { default as AddAnswerList } from "./AddAnswerList";
 export { default as AddAnswerItem } from "./AddAnswerItem";
+export { default as Card } from "./Card";

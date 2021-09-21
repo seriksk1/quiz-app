@@ -27,3 +27,12 @@ export const deleteAnswer = (data: any) => ({
   type: ACTION_QUIZ.DELETE_ANSWER,
   payload: data,
 });
+
+export const setSelectedCard = (data: any) => ({
+  type: ACTION_QUIZ.SET_SELECTED_CARD,
+  payload: data,
+});
+
+export const startCreateQuiz = () => ({
+  type: ACTION_QUIZ.START_CREATE_QUIZ,
+});

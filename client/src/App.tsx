@@ -7,7 +7,7 @@ import { Home, Quiz, Results, CreateQuiz } from "./pages";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
-  width: 80%;
+  width: 100%
   padding: 20px 0;
   margin: 0 auto;
 `;

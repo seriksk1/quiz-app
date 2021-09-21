@@ -1,49 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { TextField } from "@material-ui/core";
-import { StyledCreateBtn } from "../components/styled-components";
-import { AddQuestionList } from "../components";
+import { AddQuestionList, Card } from "../components";
 
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-`;
+import { startCreateQuiz } from "../redux/actions/quizCreation";
+import { quizSelector } from "../redux/selectors";
+import { IQuizState } from "../redux/interfaces";
+import { StyledButton } from "../components/styled-components";
 
 const StyledTitle = styled.h1`
   margin: 0;
+  margin-top: 20px;
   text-align: center;
 `;
 
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
-const emptyQuestion = {
-  answers: ["Вариант 1"],
-};
+const StyledCreateQuizBtn = styled(StyledButton)`
+  max-width: 200px;
+  margin-bottom: 20px;
+`;
 
 function CreateQuiz() {
-  const [questions, setQuestions] = useState<any>([]);
+  const dispatch = useDispatch();
+  const { quizToCreate }: IQuizState = useSelector(quizSelector);
 
-  const handleAddQuestion = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setQuestions((prev: any) => [...prev, emptyQuestion]);
+  const handleCreateQuiz = () => {
+    console.log(quizToCreate);
   };
+
+  useEffect(() => {
+    dispatch(startCreateQuiz());
+    console.log("Creating new quiz");
+  }, []);
 
   return (
     <>
       <Column>
         <StyledTitle>Create Quiz</StyledTitle>
-        <StyledForm>
-          <TextField id="name" type="text" name="name" label="Type quiz name" />
-          <AddQuestionList items={questions} />
-          <StyledCreateBtn onClick={handleAddQuestion}>+</StyledCreateBtn>
-        </StyledForm>
+        <Card type="quiz" item={undefined} />
+        <AddQuestionList items={quizToCreate?.questions!} />
+        <StyledCreateQuizBtn onClick={handleCreateQuiz}>
+          Create quiz
+        </StyledCreateQuizBtn>
       </Column>
     </>
   );

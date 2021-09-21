@@ -1,20 +1,28 @@
 import React, { FC } from "react";
-import styled from "styled-components";
 
 import { AddAnswerItem } from "../components";
+import { IAnswer } from "../redux/interfaces";
 
 interface AddAnswerListProps {
-  items: any[];
+  items: IAnswer[] | [];
+  selected?: boolean;
 }
 
-const AddAnswerList: FC<AddAnswerListProps> = ({ items }) => {
+const AddAnswerList: FC<AddAnswerListProps> = ({ items, selected }) => {
   return (
-    <div>
+    <>
       {items &&
         items.map((item) => {
-          return <AddAnswerItem item={item} />;
+          return (
+            <AddAnswerItem key={item.id} item={item} selected={selected} />
+          );
         })}
-    </div>
+      {/* <AddAnswerItem
+        key={"fake"}
+        item={{ id: "fake", text: "Add variant" }}
+        selected={selected}
+      /> */}
+    </>
   );
 };
 

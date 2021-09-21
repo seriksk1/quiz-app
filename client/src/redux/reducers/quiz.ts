@@ -4,6 +4,8 @@ import { AnyAction } from "../types";
 
 const initialState: IQuizState = {
   quizToCreate: null,
+  selectedCard: null,
+
   currentQuestion: null,
   currentQuiz: null,
   quizes: null,
@@ -53,10 +55,20 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
       };
     }
 
-    case ACTION_QUIZ.CREATE_NEW_QUIZ: {
+    case ACTION_QUIZ.START_CREATE_QUIZ: {
       return {
         ...state,
-        quizToCreate: {},
+        quizToCreate: {
+          name: "New quiz",
+          questions: [
+            {
+              id: 1,
+              text: "Question",
+              rightAnswerId: null,
+              answers: [{ id: 1, text: "Answer" }],
+            },
+          ],
+        },
       };
     }
 
@@ -76,6 +88,13 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
         quizToCreate: {
           ...state.quizToCreate,
         },
+      };
+    }
+
+    case ACTION_QUIZ.SET_SELECTED_CARD: {
+      return {
+        ...state,
+        selectedCard: payload,
       };
     }
 

@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { StyledCreateBtn } from "../components/styled-components";
 import { AddAnswerList } from "../components";
+import { IQuestion } from "../redux/interfaces";
 
 const StyledAddQuestion = styled.div`
   display: flex;
@@ -31,18 +32,10 @@ const StyledInput = styled(TextField)`
 `;
 
 interface AddQuestionItemProps {
-  item: any;
+  item: IQuestion;
 }
 
 const AddQuestionItem: FC<AddQuestionItemProps> = ({ item }) => {
-  const [answers, setAnswers] = useState<any>([]);
-
-  const handleAddAnswer = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setAnswers((prev: any) => [...prev, {}]);
-  };
-
   return (
     <StyledAddQuestion>
       <StyledInput
@@ -54,13 +47,12 @@ const AddQuestionItem: FC<AddQuestionItemProps> = ({ item }) => {
         name=""
         id=""
       />
-      {answers.length ? (
+      {item.answers ? (
         <>
           <h3>Answers</h3>
-          <AddAnswerList items={answers} />
+          <AddAnswerList items={item.answers} />
         </>
       ) : null}
-      <StyledCreateBtn onClick={handleAddAnswer}>+</StyledCreateBtn>
     </StyledAddQuestion>
   );
 };

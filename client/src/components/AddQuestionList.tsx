@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import styled from "styled-components";
 
-import { AddQuestionItem } from "../components";
+import { Card } from "../components";
+import { IQuestion } from "../redux/interfaces";
 
 interface AddQuestionListProps {
-  items: any[];
+  items: IQuestion[];
 }
 
 const AddQuestionList: FC<AddQuestionListProps> = ({ items }) => {
@@ -12,7 +12,7 @@ const AddQuestionList: FC<AddQuestionListProps> = ({ items }) => {
     <>
       {items &&
         items.map((item) => {
-          return <AddQuestionItem key={item} item={item} />;
+          return <Card key={item.id} item={item} />;
         })}
     </>
   );
