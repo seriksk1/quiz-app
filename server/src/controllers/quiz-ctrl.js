@@ -28,15 +28,6 @@ const getQuizzes = async (req, res) => {
   }
 };
 
-const createQuiz = async () => {
-  try {
-    console.log("call quiz-service create");
-    await QuizService.createQuiz();
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 const getQuizById = async () => {
   try {
     console.log("call quiz-service getById");
@@ -46,10 +37,48 @@ const getQuizById = async () => {
   }
 };
 
+const createQuiz = async (req, res) => {
+  try {
+    console.log("call quiz-service create quiz");
+    const newQuiz = await QuizService.createQuiz();
+
+    res.status(200).json({ success: true, data: newQuiz });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const createQuestion = async (req, res, next) => {
+  try {
+    const { quizId } = req.body;
+    console.log("call quiz-service create question");
+    const newQuestion = await QuizService.createQuestion(quizId);
+
+    res.status(200).json({ success: true, data: newQuestion });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const createAnswer = async (req, res, next) => {
+  try {
+    const { questionId } = req.body;
+    console.log("questionId:", questionId);
+    console.log("call quiz-service create answer");
+    const newAnswer = await QuizService.createAnswer(questionId);
+
+    res.status(200).json({ success: true, data: newAnswer });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   updateQuiz,
   deleteQuiz,
   getQuizzes,
-  createQuiz,
   getQuizById,
+  createQuiz,
+  createQuestion,
+  createAnswer,
 };

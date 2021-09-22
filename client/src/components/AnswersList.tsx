@@ -25,7 +25,7 @@ const AnswersList: FC<AnswersListProps> = ({
         items.map((item) => {
           return (
             <AnswerItem
-              key={`${item.id}`}
+              key={`${item._id}`}
               item={item}
               updateCurrentQuestion={updateCurrentQuestion}
             />

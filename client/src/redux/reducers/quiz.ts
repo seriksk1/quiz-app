@@ -3,13 +3,13 @@ import { IQuizState } from "../interfaces";
 import { AnyAction } from "../types";
 
 const initialState: IQuizState = {
+  quizes: null,
+  currentQuiz: null,
+  currentQuestion: null,
+  currentQuestionIndex: 0,
+
   quizToCreate: null,
   selectedCard: null,
-
-  currentQuestion: null,
-  currentQuiz: null,
-  quizes: null,
-  currentQuestionIndex: 0,
 };
 
 const quiz = (state = initialState, { type, payload }: AnyAction) => {
@@ -58,35 +58,39 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
     case ACTION_QUIZ.START_CREATE_QUIZ: {
       return {
         ...state,
-        quizToCreate: {
-          name: "New quiz",
-          questions: [
-            {
-              id: 1,
-              text: "Question",
-              rightAnswerId: null,
-              answers: [{ id: 1, text: "Answer" }],
-            },
-          ],
-        },
+        quizToCreate: payload,
       };
     }
 
-    case ACTION_QUIZ.NEW_QUESTION: {
+    case ACTION_QUIZ.ADD_QUESTION: {
+      const oldItems = state.quizToCreate?.questions!;
+
       return {
         ...state,
         quizToCreate: {
           ...state.quizToCreate,
-          questions: [...state.quizToCreate?.questions!, 1],
+          questions: [...oldItems, payload],
         },
       };
     }
 
-    case ACTION_QUIZ.NEW_ANSWER: {
+    case ACTION_QUIZ.ADD_ANSWER: {
+      const oldItems = [...state.quizToCreate?.questions!];
+
+      console.log("oldItems:", oldItems);
+      console.log("adding answer:", payload);
+
+      // const currentQuestion = oldItems.find((item) => {
+      //   return item._id === payload.questionId;
+      // });
+
+      // console.log("currentQuestion:", currentQuestion);
+
       return {
         ...state,
         quizToCreate: {
           ...state.quizToCreate,
+          // questions: [...newItems, updatedQuestion],
         },
       };
     }

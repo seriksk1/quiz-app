@@ -15,12 +15,6 @@ const user = (state = initialState, { type, payload }: AnyAction) => {
         ...payload,
       };
 
-    case ACTION_USER.ADD_ANSWER:
-      return {
-        ...state,
-        answers: [...state.answers, payload],
-      };
-
     case ACTION_USER.CLEAR_ANSWERS:
       return {
         ...state,

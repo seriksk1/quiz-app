@@ -25,15 +25,12 @@ const StyledInput = styled(TextField)`
   }
 
   &:hover :before {
-    ${({ selected }: any) => {
-      return selected
+    ${({ selected }: any) =>
+      selected
         ? ` 
       display: flex;
-      border-bottom: 1px solid rgb(218 218 218 / 42%) !important;
-      `
-        : null;
-    }}
-
+      border-bottom: 1px solid rgb(218 218 218 / 42%) !important;`
+        : null}
 `;
 
 const StyledCheckBox = styled(Checkbox)`
@@ -61,9 +58,17 @@ const StyledRemoveBtn = styled(IconButton)`
 interface AddAnswerItemProps {
   item: IAnswer;
   selected?: boolean;
+  number?: number;
+
+  addAnswer?: () => void;
 }
 
-const AddAnswerItem: FC<AddAnswerItemProps> = ({ item, selected }) => {
+const AddAnswerItem: FC<AddAnswerItemProps> = ({
+  item,
+  selected,
+  number,
+  addAnswer,
+}) => {
   const [isRightAnswer, setIsRightAnswer] = useState<boolean>(false);
 
   const handleDeleteClick = (e: React.FormEvent) => {
@@ -90,9 +95,10 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({ item, selected }) => {
         type="text"
         multiline
         maxRows={4}
-        defaultValue={`Variant ${item.id}`}
+        defaultValue={item.text || `Variant ${number}`}
         placeholder="Variant"
         selected={selected}
+        onClick={addAnswer}
       />
 
       {selected ? (

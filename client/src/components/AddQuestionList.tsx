@@ -11,8 +11,8 @@ const AddQuestionList: FC<AddQuestionListProps> = ({ items }) => {
   return (
     <>
       {items &&
-        items.map((item) => {
-          return <Card key={item.id} item={item} />;
+        items.map((item, i) => {
+          return <Card key={item._id} item={item} number={i + 1} />;
         })}
     </>
   );

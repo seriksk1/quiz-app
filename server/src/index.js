@@ -1,10 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 require("./db");
 
 const app = express();
+app.use(cors());
+app.use(express.json());
+
 const port = process.env.PORT;
 
 const quizRouter = require("./routes/quiz-router");
@@ -20,4 +24,6 @@ app.use((req, res, next) => {
 
 app.use("/api", quizRouter);
 
-app.listen(port, () => console.log(`Running on port ${port}`));
+app.listen(port, () => {
+  console.log(`Running on port ${port}`);
+});

@@ -35,6 +35,7 @@ export const fetchQuizes = () => async (dispatch: any) => {
   try {
     const { data } = await api.get(`/quizzes`);
     const items = data.data;
+    console.log(items);
 
     dispatch(setQuizes(items));
   } catch (err) {

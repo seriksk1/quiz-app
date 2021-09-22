@@ -22,7 +22,7 @@ export interface IQuiz {
 }
 
 export interface IQuestion {
-  id: ID;
+  _id: ID;
   text: Text;
   answers: Answer[];
   rightAnswerId: ID;
@@ -30,6 +30,6 @@ export interface IQuestion {
 }
 
 export interface IAnswer {
-  id: ID;
+  _id: ID;
   text: Text;
 }

@@ -12,16 +12,16 @@ const AddAnswerList: FC<AddAnswerListProps> = ({ items, selected }) => {
   return (
     <>
       {items &&
-        items.map((item) => {
+        items.map((item, i) => {
           return (
-            <AddAnswerItem key={item.id} item={item} selected={selected} />
+            <AddAnswerItem
+              key={item._id}
+              item={item}
+              selected={selected}
+              number={i + 1}
+            />
           );
         })}
-      {/* <AddAnswerItem
-        key={"fake"}
-        item={{ id: "fake", text: "Add variant" }}
-        selected={selected}
-      /> */}
     </>
   );
 };

@@ -7,7 +7,8 @@ import AddAnswerList from "./AddAnswerList";
 
 import { quizSelector } from "../redux/selectors";
 import { IQuestion, IQuizState } from "../redux/interfaces";
-import { setSelectedCard } from "../redux/actions/quizCreation";
+import { newAnswer, setSelectedCard } from "../redux/actions/quizCreation";
+import AddAnswerItem from "./AddAnswerItem";
 
 const StyledCard = styled.div`
   display: flex;
@@ -73,18 +74,24 @@ type CardType = "quiz" | "question" | null;
 interface CardProps {
   item?: IQuestion;
   type?: CardType;
+  number?: number;
 }
 
-const Card: FC<CardProps> = ({ type, item }) => {
+const Card: FC<CardProps> = ({ type, item, number }) => {
   const dispatch = useDispatch();
   const { selectedCard }: IQuizState = useSelector(quizSelector);
 
   const handleSelectToggle = () => {
-    dispatch(setSelectedCard(item?.id));
+    dispatch(setSelectedCard(item?._id));
+  };
+
+  const handleAddAnswer = () => {
+    console.log("add answer with question_id:", item?._id);
+    dispatch(newAnswer(item?._id));
   };
 
   const isSelected = () => {
-    return item?.id === selectedCard;
+    return item?._id === selectedCard;
   };
 
   return (
@@ -92,11 +99,11 @@ const Card: FC<CardProps> = ({ type, item }) => {
       {isSelected() ? <StyledSelectStrip /> : null}
 
       <StyledCardTop>
-        <StyledInput //Question
+        <StyledInput
           multiline
           type={type}
           selected={isSelected()}
-          defaultValue={type === "quiz" ? "New quiz" : `Question ${item?.id}`}
+          defaultValue={type === "quiz" ? "New quiz" : `Question ${number}`}
           placeholder={type === "quiz" ? "Quiz" : `Question`}
           inputProps={{
             style: { fontSize: type === "quiz" ? "32px" : "16px" },
@@ -106,6 +113,13 @@ const Card: FC<CardProps> = ({ type, item }) => {
 
       <StyledCardBottom>
         <AddAnswerList items={item?.answers!} selected={isSelected()} />
+
+        {isSelected() && type !== "quiz" ? (
+          <AddAnswerItem
+            item={{ _id: "new", text: "Add variant" }}
+            addAnswer={handleAddAnswer}
+          />
+        ) : null}
       </StyledCardBottom>
     </StyledCard>
   );

@@ -17,12 +17,12 @@ const AnswerItem: FC<AnswerItemProps> = ({ item, updateCurrentQuestion }) => {
   const { currentQuestion }: IQuizState = useSelector(quizSelector)!;
 
   const handleClick = () => {
-    dispatch([addAnswer(item.id)]);
+    dispatch([addAnswer(item._id)]);
     updateCurrentQuestion();
   };
 
   const isAnswerRight = () => {
-    return currentQuestion?.rightAnswerId === item.id;
+    return currentQuestion?.rightAnswerId === item._id;
   };
 
   const getAnswerBtnColor = () => {
