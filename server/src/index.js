@@ -12,6 +12,8 @@ app.use(express.json());
 const port = process.env.PORT;
 
 const quizRouter = require("./routes/quiz-router");
+const questionRouter = require("./routes/question-router");
+const answerRouter = require("./routes/answer-router");
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
@@ -22,7 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", quizRouter);
+app.use("/api", [quizRouter, questionRouter, answerRouter]);
 
 app.listen(port, () => {
   console.log(`Running on port ${port}`);

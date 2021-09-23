@@ -76,21 +76,67 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
 
     case ACTION_QUIZ.ADD_ANSWER: {
       const oldItems = [...state.quizToCreate?.questions!];
+      const currentQuestion = oldItems.find((item) => {
+        return item._id === payload.questionId;
+      });
 
-      console.log("oldItems:", oldItems);
-      console.log("adding answer:", payload);
+      const newItems = oldItems.filter(
+        (item) => item._id !== payload.questionId
+      );
 
-      // const currentQuestion = oldItems.find((item) => {
-      //   return item._id === payload.questionId;
-      // });
-
-      // console.log("currentQuestion:", currentQuestion);
+      const updatedQuestion = {
+        ...currentQuestion,
+        answers: [...currentQuestion?.answers!, payload],
+      };
 
       return {
         ...state,
         quizToCreate: {
           ...state.quizToCreate,
-          // questions: [...newItems, updatedQuestion],
+          questions: [...newItems, updatedQuestion],
+        },
+      };
+    }
+
+    case ACTION_QUIZ.DELETE_QUESTION: {
+      const oldItems = state.quizToCreate?.questions!;
+
+      const newItems = oldItems.filter((item) => item._id !== payload);
+
+      return {
+        ...state,
+        quizToCreate: {
+          ...state.quizToCreate,
+          questions: newItems,
+        },
+      };
+    }
+
+    case ACTION_QUIZ.DELETE_ANSWER: {
+      const oldItems = [...state.quizToCreate?.questions!];
+
+      const currentQuestion = oldItems.find((item) => {
+        return item._id === state.selectedCard;
+      });
+
+      const newItems = oldItems.filter(
+        (item) => item._id !== state.selectedCard
+      );
+
+      const newAnswers = currentQuestion?.answers.filter(
+        (item) => item._id !== payload
+      );
+
+      const updatedQuestion = {
+        ...currentQuestion,
+        answers: newAnswers,
+      };
+
+      return {
+        ...state,
+        quizToCreate: {
+          ...state.quizToCreate,
+          questions: [...newItems, updatedQuestion],
         },
       };
     }

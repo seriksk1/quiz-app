@@ -6,7 +6,6 @@ const Question = new Schema(
     answers: [{ type: Schema.Types.ObjectId, ref: "Answer" }],
 
     text: { type: String, default: "New question" },
-    rightAnswerId: { type: Number, default: null },
     isAnswered: { type: Boolean, default: false },
   },
   { timestamps: true }

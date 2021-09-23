@@ -28,6 +28,13 @@ const user = (state = initialState, { type, payload }: AnyAction) => {
       };
     }
 
+    case ACTION_USER.ADD_ANSWER: {
+      return {
+        ...state,
+        result: payload,
+      };
+    }
+
     default:
       return state;
   }

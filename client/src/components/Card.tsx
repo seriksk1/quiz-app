@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { TextField } from "@material-ui/core";
-import AddAnswerList from "./AddAnswerList";
 
 import { quizSelector } from "../redux/selectors";
 import { IQuestion, IQuizState } from "../redux/interfaces";
-import { newAnswer, setSelectedCard } from "../redux/actions/quizCreation";
+import {
+  deleteQuestion,
+  newAnswer,
+  setSelectedCard,
+} from "../redux/actions/quizCreation";
+import AddAnswerList from "./AddAnswerList";
 import AddAnswerItem from "./AddAnswerItem";
+import { StyledButton } from "./styled-components";
 
 const StyledCard = styled.div`
   display: flex;
@@ -69,6 +74,24 @@ const StyledCardBottom = styled.div`
   padding-top: 16px;
 `;
 
+const StyledQuestionControls = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const StyledControlButton = styled(StyledButton)`
+  display: flex;
+  width: fit-content;
+  padding: 10px 15px;
+  font-size: 14px;
+  margin: 0;
+
+  &:hover {
+    filter: none;
+    background-color: #e83939;
+  }
+`;
+
 type CardType = "quiz" | "question" | null;
 
 interface CardProps {
@@ -88,6 +111,11 @@ const Card: FC<CardProps> = ({ type, item, number }) => {
   const handleAddAnswer = () => {
     console.log("add answer with question_id:", item?._id);
     dispatch(newAnswer(item?._id));
+  };
+
+  const handleQuestionDelete = () => {
+    dispatch(deleteQuestion(item?._id));
+    console.log("question delete");
   };
 
   const isSelected = () => {
@@ -115,10 +143,17 @@ const Card: FC<CardProps> = ({ type, item, number }) => {
         <AddAnswerList items={item?.answers!} selected={isSelected()} />
 
         {isSelected() && type !== "quiz" ? (
-          <AddAnswerItem
-            item={{ _id: "new", text: "Add variant" }}
-            addAnswer={handleAddAnswer}
-          />
+          <>
+            <AddAnswerItem
+              item={{ _id: "new", text: "Add variant" }}
+              addAnswer={handleAddAnswer}
+            />
+            <StyledQuestionControls>
+              <StyledControlButton onClick={handleQuestionDelete}>
+                Delete
+              </StyledControlButton>
+            </StyledQuestionControls>
+          </>
         ) : null}
       </StyledCardBottom>
     </StyledCard>

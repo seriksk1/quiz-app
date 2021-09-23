@@ -23,7 +23,7 @@ const Column = styled.div`
 
 const StyledCreateQuizBtn = styled(StyledButton)`
   width: fit-content;
-  margin: 15px 10px;
+  margin: 0px 10px 25px;
   padding: 10px 15px;
   background-color: #309d8f;
   cursor: pointer;

@@ -4,10 +4,12 @@ import styled from "styled-components";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { TextField, IconButton, Checkbox } from "@material-ui/core";
 import { IAnswer } from "../redux/interfaces";
+import { useDispatch } from "react-redux";
+import { deleteAnswer } from "../redux/actions/quizCreation";
 
 const StyledAddAnswer = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -69,9 +71,11 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
   number,
   addAnswer,
 }) => {
+  const dispatch = useDispatch();
   const [isRightAnswer, setIsRightAnswer] = useState<boolean>(false);
 
   const handleDeleteClick = (e: React.FormEvent) => {
+    dispatch(deleteAnswer(item._id));
     console.log("delete");
   };
 
