@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import React, { ChangeEvent, FC } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -98,23 +99,26 @@ interface CardProps {
   item?: IQuestion;
   type?: CardType;
   number?: number;
+  onDelete?: (i: number) => void;
+  onChange?: (e: ChangeEvent) => void;
 }
 
-const Card: FC<CardProps> = ({ type, item, number }) => {
+const Card: FC<CardProps> = ({ type, item, number, onDelete, onChange }) => {
   const dispatch = useDispatch();
   const { selectedCard }: IQuizState = useSelector(quizSelector);
 
   const handleSelectToggle = () => {
-    dispatch(setSelectedCard(item?._id));
+    // dispatch(setSelectedCard(item?._id));
   };
 
-  const handleAddAnswer = () => {
-    console.log("add answer with question_id:", item?._id);
-    dispatch(newAnswer(item?._id));
-  };
+  // const handleAddAnswer = () => {
+  //   console.log("add answer with question_id");
+  //   // dispatch(newAnswer(item?._id));
+  // };
 
   const handleQuestionDelete = () => {
-    dispatch(deleteQuestion(item?._id));
+    onDelete!(number!);
+    // dispatch(deleteQuestion(item?._id));
     console.log("question delete");
   };
 
@@ -131,25 +135,25 @@ const Card: FC<CardProps> = ({ type, item, number }) => {
           multiline
           type={type}
           selected={isSelected()}
+          onChange={onChange}
           defaultValue={type === "quiz" ? "New quiz" : `Question ${number}`}
           placeholder={type === "quiz" ? "Quiz" : `Question`}
           inputProps={{
+            name: "name",
             style: { fontSize: type === "quiz" ? "32px" : "16px" },
           }}
         />
       </StyledCardTop>
 
       <StyledCardBottom>
-        <AddAnswerList items={item?.answers!} selected={isSelected()} />
+        {type !== "quiz" ? (
+          <AddAnswerList items={item?.answers!} selected={isSelected()} />
+        ) : null}
 
         {isSelected() && type !== "quiz" ? (
           <>
-            <AddAnswerItem
-              item={{ _id: "new", text: "Add variant" }}
-              addAnswer={handleAddAnswer}
-            />
             <StyledQuestionControls>
-              <StyledControlButton onClick={handleQuestionDelete}>
+              <StyledControlButton type="button" onClick={handleQuestionDelete}>
                 Delete
               </StyledControlButton>
             </StyledQuestionControls>

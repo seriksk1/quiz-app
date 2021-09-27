@@ -44,8 +44,7 @@ const AddQuestionItem: FC<AddQuestionItemProps> = ({ item }) => {
         maxRows={4}
         variant="outlined"
         type="text"
-        name=""
-        id=""
+        name={`questions[${item}].text`}
       />
       {item.answers ? (
         <>

@@ -1,5 +1,6 @@
-import { Reducer } from "react";
+import React from "react";
 import { combineReducers } from "redux";
+
 import quiz from "./quiz";
 import user from "./user";
 

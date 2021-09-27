@@ -63,6 +63,7 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
     }
 
     case ACTION_QUIZ.ADD_QUESTION: {
+      //need to rework
       const oldItems = state.quizToCreate?.questions!;
 
       return {
@@ -75,6 +76,7 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
     }
 
     case ACTION_QUIZ.ADD_ANSWER: {
+      //need to rework
       const oldItems = [...state.quizToCreate?.questions!];
       const currentQuestion = oldItems.find((item) => {
         return item._id === payload.questionId;
@@ -98,7 +100,20 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
       };
     }
 
+    case ACTION_QUIZ.UPDATE_QUESTION: {
+      return {
+        ...state,
+      };
+    }
+
+    case ACTION_QUIZ.UPDATE_ANSWER: {
+      return {
+        ...state,
+      };
+    }
+
     case ACTION_QUIZ.DELETE_QUESTION: {
+      //need to rework
       const oldItems = state.quizToCreate?.questions!;
 
       const newItems = oldItems.filter((item) => item._id !== payload);
@@ -113,6 +128,7 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
     }
 
     case ACTION_QUIZ.DELETE_ANSWER: {
+      //need to rework
       const oldItems = [...state.quizToCreate?.questions!];
 
       const currentQuestion = oldItems.find((item) => {

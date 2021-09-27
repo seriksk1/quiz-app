@@ -1,11 +1,12 @@
 import React, { FC, useState } from "react";
+
 import styled from "styled-components";
 
 import DeleteIcon from "@material-ui/icons/Delete";
 import { TextField, IconButton, Checkbox } from "@material-ui/core";
 import { IAnswer } from "../redux/interfaces";
 import { useDispatch } from "react-redux";
-import { deleteAnswer } from "../redux/actions/quizCreation";
+import { deleteAnswer, updateAnswer } from "../redux/actions/quizCreation";
 
 const StyledAddAnswer = styled.div`
   display: flex;
@@ -62,6 +63,7 @@ interface AddAnswerItemProps {
   selected?: boolean;
   number?: number;
 
+  onDelete?: (i: number) => void;
   addAnswer?: () => void;
 }
 
@@ -69,14 +71,22 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
   item,
   selected,
   number,
+
+  onDelete,
   addAnswer,
 }) => {
   const dispatch = useDispatch();
   const [isRightAnswer, setIsRightAnswer] = useState<boolean>(false);
 
+  const handleAnswerChange = () => {
+    dispatch(updateAnswer(item._id));
+    console.log("change");
+  };
+
   const handleDeleteClick = (e: React.FormEvent) => {
-    dispatch(deleteAnswer(item._id));
+    onDelete!(number!);
     console.log("delete");
+    // dispatch(deleteAnswer(item._id));
   };
 
   const handleCheckboxToggle = () => {
@@ -94,7 +104,7 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
       />
 
       <StyledInput
-        id=""
+        component={StyledInput}
         name=""
         type="text"
         multiline
@@ -103,6 +113,7 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
         placeholder="Variant"
         selected={selected}
         onClick={addAnswer}
+        onChange={handleAnswerChange}
       />
 
       {selected ? (
