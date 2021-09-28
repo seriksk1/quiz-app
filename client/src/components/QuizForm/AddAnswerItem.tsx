@@ -1,12 +1,11 @@
 import React, { FC, useState } from "react";
-
 import styled from "styled-components";
 
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Field } from "formik";
 import { TextField, IconButton, Checkbox } from "@material-ui/core";
-import { IAnswer } from "../redux/interfaces";
-import { useDispatch } from "react-redux";
-import { deleteAnswer, updateAnswer } from "../redux/actions/quizCreation";
+import DeleteIcon from "@material-ui/icons/Delete";
+
+import { IAnswer } from "../../redux/interfaces";
 
 const StyledAddAnswer = styled.div`
   display: flex;
@@ -61,37 +60,39 @@ const StyledRemoveBtn = styled(IconButton)`
 interface AddAnswerItemProps {
   item: IAnswer;
   selected?: boolean;
-  number?: number;
+  index?: number;
+  questionIndex?: number;
 
   onDelete?: (i: number) => void;
+  onChange?: () => void;
   addAnswer?: () => void;
 }
 
 const AddAnswerItem: FC<AddAnswerItemProps> = ({
   item,
   selected,
-  number,
+  index,
+  questionIndex,
 
   onDelete,
+  onChange,
   addAnswer,
 }) => {
-  const dispatch = useDispatch();
   const [isRightAnswer, setIsRightAnswer] = useState<boolean>(false);
-
-  const handleAnswerChange = () => {
-    dispatch(updateAnswer(item._id));
-    console.log("change");
-  };
+  const [text, setText] = React.useState("");
 
   const handleDeleteClick = (e: React.FormEvent) => {
-    onDelete!(number!);
+    onDelete!(index!);
     console.log("delete");
-    // dispatch(deleteAnswer(item._id));
   };
 
   const handleCheckboxToggle = () => {
     setIsRightAnswer((prev) => !prev);
     console.log("toggle checkbox");
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e?.currentTarget.value);
   };
 
   return (
@@ -103,17 +104,16 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
         color="primary"
       />
 
-      <StyledInput
-        component={StyledInput}
-        name=""
+      <Field
+        value={text || `Variant`}
+        name={`questions[${questionIndex}].answers[${index}].text`}
         type="text"
         multiline
         maxRows={4}
-        defaultValue={item.text || `Variant ${number}`}
-        placeholder="Variant"
+        component={StyledInput}
         selected={selected}
         onClick={addAnswer}
-        onChange={handleAnswerChange}
+        onChange={handleChange}
       />
 
       {selected ? (

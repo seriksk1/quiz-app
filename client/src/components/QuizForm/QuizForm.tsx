@@ -1,15 +1,8 @@
 import React, { FC } from "react";
-import { useFormikContext, Formik, Form, Field, FormikHelpers } from "formik";
-
-import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { StyledButton } from "../components/styled-components";
-import { AddQuestionList, Card } from "../components";
-
-import { newQuestion, startCreateQuiz } from "../redux/actions/quizCreation";
-import { quizSelector } from "../redux/selectors";
-import { IQuiz, IQuizState } from "../redux/interfaces";
+import { Formik, Form, FieldArray } from "formik";
+import { AddQuestionList, AddQuestionItem } from "../";
 
 const Column = styled.div`
   display: flex;
@@ -41,31 +34,28 @@ const StyledControls = styled.div`
 
 interface QuizFormProps {}
 
-const QuizForm: FC<QuizFormProps> = ({}) => {
-  const dispatch = useDispatch();
-  const formik = useFormikContext();
-  const { quizToCreate }: IQuizState = useSelector(quizSelector);
-
+const QuizForm: FC<QuizFormProps> = () => {
   return (
     <>
       <Formik
-        initialValues={{ name: "" }}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            actions.setSubmitting(false);
-          }, 1000);
+        initialValues={{ name: "", questions: [] }}
+        onSubmit={(values) => {
+          console.log(values);
         }}
       >
         {(formik) => (
           <Form>
             <Column>
-              <Card
+              <AddQuestionItem
                 onChange={formik.handleChange}
                 type="quiz"
                 item={undefined}
               />
-              <AddQuestionList items={quizToCreate?.questions!} />
+              <FieldArray name="questions">
+                {(arrayHelpers) => (
+                  <AddQuestionList arrayHelpers={arrayHelpers} />
+                )}
+              </FieldArray>
             </Column>
 
             <StyledControls>
