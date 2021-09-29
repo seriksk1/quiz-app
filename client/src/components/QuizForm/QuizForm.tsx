@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 
-import { Formik, Form, FieldArray, Field } from "formik";
+import { Formik, Form, FieldArray } from "formik";
 import { AddQuestionList } from "../";
 import AddQuestionItem from "./AddQuestionItem";
 
@@ -44,23 +44,21 @@ const QuizForm: FC<QuizFormProps> = () => {
           console.log(values);
         }}
       >
-        {(formik) => (
-          <Form>
-            <Column>
-              <AddQuestionItem type="quiz" />
+        <Form>
+          <Column>
+            <AddQuestionItem type="quiz" />
 
-              <FieldArray name="questions">
-                {(arrayHelpers) => (
-                  <AddQuestionList arrayHelpers={arrayHelpers} />
-                )}
-              </FieldArray>
-            </Column>
+            <FieldArray name="questions">
+              {(arrayHelpers) => (
+                <AddQuestionList arrayHelpers={arrayHelpers} />
+              )}
+            </FieldArray>
+          </Column>
 
-            <StyledControls>
-              <StyledSubmitBtn type="submit">Create quiz</StyledSubmitBtn>
-            </StyledControls>
-          </Form>
-        )}
+          <StyledControls>
+            <StyledSubmitBtn type="submit">Create quiz</StyledSubmitBtn>
+          </StyledControls>
+        </Form>
       </Formik>
     </>
   );

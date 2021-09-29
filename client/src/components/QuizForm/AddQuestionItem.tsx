@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { IQuestion, IQuizState } from "../../redux/interfaces";
+import { IQuizState } from "../../redux/interfaces";
 import { quizSelector } from "../../redux/selectors";
+import { setSelectedCard } from "../../redux/actions/quizCreation";
 
 import { FieldArray } from "formik";
 import { AddAnswerList, FormInput } from "../";
@@ -14,34 +15,35 @@ import {
   StyledControlButton,
   StyledQuestionControls,
   StyledSelectStrip,
-  StyledInput,
 } from "./style";
 
-export type CardType = string;
+type CardType = string;
 
 interface CardProps {
-  item?: IQuestion;
   type?: CardType;
   index?: number;
 
   onDelete?: (i: number) => void;
 }
 
-const AddQuestionItem: FC<CardProps> = ({ type, item, index, onDelete }) => {
+const AddQuestionItem: FC<CardProps> = ({ type, index, onDelete }) => {
+  const dispatch = useDispatch();
   const { selectedCard }: IQuizState = useSelector(quizSelector);
 
-  const handleSelectToggle = () => {};
+  const handleCardSelect = () => {
+    dispatch(setSelectedCard(index));
+  };
 
   const handleQuestionDelete = () => {
     onDelete!(index!);
   };
 
   const isSelected = () => {
-    return item?._id === selectedCard || true;
+    return index === selectedCard;
   };
 
   return (
-    <StyledCard selected={isSelected()} onClick={handleSelectToggle}>
+    <StyledCard selected={isSelected()} onClick={handleCardSelect}>
       {isSelected() ? <StyledSelectStrip /> : null}
 
       <StyledCardTop>

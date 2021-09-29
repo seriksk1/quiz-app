@@ -32,4 +32,5 @@ export interface IQuestion {
 export interface IAnswer {
   _id?: ID;
   text: Text;
+  isRight?: boolean;
 }

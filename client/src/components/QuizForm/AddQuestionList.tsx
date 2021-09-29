@@ -31,10 +31,9 @@ const AddQuestionList: FC<AddQuestionListProps> = ({ arrayHelpers }) => {
   const { values } = useFormikContext<IQuiz>();
 
   const onAddQuestion = () => {
-    console.log("add question");
     arrayHelpers.push({
       text: "New Question",
-      answers: [{ text: "New answer" }],
+      answers: [{ text: "New answer", isRight: false }],
     });
   };
 
@@ -45,14 +44,7 @@ const AddQuestionList: FC<AddQuestionListProps> = ({ arrayHelpers }) => {
   return (
     <>
       {values?.questions.map((item: IQuestion, i: number) => {
-        return (
-          <AddQuestionItem
-            key={`${i}`}
-            index={i}
-            item={item}
-            onDelete={onDelete}
-          />
-        );
+        return <AddQuestionItem key={`${i}`} index={i} onDelete={onDelete} />;
       })}
       <StyledControlBtn type="button" onClick={onAddQuestion}>
         Add question
