@@ -1,39 +1,33 @@
-import React, { ChangeEvent, FC } from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
 import { IQuestion, IQuizState } from "../../redux/interfaces";
 import { quizSelector } from "../../redux/selectors";
 
-import AddAnswerList from "./AddAnswerList";
-import { Field, FieldArray } from "formik";
+import { FieldArray } from "formik";
+import { AddAnswerList, FormInput } from "../";
 
 import {
-  StyledInput,
   StyledCard,
   StyledCardTop,
   StyledCardBottom,
   StyledControlButton,
   StyledQuestionControls,
   StyledSelectStrip,
+  StyledInput,
 } from "./style";
 
-type CardType = "quiz" | "question" | null;
+export type CardType = string;
 
 interface CardProps {
   item?: IQuestion;
   type?: CardType;
   index?: number;
+
   onDelete?: (i: number) => void;
-  onChange?: (e: ChangeEvent) => void;
 }
 
-const AddQuestionItem: FC<CardProps> = ({
-  type,
-  item,
-  index,
-  onDelete,
-  onChange,
-}) => {
+const AddQuestionItem: FC<CardProps> = ({ type, item, index, onDelete }) => {
   const { selectedCard }: IQuizState = useSelector(quizSelector);
 
   const handleSelectToggle = () => {};
@@ -51,18 +45,11 @@ const AddQuestionItem: FC<CardProps> = ({
       {isSelected() ? <StyledSelectStrip /> : null}
 
       <StyledCardTop>
-        <Field
-          component={StyledInput}
-          multiline
+        <FormInput
           type={type}
-          selected={isSelected()}
-          onChange={onChange}
-          defaultValue={type === "quiz" ? "New quiz" : `Question ${index}`}
+          name={type === "quiz" ? "name" : `questions.${index}.text`}
           placeholder={type === "quiz" ? "Quiz" : `Question`}
-          inputProps={{
-            name: type === "quiz" ? "name" : `questions[${index}].text`,
-            style: { fontSize: type === "quiz" ? "32px" : "16px" },
-          }}
+          selected={isSelected()}
         />
       </StyledCardTop>
 

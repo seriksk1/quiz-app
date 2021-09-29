@@ -28,18 +28,14 @@ interface AddQuestionListProps {
 }
 
 const AddQuestionList: FC<AddQuestionListProps> = ({ arrayHelpers }) => {
-  const { values, setFieldValue } = useFormikContext<IQuiz>();
+  const { values } = useFormikContext<IQuiz>();
 
   const onAddQuestion = () => {
     console.log("add question");
     arrayHelpers.push({
-      text: "",
-      answers: [{ text: "" }],
+      text: "New Question",
+      answers: [{ text: "New answer" }],
     });
-  };
-
-  const onChange = () => {
-    // setFieldValue(`questions[${i}].text`,);
   };
 
   const onDelete = (i: number) => {
@@ -51,10 +47,9 @@ const AddQuestionList: FC<AddQuestionListProps> = ({ arrayHelpers }) => {
       {values?.questions.map((item: IQuestion, i: number) => {
         return (
           <AddQuestionItem
-            key={`${new Date()}_${i}`}
+            key={`${i}`}
             index={i}
             item={item}
-            onChange={onChange}
             onDelete={onDelete}
           />
         );

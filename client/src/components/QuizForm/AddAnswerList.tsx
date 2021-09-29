@@ -17,10 +17,22 @@ const AddAnswerList: FC<AddAnswerListProps> = ({
 }) => {
   const { values, setFieldValue } = useFormikContext<IQuiz>();
 
-  const onAnswerDelete = (i: number) => {};
+  const onAnswerDelete = (i: number) => {
+    arrayHelpers?.remove(i);
+  };
 
   const onAnswerAdd = () => {
     arrayHelpers?.push({ text: "New answer" });
+  };
+
+  const onAnswerChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    setFieldValue(
+      `questions[${questionIndex}].answers[${i}].text`,
+      e.target.value
+    );
   };
 
   return (
@@ -29,20 +41,20 @@ const AddAnswerList: FC<AddAnswerListProps> = ({
         (item: IAnswer, i: number) => {
           return (
             <AddAnswerItem
-              key={`${new Date()}_${i}`}
+              key={`${i}`}
               item={item}
               selected={selected}
               questionIndex={questionIndex}
               index={i}
-              onDelete={() => {
-                arrayHelpers?.remove(i);
-              }}
+              onChange={onAnswerChange}
+              onDelete={onAnswerDelete}
             />
           );
         }
       )}
       <AddAnswerItem
         item={{ _id: "new", text: "Add variant" }}
+        index={questionIndex! + 1000}
         addAnswer={onAnswerAdd}
       />
     </>

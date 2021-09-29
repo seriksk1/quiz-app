@@ -14,3 +14,4 @@ export { default as AddAnswerList } from "./QuizForm/AddAnswerList";
 export { default as AddAnswerItem } from "./QuizForm/AddAnswerItem";
 
 export { default as QuizForm } from "./QuizForm/QuizForm";
+export { default as FormInput } from "./QuizForm/FormInput";

@@ -1,8 +1,9 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 
-import { Formik, Form, FieldArray } from "formik";
-import { AddQuestionList, AddQuestionItem } from "../";
+import { Formik, Form, FieldArray, Field } from "formik";
+import { AddQuestionList } from "../";
+import AddQuestionItem from "./AddQuestionItem";
 
 const Column = styled.div`
   display: flex;
@@ -46,11 +47,8 @@ const QuizForm: FC<QuizFormProps> = () => {
         {(formik) => (
           <Form>
             <Column>
-              <AddQuestionItem
-                onChange={formik.handleChange}
-                type="quiz"
-                item={undefined}
-              />
+              <AddQuestionItem type="quiz" />
+
               <FieldArray name="questions">
                 {(arrayHelpers) => (
                   <AddQuestionList arrayHelpers={arrayHelpers} />

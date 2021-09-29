@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TextField } from "@material-ui/core";
+import { TextField, IconButton, Checkbox } from "@material-ui/core";
 import { StyledButton } from "../styled-components";
 
 export const StyledCard = styled.div`
@@ -77,4 +77,62 @@ export const StyledControlButton = styled(StyledButton)`
     filter: none;
     background-color: #e83939;
   }
+`;
+
+// AnswerItem
+
+export const StyledAddAnswer = styled.div`
+  display: flex;
+  margin-bottom: 15px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+`;
+
+export const StyledAnswerInput = styled(TextField)`
+  width: 100%;
+  & input {
+    padding: 10px;
+  }
+
+  & textarea {
+    line-height: 120%;
+  }
+
+  & :before {
+    display: ${({ selected }: any) => (selected ? "none" : "none")};
+  }
+
+  &:hover :before {
+    ${({ selected }: any) =>
+      selected
+        ? ` 
+      display: flex;
+      border-bottom: 1px solid rgb(218 218 218 / 42%) !important;`
+        : null}
+
+        
+`;
+
+export const StyledCheckBox = styled(Checkbox)`
+  display: flex;
+  align-self: center;
+
+  width: fit-content;
+  height: fit-content;
+
+  margin-right: 15px !important;
+  padding: 0px !important;
+`;
+
+export const StyledRemoveBtn = styled(IconButton)`
+  display: flex;
+  align-self: center;
+
+  width: fit-content;
+  height: fit-content;
+
+  margin-left: 10px !important;
+  padding: 5px !important;
 `;
