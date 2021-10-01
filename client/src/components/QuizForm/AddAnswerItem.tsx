@@ -27,15 +27,15 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
   return (
     <StyledAddAnswer>
       <FormCheckBox
-        type="checkbox"
+        // type="checkbox"
         selected={selected}
-        name={`questions[${questionIndex}].answers[${index}].isRight`}
+        // name={`questions[${questionIndex}].answers[${index}].isRight`}
       />
 
       <FormInput
-        placeholder={`Answer`}
-        name={`questions[${questionIndex}].answers[${index}].text`}
-        type="text"
+        // placeholder={`Answer`}
+        // name={`questions[${questionIndex}].answers[${index}].text`}
+        // type="text"
         maxRows={4}
         selected={selected}
         onClick={addAnswer}

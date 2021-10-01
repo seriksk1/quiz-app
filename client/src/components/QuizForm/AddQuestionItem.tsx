@@ -5,7 +5,6 @@ import { IQuizState } from "../../redux/interfaces";
 import { quizSelector } from "../../redux/selectors";
 import { setSelectedCard } from "../../redux/actions/quizCreation";
 
-import { FieldArray } from "formik";
 import { AddAnswerList, FormInput } from "../";
 
 import {
@@ -48,24 +47,17 @@ const AddQuestionItem: FC<CardProps> = ({ type, index, onDelete }) => {
 
       <StyledCardTop>
         <FormInput
-          type={type}
-          name={type === "quiz" ? "name" : `questions.${index}.text`}
-          placeholder={type === "quiz" ? "Quiz" : `Question`}
+          // type={type}
+          // name={type === "quiz" ? "name" : `questions.${index}.text`}
+          // placeholder={type === "quiz" ? "Quiz" : `Question`}
           selected={isSelected()}
         />
       </StyledCardTop>
 
       <StyledCardBottom>
+        {/* {`questions[${index}].answers`} */}
         {type !== "quiz" ? (
-          <FieldArray name={`questions[${index}].answers`}>
-            {(arrayHelpers) => (
-              <AddAnswerList
-                questionIndex={index}
-                arrayHelpers={arrayHelpers}
-                selected={isSelected()}
-              />
-            )}
-          </FieldArray>
+          <AddAnswerList questionIndex={index} selected={isSelected()} />
         ) : null}
 
         {isSelected() && type !== "quiz" ? (

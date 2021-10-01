@@ -1,6 +1,12 @@
-import { ArrayHelpers, useFormikContext } from "formik";
 import React, { FC } from "react";
 import styled from "styled-components";
+import {
+  Control,
+  UseFormGetValues,
+  UseFormSetValue,
+  UseFormRegister,
+  useFieldArray,
+} from "react-hook-form";
 
 import { AddQuestionItem } from "../../components";
 import { StyledButton } from "../../components/styled-components";
@@ -24,26 +30,36 @@ const StyledControlBtn = styled(StyledButton)`
 `;
 
 interface AddQuestionListProps {
-  arrayHelpers: ArrayHelpers;
+  control?: Control;
+  register?: UseFormRegister<any>;
+  getValues?: UseFormGetValues<any>;
+  setValue?: UseFormSetValue<any>;
 }
 
-const AddQuestionList: FC<AddQuestionListProps> = ({ arrayHelpers }) => {
-  const { values } = useFormikContext<IQuiz>();
+const AddQuestionList: FC<AddQuestionListProps> = ({
+  control,
+  register,
+  getValues,
+  setValue,
+}) => {
+  const { fields, append, remove } = useFieldArray({
+    name: "questions",
+  });
 
   const onAddQuestion = () => {
-    arrayHelpers.push({
+    append({
       text: "New Question",
       answers: [{ text: "New answer", isRight: false }],
     });
   };
 
   const onDelete = (i: number) => {
-    arrayHelpers.remove(i);
+    remove(i);
   };
 
   return (
     <>
-      {values?.questions.map((item: IQuestion, i: number) => {
+      {fields.map((item: any, i: number) => {
         return <AddQuestionItem key={`${i}`} index={i} onDelete={onDelete} />;
       })}
       <StyledControlBtn type="button" onClick={onAddQuestion}>

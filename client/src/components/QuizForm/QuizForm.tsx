@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
-import { Formik, Form, FieldArray } from "formik";
-import { AddQuestionList, AddQuestionItem } from "../";
-import { IQuiz } from "../../redux/interfaces";
+import { IQuestion, IQuiz } from "../../redux/interfaces";
 import { createQuiz } from "../../redux/actions/quizCreation";
+import { AddQuestionList, AddQuestionItem } from "../";
 
 const Column = styled.div`
   display: flex;
@@ -37,35 +37,34 @@ const StyledControls = styled.div`
 
 interface QuizFormProps {}
 
+type FormControlType = {
+  name: string;
+  questions: IQuestion[];
+};
+
 const QuizForm: FC<QuizFormProps> = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (quiz: IQuiz) => {
+  const defaultValues: IQuiz = { name: "", questions: [] };
+
+  const { handleSubmit } = useForm<FormControlType>();
+
+  const onSubmit = (quiz: IQuiz) => {
     dispatch(createQuiz(quiz));
   };
 
   return (
     <>
-      <Formik
-        initialValues={{ name: "", questions: [] }}
-        onSubmit={handleSubmit}
-      >
-        <Form>
-          <Column>
-            <AddQuestionItem type="quiz" />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Column>
+          <AddQuestionItem type="quiz" />
+          <AddQuestionList />
+        </Column>
 
-            <FieldArray name="questions">
-              {(arrayHelpers) => (
-                <AddQuestionList arrayHelpers={arrayHelpers} />
-              )}
-            </FieldArray>
-          </Column>
-
-          <StyledControls>
-            <StyledSubmitBtn type="submit">Create quiz</StyledSubmitBtn>
-          </StyledControls>
-        </Form>
-      </Formik>
+        <StyledControls>
+          <StyledSubmitBtn type="submit">Create quiz</StyledSubmitBtn>
+        </StyledControls>
+      </form>
     </>
   );
 };
