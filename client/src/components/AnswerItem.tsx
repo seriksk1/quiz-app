@@ -21,13 +21,9 @@ const AnswerItem: FC<AnswerItemProps> = ({ item, updateCurrentQuestion }) => {
     updateCurrentQuestion();
   };
 
-  const isAnswerRight = () => {
-    return currentQuestion?.rightAnswerId === item._id;
-  };
-
   const getAnswerBtnColor = () => {
     if (currentQuestion?.isAnswered) {
-      return isAnswerRight() ? "#33bb2a" : "#dc0000";
+      return item.isRight ? "#33bb2a" : "#dc0000";
     }
   };
 

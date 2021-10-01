@@ -1,13 +1,15 @@
-import { ACTION_QUIZ } from "../contants";
-import { ID } from "../types";
 import axios from "axios";
+
+import { ACTION_QUIZ } from "../contants";
+import { IQuiz } from "../interfaces";
+import { ID } from "../types";
 
 const api = axios.create({
   baseURL: `http://localhost:3001/api`,
 });
 
 export const setNewQuiz = (data: any) => ({
-  type: ACTION_QUIZ.START_CREATE_QUIZ,
+  type: ACTION_QUIZ.CREATE_QUIZ,
   payload: data,
 });
 
@@ -98,13 +100,9 @@ export const deleteAnswer = (id: any) => async (dispatch: any) => {
   }
 };
 
-export const startCreateQuiz = () => async (dispatch: any) => {
+export const createQuiz = async (data: IQuiz) => {
   try {
-    const { data } = await api.post("/quiz");
-    const newQuiz = data.data;
-
-    // console.log(data.normalized);
-    dispatch(setNewQuiz(newQuiz));
+    await api.post("/quiz", data);
   } catch (err) {
     console.log(err);
   }

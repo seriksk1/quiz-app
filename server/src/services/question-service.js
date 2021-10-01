@@ -2,9 +2,9 @@ const Quiz = require("../models/quiz-model");
 const Question = require("../models/question-model");
 const AnswerService = require("../services/answer-service");
 
-const createQuestion = async (quizId) => {
+const createQuestion = async (quizId, question) => {
   try {
-    const newQuestion = await new Question({ quizId });
+    const newQuestion = await new Question({ quizId, text: question.text });
     await newQuestion.save();
 
     await Quiz.findByIdAndUpdate(
@@ -13,7 +13,9 @@ const createQuestion = async (quizId) => {
       { new: true, upsert: true }
     );
 
-    await AnswerService.createAnswer(newQuestion._id);
+    await question.answers.forEach(async (answer) => {
+      await AnswerService.createAnswer(newQuestion._id, answer);
+    });
 
     const populatedQuestion = getQuestion(newQuestion._id);
 

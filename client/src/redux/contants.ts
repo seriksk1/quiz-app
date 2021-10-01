@@ -7,7 +7,7 @@ export const ACTION_QUIZ = {
 
   //--------------- Quiz creating ----------------
 
-  START_CREATE_QUIZ: "START_CREATE_QUIZ",
+  CREATE_QUIZ: "CREATE_QUIZ",
   SET_SELECTED_CARD: "SET_SELECTED_CARD",
 
   NEW_QUESTION: "NEW_QUESTION",

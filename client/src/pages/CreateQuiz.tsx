@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-// import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-// import { startCreateQuiz } from "../redux/actions/quizCreation";
 import { QuizForm } from "../components";
 
 const StyledTitle = styled.h1`
@@ -12,10 +10,7 @@ const StyledTitle = styled.h1`
 `;
 
 function CreateQuiz() {
-  // const dispatch = useDispatch();
-
   useEffect(() => {
-    // dispatch(startCreateQuiz());
     console.log("Creating new quiz");
   }, []);
 

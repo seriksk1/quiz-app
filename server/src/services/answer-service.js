@@ -1,9 +1,9 @@
 const Answer = require("../models/answer-model");
 const Question = require("../models/question-model");
 
-const createAnswer = async (questionId) => {
+const createAnswer = async (questionId, answer) => {
   try {
-    const newAnswer = await new Answer({ questionId });
+    const newAnswer = await new Answer({ questionId, ...answer });
     await newAnswer.save();
 
     await Question.findByIdAndUpdate(

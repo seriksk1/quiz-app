@@ -55,7 +55,7 @@ const quiz = (state = initialState, { type, payload }: AnyAction) => {
       };
     }
 
-    case ACTION_QUIZ.START_CREATE_QUIZ: {
+    case ACTION_QUIZ.CREATE_QUIZ: {
       return {
         ...state,
         quizToCreate: payload,

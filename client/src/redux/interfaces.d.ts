@@ -15,14 +15,14 @@ export interface IUserState {
 }
 
 export interface IQuiz {
-  _id: ID;
+  _id?: ID;
   name: string;
   questions: IQuestion[];
   numberOfQuestions?: number;
 }
 
 export interface IQuestion {
-  _id: ID;
+  _id?: ID;
   text: Text;
   answers: Answer[];
   rightAnswerId: ID;

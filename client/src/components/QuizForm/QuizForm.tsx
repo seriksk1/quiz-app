@@ -1,9 +1,11 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { Formik, Form, FieldArray } from "formik";
-import { AddQuestionList } from "../";
-import AddQuestionItem from "./AddQuestionItem";
+import { AddQuestionList, AddQuestionItem } from "../";
+import { IQuiz } from "../../redux/interfaces";
+import { createQuiz } from "../../redux/actions/quizCreation";
 
 const Column = styled.div`
   display: flex;
@@ -36,13 +38,17 @@ const StyledControls = styled.div`
 interface QuizFormProps {}
 
 const QuizForm: FC<QuizFormProps> = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (quiz: IQuiz) => {
+    dispatch(createQuiz(quiz));
+  };
+
   return (
     <>
       <Formik
         initialValues={{ name: "", questions: [] }}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={handleSubmit}
       >
         <Form>
           <Column>

@@ -1,11 +1,14 @@
 const Quiz = require("../models/quiz-model");
 const QuestionService = require("../services/question-service");
 
-const createQuiz = async () => {
+const createQuiz = async (body) => {
   try {
-    const newQuiz = await new Quiz();
+    const newQuiz = await new Quiz({ name: body.name });
     await newQuiz.save();
-    await QuestionService.createQuestion(newQuiz._id);
+
+    await body.questions.forEach(async (question) => {
+      await QuestionService.createQuestion(newQuiz._id, question);
+    });
 
     const populatedQuiz = await Quiz.findOne({ _id: newQuiz._id }).populate({
       path: "questions",

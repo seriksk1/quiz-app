@@ -1,14 +1,11 @@
 const QuizService = require("../services/quiz-service");
 const HTTP_STATUS = require("../constants");
-// const { normalizeResponse } = require("../helpers/normalize-data");
 
 const createQuiz = async (req, res) => {
   try {
-    const newQuiz = await QuizService.createQuiz();
+    const body = req.body;
+    const newQuiz = await QuizService.createQuiz(body);
 
-    // const normalized = normalizeResponse(newQuiz);
-    // console.log(normalized);
-    // // console.log(newQuiz);
     res.status(HTTP_STATUS.OK).json({ success: true, data: newQuiz });
   } catch (err) {
     console.log(err);
