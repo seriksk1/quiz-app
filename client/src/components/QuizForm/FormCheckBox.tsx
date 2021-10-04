@@ -1,19 +1,20 @@
 import React, { FC } from "react";
-
+import { useFormContext } from "react-hook-form";
 import { StyledCheckBox } from "./style";
 
 type FormCheckBoxProps = {
   selected?: boolean;
+  name?: any;
+  type?: any;
 };
 
 const FormCheckBox: FC<FormCheckBoxProps> = (props) => {
-  // const [field] = useField(props);
+  const { register } = useFormContext();
   return (
     <>
       <StyledCheckBox
-        // {...field}
-        // type={props.type}
-        // name={props.name}
+        type={props.type}
+        {...register(props.name)}
         variant="primary"
         disabled={!props?.selected}
       />

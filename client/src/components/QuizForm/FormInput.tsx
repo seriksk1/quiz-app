@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useFormContext } from "react-hook-form";
 
 import { StyledAnswerInput } from "./style";
 
@@ -6,23 +7,24 @@ type FormInputProps = {
   selected?: boolean;
   maxRows?: number;
   onClick?: () => void;
+  register?: any;
+  name?: any;
+  type?: any;
+  placeholder?: any;
 };
 
-const FormInput: FC<FormInputProps> = (props) => {
-  // const [field] = useField(props);
+const FormInput: FC<FormInputProps> = ({ name, type, placeholder }) => {
+  const { register } = useFormContext();
   return (
     <>
       <StyledAnswerInput
-        onClick={props?.onClick}
-        maxRows={props?.maxRows}
-        multiline
-        // {...field}
-        // placeholder={props.placeholder}
-        // type={props.type}
-        // inputProps={{
-        //   name: props.name,
-        //   style: { fontSize: props.type === "quiz" ? "32px" : "16px" },
-        // }}
+        {...register(name)}
+        placeholder={placeholder}
+        type={type}
+        inputProps={{
+          name: name,
+          style: { fontSize: type === "quiz" ? "32px" : "16px" },
+        }}
       />
     </>
   );

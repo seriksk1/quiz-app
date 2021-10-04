@@ -1,16 +1,9 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import {
-  Control,
-  UseFormGetValues,
-  UseFormSetValue,
-  UseFormRegister,
-  useFieldArray,
-} from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
 
 import { AddQuestionItem } from "../../components";
 import { StyledButton } from "../../components/styled-components";
-import { IQuestion, IQuiz } from "../../redux/interfaces";
 
 const StyledControlBtn = styled(StyledButton)`
   width: fit-content;
@@ -29,19 +22,9 @@ const StyledControlBtn = styled(StyledButton)`
   }
 `;
 
-interface AddQuestionListProps {
-  control?: Control;
-  register?: UseFormRegister<any>;
-  getValues?: UseFormGetValues<any>;
-  setValue?: UseFormSetValue<any>;
-}
+interface AddQuestionListProps {}
 
-const AddQuestionList: FC<AddQuestionListProps> = ({
-  control,
-  register,
-  getValues,
-  setValue,
-}) => {
+const AddQuestionList: FC<AddQuestionListProps> = ({}) => {
   const { fields, append, remove } = useFieldArray({
     name: "questions",
   });
@@ -60,7 +43,10 @@ const AddQuestionList: FC<AddQuestionListProps> = ({
   return (
     <>
       {fields.map((item: any, i: number) => {
-        return <AddQuestionItem key={`${i}`} index={i} onDelete={onDelete} />;
+        console.log(item.id);
+        return (
+          <AddQuestionItem key={`${item.id}`} index={i} onDelete={onDelete} />
+        );
       })}
       <StyledControlBtn type="button" onClick={onAddQuestion}>
         Add question

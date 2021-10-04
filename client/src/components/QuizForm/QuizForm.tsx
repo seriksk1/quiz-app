@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import styled from "styled-components";
 
 import { IQuestion, IQuiz } from "../../redux/interfaces";
@@ -37,7 +37,7 @@ const StyledControls = styled.div`
 
 interface QuizFormProps {}
 
-type FormControlType = {
+type FormValues = {
   name: string;
   questions: IQuestion[];
 };
@@ -47,24 +47,29 @@ const QuizForm: FC<QuizFormProps> = () => {
 
   const defaultValues: IQuiz = { name: "", questions: [] };
 
-  const { handleSubmit } = useForm<FormControlType>();
+  const methods = useForm<FormValues>({
+    defaultValues,
+  });
 
   const onSubmit = (quiz: IQuiz) => {
-    dispatch(createQuiz(quiz));
+    console.log(quiz);
+    // dispatch(createQuiz(quiz));
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Column>
-          <AddQuestionItem type="quiz" />
-          <AddQuestionList />
-        </Column>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <Column>
+            <AddQuestionItem type="quiz" />
+            <AddQuestionList />
+          </Column>
 
-        <StyledControls>
-          <StyledSubmitBtn type="submit">Create quiz</StyledSubmitBtn>
-        </StyledControls>
-      </form>
+          <StyledControls>
+            <StyledSubmitBtn type="submit">Create quiz</StyledSubmitBtn>
+          </StyledControls>
+        </form>
+      </FormProvider>
     </>
   );
 };

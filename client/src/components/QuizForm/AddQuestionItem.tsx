@@ -21,7 +21,6 @@ type CardType = string;
 interface CardProps {
   type?: CardType;
   index?: number;
-
   onDelete?: (i: number) => void;
 }
 
@@ -47,15 +46,14 @@ const AddQuestionItem: FC<CardProps> = ({ type, index, onDelete }) => {
 
       <StyledCardTop>
         <FormInput
-          // type={type}
-          // name={type === "quiz" ? "name" : `questions.${index}.text`}
-          // placeholder={type === "quiz" ? "Quiz" : `Question`}
+          type={type}
+          placeholder={type === "quiz" ? "Quiz" : `Question`}
+          name={type === "quiz" ? "name" : `questions.${index}.text`}
           selected={isSelected()}
         />
       </StyledCardTop>
 
       <StyledCardBottom>
-        {/* {`questions[${index}].answers`} */}
         {type !== "quiz" ? (
           <AddAnswerList questionIndex={index} selected={isSelected()} />
         ) : null}

@@ -5,9 +5,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { FormInput, FormCheckBox } from "../";
 
 import { StyledAddAnswer, StyledRemoveBtn } from "./style";
-import { useEffect } from "react";
 
-interface AddAnswerItemProps {
+interface MockAnswerProps {
   selected?: boolean;
   index?: number;
   questionIndex?: number;
@@ -15,46 +14,31 @@ interface AddAnswerItemProps {
   addAnswer?: () => void;
 }
 
-const AddAnswerItem: FC<AddAnswerItemProps> = ({
+const MockAnswer: FC<MockAnswerProps> = ({
   selected,
   index,
   questionIndex,
   onDelete,
   addAnswer,
 }) => {
-  const handleDeleteClick = (e: React.FormEvent) => {
-    onDelete!(index!);
-  };
-
-  const methods = useFormContext();
-
-  useEffect(() => {
-    return () => {
-      methods.unregister([
-        `questions[${questionIndex}].answers[${index}].isRight`,
-        `questions[${questionIndex}].answers[${index}].text`,
-      ]);
-    };
-  }, []);
-
   return (
     <StyledAddAnswer>
-      <FormCheckBox
+      {/* <FormCheckBox
         type="checkbox"
         selected={selected}
         name={`questions[${questionIndex}].answers[${index}].isRight`}
-      />
+      /> */}
 
-      <FormInput
+      <input
         type="text"
         placeholder={`Answer`}
         name={`questions[${questionIndex}].answers[${index}].text`}
-        maxRows={4}
-        selected={selected}
+        // maxRows={4}
+        // selected={selected}
         onClick={addAnswer}
       />
 
-      {selected ? (
+      {/* {selected ? (
         <StyledRemoveBtn
           onClick={handleDeleteClick}
           aria-label="delete"
@@ -62,9 +46,9 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
         >
           <DeleteIcon fontSize="small" />
         </StyledRemoveBtn>
-      ) : null}
+      ) : null} */}
     </StyledAddAnswer>
   );
 };
 
-export default AddAnswerItem;
+export default MockAnswer;

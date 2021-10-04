@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useFieldArray } from "react-hook-form";
 
 import { AddAnswerItem } from "../../components";
-import { IAnswer, IQuiz } from "../../redux/interfaces";
+import MockAnswer from "./MockAnswer";
 
 interface AddAnswerListProps {
   selected?: boolean;
@@ -11,7 +11,7 @@ interface AddAnswerListProps {
 
 const AddAnswerList: FC<AddAnswerListProps> = ({ selected, questionIndex }) => {
   const { fields, append, remove } = useFieldArray({
-    name: `quiz.${questionIndex}.answers`,
+    name: `questions.${questionIndex}.answers`,
   });
 
   const onAnswerDelete = (i: number) => {
@@ -22,12 +22,14 @@ const AddAnswerList: FC<AddAnswerListProps> = ({ selected, questionIndex }) => {
     append({ text: "New answer", isRight: false });
   };
 
+  
+
   return (
     <>
       {fields.map((item: any, i: number) => {
         return (
           <AddAnswerItem
-            key={`${i}`}
+            key={`${item.id}`}
             index={i}
             selected={selected}
             onDelete={onAnswerDelete}
@@ -35,7 +37,7 @@ const AddAnswerList: FC<AddAnswerListProps> = ({ selected, questionIndex }) => {
           />
         );
       })}
-      <AddAnswerItem index={questionIndex! + 1000} addAnswer={onAnswerAdd} />
+      <MockAnswer addAnswer={onAnswerAdd} />
     </>
   );
 };
