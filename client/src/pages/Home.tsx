@@ -38,7 +38,6 @@ const Home: FC = () => {
   };
 
   useEffect(() => {
-    dispatch([clearQuiz(), clearAnswers()]);
     dispatch(fetchQuizes());
   }, []);
 

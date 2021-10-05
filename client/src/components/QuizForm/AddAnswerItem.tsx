@@ -30,10 +30,7 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
 
   useEffect(() => {
     return () => {
-      methods.unregister([
-        `questions[${questionIndex}].answers[${index}].isRight`,
-        `questions[${questionIndex}].answers[${index}].text`,
-      ]);
+      methods.unregister([`questions[${questionIndex}].answers[${index}]`]);
     };
   }, []);
 

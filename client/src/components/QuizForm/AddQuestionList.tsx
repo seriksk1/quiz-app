@@ -43,7 +43,6 @@ const AddQuestionList: FC<AddQuestionListProps> = ({}) => {
   return (
     <>
       {fields.map((item: any, i: number) => {
-        console.log(item.id);
         return (
           <AddQuestionItem key={`${item.id}`} index={i} onDelete={onDelete} />
         );

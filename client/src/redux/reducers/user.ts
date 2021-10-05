@@ -5,10 +5,32 @@ import { IUserState } from "../interfaces";
 const initialState: IUserState = {
   answers: [],
   result: null,
+  isAuthorized: localStorage.getItem("token") ? true : false,
 };
 
 const user = (state = initialState, { type, payload }: AnyAction) => {
   switch (type) {
+    case ACTION_USER.LOGGED_IN: {
+      return {
+        ...state,
+        isAuthorized: true,
+      };
+    }
+
+    case ACTION_USER.REGISTERED: {
+      return {
+        ...state,
+        isAuthorized: true,
+      };
+    }
+
+    case ACTION_USER.LOGGED_OUT: {
+      return {
+        ...state,
+        isAuthorized: false,
+      };
+    }
+
     case ACTION_USER.SET_USER:
       return {
         ...state,

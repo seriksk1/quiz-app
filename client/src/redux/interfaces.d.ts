@@ -12,6 +12,7 @@ export interface IQuizState {
 export interface IUserState {
   answers: any[];
   result: number | null;
+  isAuthorized: boolean;
 }
 
 export interface IQuiz {

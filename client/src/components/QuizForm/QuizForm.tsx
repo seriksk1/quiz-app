@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import styled from "styled-components";
 
 import { IQuestion, IQuiz } from "../../redux/interfaces";
@@ -53,7 +53,7 @@ const QuizForm: FC<QuizFormProps> = () => {
 
   const onSubmit = (quiz: IQuiz) => {
     console.log(quiz);
-    // dispatch(createQuiz(quiz));
+    createQuiz(quiz);
   };
 
   return (

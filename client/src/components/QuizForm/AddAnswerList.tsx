@@ -22,8 +22,6 @@ const AddAnswerList: FC<AddAnswerListProps> = ({ selected, questionIndex }) => {
     append({ text: "New answer", isRight: false });
   };
 
-  
-
   return (
     <>
       {fields.map((item: any, i: number) => {
