@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const AuthCtrl = require("../controllers/auth-ctrl");
+const AuthCtrl = require("../controllers/user-ctrl");
 
 router.post("/register", AuthCtrl.createUser);
 router.post("/login", AuthCtrl.getUserToken);

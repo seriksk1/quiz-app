@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
 import { useForm, FormProvider } from "react-hook-form";
 import styled from "styled-components";
 
@@ -43,8 +42,6 @@ type FormValues = {
 };
 
 const QuizForm: FC<QuizFormProps> = () => {
-  const dispatch = useDispatch();
-
   const defaultValues: IQuiz = { name: "", questions: [] };
 
   const methods = useForm<FormValues>({
@@ -59,7 +56,7 @@ const QuizForm: FC<QuizFormProps> = () => {
   return (
     <>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={methods.handleSubmit(onSubmit)} autoComplete="off">
           <Column>
             <AddQuestionItem type="quiz" />
             <AddQuestionList />

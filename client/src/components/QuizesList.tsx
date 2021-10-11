@@ -6,11 +6,13 @@ import { QuizItem } from "../components";
 
 const StyledQuizesList = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  max-width: 75%;
+`;
+
+const StyleQuizItemWrapper = styled.div`
+  width: 418px;
+  padding: 7px 7px 0;
 `;
 
 interface QuizesListProps {
@@ -23,9 +25,9 @@ const QuizesList: FC<QuizesListProps> = ({ items }) => {
       {items &&
         items.map((item) => {
           return (
-            <QuizItem key={item._id} item={item}>
-              {item.name}
-            </QuizItem>
+            <StyleQuizItemWrapper key={item._id}>
+              <QuizItem item={item}>{item.name}</QuizItem>
+            </StyleQuizItemWrapper>
           );
         })}
     </StyledQuizesList>

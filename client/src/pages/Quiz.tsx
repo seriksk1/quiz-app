@@ -15,14 +15,14 @@ const StyledSecondaryText = styled.p`
 `;
 
 const Quiz: FC = () => {
-  const { currentQuiz, currentQuestionIndex }: IQuizState =
+  const { currentQuiz, currentQuestion }: IQuizState =
     useSelector(quizSelector);
 
   return (
     <>
       <Question />
       <StyledSecondaryText>
-        Question {currentQuestionIndex + 1} of {currentQuiz?.questions.length}
+        Question {currentQuestion.index! + 1} of {currentQuiz?.questions.length}
       </StyledSecondaryText>
     </>
   );

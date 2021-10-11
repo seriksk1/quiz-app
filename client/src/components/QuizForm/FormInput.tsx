@@ -13,13 +13,19 @@ type FormInputProps = {
   placeholder?: any;
 };
 
-const FormInput: FC<FormInputProps> = ({ name, type, placeholder }) => {
+const FormInput: FC<FormInputProps> = ({
+  name,
+  type,
+  placeholder,
+  onClick,
+}) => {
   const { register } = useFormContext();
   return (
     <>
       <StyledAnswerInput
         {...register(name)}
         placeholder={placeholder}
+        onClick={onClick}
         type={type}
         inputProps={{
           name: name,

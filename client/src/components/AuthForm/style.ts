@@ -30,7 +30,7 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledInput = styled(TextField)`
-  margin-bottom: 25px !important;
+  margin-bottom: 10px !important;
 
   & input {
     font-size: 16px;

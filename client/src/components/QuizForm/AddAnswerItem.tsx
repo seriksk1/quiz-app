@@ -48,7 +48,6 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
         name={`questions[${questionIndex}].answers[${index}].text`}
         maxRows={4}
         selected={selected}
-        onClick={addAnswer}
       />
 
       {selected ? (

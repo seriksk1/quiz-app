@@ -1,12 +1,18 @@
-import { Text, Answer } from "./types";
+import { Text, Answer, ID } from "./types";
 
 export interface IQuizState {
-  selectedCard: ID;
-  quizToCreate: IQuiz | null;
-  currentQuiz: IQuiz | null;
-  currentQuestion: IQuestion | null;
   quizes: IQuiz[] | null;
-  currentQuestionIndex: number;
+
+  currentQuiz: IQuiz | null;
+  currentQuestion: {
+    isAnswered?: boolean;
+    index?: number;
+  };
+
+  userAnswers: ID[];
+
+  quizToCreate: IQuiz | null;
+  selectedCard: ID;
 }
 
 export interface IUserState {
@@ -19,15 +25,12 @@ export interface IQuiz {
   _id?: ID;
   name: string;
   questions: IQuestion[];
-  numberOfQuestions?: number;
 }
 
 export interface IQuestion {
   _id?: ID;
   text: Text;
   answers: Answer[];
-  rightAnswerId: ID;
-  isAnswered?: boolean;
 }
 
 export interface IAnswer {

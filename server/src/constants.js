@@ -9,4 +9,6 @@ const HTTP_STATUS = {
   INTERNAL_SERVER: 500,
 };
 
-module.exports = HTTP_STATUS;
+module.exports = {
+  HTTP_STATUS,
+};

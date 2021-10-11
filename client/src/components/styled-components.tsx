@@ -74,24 +74,15 @@ export const StyledIconContainer = styled.div`
 `;
 
 export const StyledQuizItem = styled.div`
-  width: 80%;
-  max-width: 300px;
-  padding: 10px 15px;
-  box-sizing: border-box;
-  background-color: #2a9d8f;
-  margin: 15px 0;
-  border-radius: 12px;
+  position: relative;
   cursor: pointer;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-weight: 500;
-  font-size: 20px;
-  color: #fff;
-
-  &:hover {
-    background-color: #28776e;
-  }
+  display: block;
+  min-width: 200px;
+  width: 100%;
+  max-width: 39rem;
+  padding-bottom: 44%;
+  border-radius: 0.625rem;
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px 0px;
+  background: url(https://files-cdn.kahoot.it/email-assets/Banners/collectionbox/SW_Discover.jpg?auto=webp&width=1000)
+    center center / cover no-repeat;
 `;

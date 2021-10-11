@@ -1,5 +1,5 @@
 const QuizService = require("../services/quiz-service");
-const HTTP_STATUS = require("../constants");
+const { HTTP_STATUS } = require("../constants");
 
 const createQuiz = async (req, res) => {
   try {

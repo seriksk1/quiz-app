@@ -1,17 +1,47 @@
+import axios from "axios";
 import { ACTION_USER } from "../contants";
 
-export const register = () => (dispatch: any) => {
-  localStorage.setItem("token", "some token");
-  dispatch({
-    type: ACTION_USER.REGISTERED,
-  });
+const API_URI = process.env.REACT_APP_URI;
+
+const api = axios.create({
+  baseURL: API_URI + "/auth",
+});
+
+export const register = () => async (dispatch: any) => {
+  try {
+    const { data } = await api.post("/register", {
+      username: "seriksk1",
+      email: "seriksk1@ukr.net",
+      password: "Seriksk1",
+    });
+
+    console.log(data.token);
+    localStorage.setItem("token", data.token);
+
+    dispatch({
+      type: ACTION_USER.REGISTERED,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-export const login = () => (dispatch: any) => {
-  localStorage.setItem("token", "some token");
-  dispatch({
-    type: ACTION_USER.LOGGED_IN,
-  });
+export const login = () => async (dispatch: any) => {
+  try {
+    const { data } = await api.post("/login", {
+      username: "seriksk1",
+      email: "seriksk1@ukr.net",
+      password: "Seriksk1",
+    });
+
+    console.log(data.token);
+    localStorage.setItem("token", data.token);
+    dispatch({
+      type: ACTION_USER.LOGGED_IN,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const logout = () => (dispatch: any) => {
@@ -20,17 +50,3 @@ export const logout = () => (dispatch: any) => {
     type: ACTION_USER.LOGGED_OUT,
   });
 };
-
-export const addAnswer = (answer: any) => ({
-  type: ACTION_USER.ADD_ANSWER,
-  payload: answer,
-});
-
-export const setResults = (result: number) => ({
-  type: ACTION_USER.SET_RESULTS,
-  payload: result,
-});
-
-export const clearAnswers = () => ({
-  type: ACTION_USER.CLEAR_ANSWERS,
-});

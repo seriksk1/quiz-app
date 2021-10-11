@@ -1,24 +1,25 @@
 import React, { FC } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { addAnswer } from "../redux/actions/user";
+import { writeAnswer } from "../redux/actions/quiz";
+import { IAnswer, IQuizState } from "../redux/interfaces";
 import { quizSelector } from "../redux/selectors";
-import { IQuizState, IAnswer } from "../redux/interfaces";
-
 import { StyledAnswerItem, StyledButton } from "./styled-components";
 
 interface AnswerItemProps {
   item: IAnswer;
-  updateCurrentQuestion: Function;
+  nextQuestion: Function;
 }
 
-const AnswerItem: FC<AnswerItemProps> = ({ item, updateCurrentQuestion }) => {
+const AnswerItem: FC<AnswerItemProps> = ({ item, nextQuestion }) => {
   const dispatch = useDispatch();
-  const { currentQuestion }: IQuizState = useSelector(quizSelector)!;
+  const { currentQuestion }: IQuizState = useSelector(quizSelector);
 
   const handleClick = () => {
-    dispatch([addAnswer(item._id)]);
-    updateCurrentQuestion();
+    if (item.isRight) {
+      dispatch([writeAnswer(item._id)]);
+    }
+    nextQuestion();
   };
 
   const getAnswerBtnColor = () => {

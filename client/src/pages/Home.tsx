@@ -1,41 +1,37 @@
 import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import { clearQuiz, fetchQuizes } from "../redux/actions/quiz";
-import { clearAnswers } from "../redux/actions/user";
-
-import { IQuizState } from "../redux/interfaces";
+import { fetchQuizes } from "../redux/actions/quiz";
 import { quizSelector } from "../redux/selectors";
+import { IQuizState } from "../redux/interfaces";
 
 import { QuizesList } from "../components";
-import { StyledButton } from "../components/styled-components";
 
-const StyledCreateQuizBtn = styled(StyledButton)`
-  display: flex;
-  padding: 10px;
-  width: fit-content;
+const StyledContainer = styled.div`
+  margin: 0 auto;
+`;
 
-  font-size: 28px;
-  padding: 0 8px;
-  margin: 10px auto;
-  border-radius: 50%;
+const Wrapper = styled.div`
+  box-sizing: border-box;
+  min-width: 0px;
+  margin: 10px auto 20px;
+  width: 100%;
+  max-width: 81rem;
+  flex-wrap: wrap;
+  height: fit-content;
+`;
 
-  &:hover {
-    filter: none;
-    background-color: #312e2e;
-  }
+const StyledSubTitle = styled.div`
+  font-size: 18px;
+  font-weight: 500;
+  padding-left: 10px;
+  margin: 10px 0;
 `;
 
 const Home: FC = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
   const { quizes }: IQuizState = useSelector(quizSelector);
-
-  const handleOpenModal = () => {
-    history.push("/create");
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchQuizes());
@@ -43,8 +39,12 @@ const Home: FC = () => {
 
   return (
     <>
-      <QuizesList items={quizes} />
-      <StyledCreateQuizBtn onClick={handleOpenModal}>+</StyledCreateQuizBtn>
+      <StyledContainer>
+        <Wrapper>
+          <StyledSubTitle>Last viewed quizzes</StyledSubTitle>
+          <QuizesList items={quizes} />
+        </Wrapper>
+      </StyledContainer>
     </>
   );
 };

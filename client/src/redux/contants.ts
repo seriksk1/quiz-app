@@ -7,6 +7,8 @@ export const ACTION_QUIZ = {
   SET_IS_ANSWERED: "SET_IS_ANSWERED",
   CLEAR_QUIZ: "CLEAR_QUIZ",
 
+  WRITE_ANSWER: "WRITE_ANSWER",
+
   //--------------- Quiz creating ----------------
 
   CREATE_QUIZ: "CREATE_QUIZ",

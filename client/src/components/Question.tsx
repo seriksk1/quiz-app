@@ -31,12 +31,12 @@ const StyledQuestionText = styled.h4`
 interface QuestionItemProps {}
 
 const Question: FC<QuestionItemProps> = () => {
-  const { currentQuiz, currentQuestion }: IQuizState =
-    useSelector(quizSelector);
-
   const dispatch = useDispatch();
   const history = useHistory();
   const refIndex = useRef<number>(0);
+
+  const { currentQuiz, currentQuestion }: IQuizState =
+    useSelector(quizSelector);
 
   const isNextIndexValid = () => {
     return refIndex.current !== currentQuiz?.questions.length! - 1;
@@ -46,8 +46,6 @@ const Question: FC<QuestionItemProps> = () => {
     dispatch(setIsAnswered(true));
 
     setTimeout(() => {
-      dispatch(setIsAnswered(false));
-
       if (isNextIndexValid()) {
         refIndex.current++;
         dispatch(setNextQuestion());
@@ -59,13 +57,15 @@ const Question: FC<QuestionItemProps> = () => {
 
   return (
     <StyledQuestionItem>
-      <StyledQuestionText>{currentQuestion?.text}</StyledQuestionText>
+      <StyledQuestionText>
+        {currentQuiz?.questions[currentQuestion.index!]?.text}
+      </StyledQuestionText>
       <StyledQuestionText>
         <TimeCounter nextQuestion={showNextQuestion} />
       </StyledQuestionText>
       <AnswersList
-        items={currentQuestion!.answers}
-        updateCurrentQuestion={showNextQuestion}
+        items={currentQuiz?.questions[currentQuestion.index!]?.answers!}
+        nextQuestion={showNextQuestion}
       />
     </StyledQuestionItem>
   );

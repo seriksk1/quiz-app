@@ -1,5 +1,5 @@
 const AnswerService = require("../services/answer-service");
-const HTTP_STATUS = require("../constants");
+const { HTTP_STATUS } = require("../constants");
 
 const createAnswer = async (req, res) => {
   try {

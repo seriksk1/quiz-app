@@ -4,8 +4,15 @@ import { ACTION_QUIZ } from "../contants";
 import { IQuiz } from "../interfaces";
 import { ID } from "../types";
 
+const API_URI = process.env.REACT_APP_URI;
+
 const api = axios.create({
-  baseURL: `http://localhost:3001/api`,
+  baseURL: API_URI + "/api",
+});
+
+api.interceptors.request.use((req) => {
+  req.headers["x-access-token"] = localStorage.getItem("token");
+  return req;
 });
 
 export const setNewQuiz = (data: any) => ({

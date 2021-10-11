@@ -1,8 +1,13 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import { ExitToApp, Person, AddBoxOutlined } from "@material-ui/icons";
+import {
+  ExitToApp,
+  Person,
+  AddCircleOutlineOutlined,
+} from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 
 import { StyledLink } from "./styled-components";
@@ -24,7 +29,9 @@ const StyledLinkTitle = styled(StyledLink)`
   color: #fff;
 `;
 
-const StyledNavigation = styled.div``;
+const StyledNavigation = styled.div`
+  display: flex;
+`;
 
 const StyledNavBtn = styled(IconButton)`
   padding: 5px 7px !important;
@@ -36,6 +43,7 @@ const StyledNavBtn = styled(IconButton)`
 
 const Header: FC = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -46,11 +54,11 @@ const Header: FC = () => {
       <StyledLinkTitle to="/">Quiz Time</StyledLinkTitle>
 
       <StyledNavigation>
-        <StyledNavBtn>
-          <AddBoxOutlined />
+        <StyledNavBtn onClick={() => history.push("/create")}>
+          <AddCircleOutlineOutlined />
         </StyledNavBtn>
 
-        <StyledNavBtn>
+        <StyledNavBtn onClick={() => history.push("/profile")}>
           <Person />
         </StyledNavBtn>
 

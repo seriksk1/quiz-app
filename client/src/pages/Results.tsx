@@ -1,12 +1,14 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { StyledTitle } from "../components/styled-components";
 
-import { quizSelector, userSelector } from "../redux/selectors";
-import { IQuizState, IUserState } from "../redux/interfaces";
+import { quizSelector } from "../redux/selectors";
+import { IQuizState } from "../redux/interfaces";
+import { clearQuiz } from "../redux/actions/quiz";
+import { useEffect } from "react";
 
 const StyledTitleCentre = styled(StyledTitle)`
   font-size: 28px;
@@ -14,22 +16,21 @@ const StyledTitleCentre = styled(StyledTitle)`
 `;
 
 const Results: FC = () => {
-  const { currentQuiz }: IQuizState = useSelector(quizSelector);
-  const { answers }: IUserState = useSelector(userSelector);
-
-  const getAllRightAnswers = () => {
-    return currentQuiz?.questions.map((item) => {
-      return item.rightAnswerId;
-    });
-  };
+  const dispatch = useDispatch();
+  const { currentQuiz, userAnswers }: IQuizState = useSelector(quizSelector);
 
   const getResults = () => {
-    const rightAnswers = getAllRightAnswers();
-
-    return rightAnswers?.reduce((sum, item, i) => {
-      return item === answers![i] ? sum + 1 : sum;
-    }, 0);
+    return userAnswers.length;
   };
+
+  const handleClearQuiz = () => {
+    dispatch(clearQuiz());
+  };
+
+  useEffect(() => {
+    console.log("Quiz start");
+    return () => handleClearQuiz();
+  }, []);
 
   return (
     <>

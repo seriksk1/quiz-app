@@ -4,7 +4,15 @@ import { Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./hocs/ProtectedRoute";
 
 import { Header } from "./components";
-import { Home, Quiz, Results, CreateQuiz, SignIn, SignUp } from "./pages";
+import {
+  Home,
+  Quiz,
+  Results,
+  CreateQuiz,
+  SignIn,
+  SignUp,
+  Profile,
+} from "./pages";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -24,6 +32,7 @@ const App = () => {
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/quiz" component={Quiz} />
           <ProtectedRoute exact path="/results" component={Results} />
+          <ProtectedRoute exact path="/profile" component={Profile} />
           <ProtectedRoute exact path="/create" component={CreateQuiz} />
         </Switch>
       </StyledContainer>

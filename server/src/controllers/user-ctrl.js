@@ -1,8 +1,8 @@
+const AuthService = require("../services/user-service");
 const User = require("../models/user-model");
+const bodyValidator = require("../helpers/bodyValidator");
 const { HTTP_STATUS } = require("../constants");
 const { QueryError } = require("../helpers/errorHandler");
-const AuthService = require("../services/auth-service");
-const bodyValidator = require("../helpers/bodyValidator");
 
 const createUser = async (req, res, next) => {
   try {

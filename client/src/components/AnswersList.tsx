@@ -6,7 +6,7 @@ import AnswerItem from "./AnswerItem";
 
 interface AnswersListProps {
   items: IAnswer[];
-  updateCurrentQuestion: Function;
+  nextQuestion: Function;
 }
 
 const StyledAnswersContainer = styled.div`
@@ -15,10 +15,7 @@ const StyledAnswersContainer = styled.div`
   align-items: center;
 `;
 
-const AnswersList: FC<AnswersListProps> = ({
-  items,
-  updateCurrentQuestion,
-}) => {
+const AnswersList: FC<AnswersListProps> = ({ items, nextQuestion }) => {
   return (
     <StyledAnswersContainer>
       {items &&
@@ -27,7 +24,7 @@ const AnswersList: FC<AnswersListProps> = ({
             <AnswerItem
               key={`${item._id}`}
               item={item}
-              updateCurrentQuestion={updateCurrentQuestion}
+              nextQuestion={nextQuestion}
             />
           );
         })}
