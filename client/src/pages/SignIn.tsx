@@ -10,7 +10,7 @@ function SignIn() {
 
   const handleSubmit = (data: any) => {
     console.log("login", data);
-    dispatch(login());
+    dispatch(login(data));
   };
 
   return (

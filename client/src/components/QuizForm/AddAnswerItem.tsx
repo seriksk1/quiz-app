@@ -12,7 +12,6 @@ interface AddAnswerItemProps {
   index?: number;
   questionIndex?: number;
   onDelete?: (i: number) => void;
-  addAnswer?: () => void;
 }
 
 const AddAnswerItem: FC<AddAnswerItemProps> = ({
@@ -20,7 +19,6 @@ const AddAnswerItem: FC<AddAnswerItemProps> = ({
   index,
   questionIndex,
   onDelete,
-  addAnswer,
 }) => {
   const handleDeleteClick = (e: React.FormEvent) => {
     onDelete!(index!);

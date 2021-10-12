@@ -12,7 +12,7 @@ const StyledContainer = styled.div`
   margin: 0 auto;
 `;
 
-const Wrapper = styled.div`
+const StyledLastQuizzes = styled.div`
   box-sizing: border-box;
   min-width: 0px;
   margin: 10px auto 20px;
@@ -40,10 +40,10 @@ const Home: FC = () => {
   return (
     <>
       <StyledContainer>
-        <Wrapper>
+        <StyledLastQuizzes>
           <StyledSubTitle>Last viewed quizzes</StyledSubTitle>
           <QuizesList items={quizes} />
-        </Wrapper>
+        </StyledLastQuizzes>
       </StyledContainer>
     </>
   );

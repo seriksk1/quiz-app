@@ -7,32 +7,30 @@ const api = axios.create({
   baseURL: API_URI + "/auth",
 });
 
-export const register = () => async (dispatch: any) => {
+interface ICredentials {
+  email: string;
+  password: string;
+}
+
+export const register =
+  (credentials: ICredentials) => async (dispatch: any) => {
+    try {
+      const { data } = await api.post("/register", credentials);
+
+      console.log(data.token);
+      localStorage.setItem("token", data.token);
+
+      dispatch({
+        type: ACTION_USER.REGISTERED,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+export const login = (credentials: ICredentials) => async (dispatch: any) => {
   try {
-    const { data } = await api.post("/register", {
-      username: "seriksk1",
-      email: "seriksk1@ukr.net",
-      password: "Seriksk1",
-    });
-
-    console.log(data.token);
-    localStorage.setItem("token", data.token);
-
-    dispatch({
-      type: ACTION_USER.REGISTERED,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const login = () => async (dispatch: any) => {
-  try {
-    const { data } = await api.post("/login", {
-      username: "seriksk1",
-      email: "seriksk1@ukr.net",
-      password: "Seriksk1",
-    });
+    const { data } = await api.post("/login", credentials);
 
     console.log(data.token);
     localStorage.setItem("token", data.token);

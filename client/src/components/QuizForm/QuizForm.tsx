@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "styled-components";
+import * as yup from "yup";
 
 import { IQuestion, IQuiz } from "../../redux/interfaces";
 import { createQuiz } from "../../redux/actions/quizCreation";
@@ -41,11 +43,29 @@ type FormValues = {
   questions: IQuestion[];
 };
 
+const schema = yup
+  .object({
+    name: yup.string().required("Quiz name is required"),
+    questions: yup.array().of(
+      yup.object().shape({
+        text: yup.string().required("Question name is required"),
+        answers: yup.array().of(
+          yup.object().shape({
+            text: yup.string().required("Answer text is required"),
+            isRight: yup.boolean(),
+          })
+        ),
+      })
+    ),
+  })
+  .required();
+
 const QuizForm: FC<QuizFormProps> = () => {
   const defaultValues: IQuiz = { name: "", questions: [] };
 
   const methods = useForm<FormValues>({
     defaultValues,
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = (quiz: IQuiz) => {

@@ -10,7 +10,7 @@ function SignUp() {
 
   const handleSubmit = (data: any) => {
     console.log("register:", data);
-    dispatch(register());
+    dispatch(register(data));
   };
 
   return (

@@ -31,6 +31,7 @@ const MockAnswer: FC<MockAnswerProps> = ({
         maxRows={4}
         selected={selected}
         onClick={addAnswer}
+        value={""}
       />
     </StyledAddAnswer>
   );

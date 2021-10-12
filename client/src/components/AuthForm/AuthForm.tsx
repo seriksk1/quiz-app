@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { useForm, FormProvider } from "react-hook-form";
+import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "styled-components";
-import * as yup from "yup";
 
 import { StyledTitle } from "../styled-components";
 import {

@@ -1,4 +1,4 @@
-import { ACTION_QUIZ } from "../contants";
+import { ACTION_QUIZ, ACTION_USER } from "../contants";
 import { IQuiz } from "../interfaces";
 import axios from "axios";
 
@@ -49,6 +49,9 @@ export const fetchQuizes = () => async (dispatch: any) => {
 
     dispatch(setQuizes(items));
   } catch (err) {
+    dispatch({
+      type: ACTION_USER.LOGGED_OUT,
+    });
     console.log(err);
   }
 };

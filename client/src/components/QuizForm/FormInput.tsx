@@ -6,17 +6,19 @@ import { StyledAnswerInput } from "./style";
 type FormInputProps = {
   selected?: boolean;
   maxRows?: number;
-  onClick?: () => void;
   register?: any;
   name?: any;
   type?: any;
   placeholder?: any;
+  value?: string;
+  onClick?: () => void;
 };
 
 const FormInput: FC<FormInputProps> = ({
   name,
   type,
   placeholder,
+  value,
   onClick,
 }) => {
   const { register } = useFormContext();
@@ -27,6 +29,7 @@ const FormInput: FC<FormInputProps> = ({
         placeholder={placeholder}
         onClick={onClick}
         type={type}
+        value={value}
         inputProps={{
           name: name,
           style: { fontSize: type === "quiz" ? "32px" : "16px" },
