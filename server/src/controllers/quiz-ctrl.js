@@ -39,9 +39,12 @@ const getQuizzes = async (req, res) => {
   }
 };
 
-const getQuizById = async () => {
+const getQuizByOwner = async (req, res) => {
   try {
-    await QuizService.getQuizById();
+    const owner = req.params.owner;
+    const items = await QuizService.getQuizByOwner(owner);
+
+    res.status(HTTP_STATUS.OK).json({ success: true, data: items });
   } catch (err) {
     console.log(err);
   }
@@ -52,5 +55,5 @@ module.exports = {
   updateQuiz,
   deleteQuiz,
   getQuizzes,
-  getQuizById,
+  getQuizByOwner,
 };

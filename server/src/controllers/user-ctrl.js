@@ -9,7 +9,8 @@ const createUser = async (req, res, next) => {
     const { email, password, username } = req.body;
     bodyValidator(req.body, "You must provide a body to create create");
 
-    const oldUser = await User.findOne({ email });
+    const oldUser =
+      (await User.findOne({ email })) || (await User.findOne({ username }));
     if (oldUser) {
       throw new QueryError(HTTP_STATUS.CONFLICT, "User already exist!");
     }

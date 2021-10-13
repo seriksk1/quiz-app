@@ -3,10 +3,12 @@ const QuestionService = require("../services/question-service");
 
 const createQuiz = async (body) => {
   try {
-    const newQuiz = await new Quiz({ name: body.name });
+    const { name, owner, questions } = body;
+
+    const newQuiz = await new Quiz({ name, owner });
     await newQuiz.save();
 
-    await body.questions.forEach(async (question) => {
+    await questions.forEach(async (question) => {
       await QuestionService.createQuestion(newQuiz._id, question);
     });
 
@@ -55,8 +57,14 @@ const getQuizzes = async () => {
   }
 };
 
-const getQuizById = async () => {
+const getQuizByOwner = async (owner) => {
   try {
+    const items = await Quiz.find({ owner }).populate({
+      path: "questions",
+      populate: { path: "answers" },
+    });
+
+    return items;
   } catch (err) {
     throw err;
   }
@@ -67,5 +75,5 @@ module.exports = {
   updateQuiz,
   deleteQuiz,
   getQuizzes,
-  getQuizById,
+  getQuizByOwner,
 };

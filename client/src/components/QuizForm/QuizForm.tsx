@@ -61,7 +61,13 @@ const schema = yup
   .required();
 
 const QuizForm: FC<QuizFormProps> = () => {
-  const defaultValues: IQuiz = { name: "", questions: [] };
+  const owner: string = localStorage.getItem("username") || "";
+
+  const defaultValues: IQuiz = {
+    name: "",
+    questions: [],
+    owner: owner,
+  };
 
   const methods = useForm<FormValues>({
     defaultValues,

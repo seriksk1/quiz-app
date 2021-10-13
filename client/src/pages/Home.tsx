@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { fetchQuizes } from "../redux/actions/quiz";
+import { fetchQuizzes } from "../redux/actions/quiz";
 import { quizSelector } from "../redux/selectors";
 import { IQuizState } from "../redux/interfaces";
 
@@ -30,20 +30,20 @@ const StyledSubTitle = styled.div`
 `;
 
 const Home: FC = () => {
-  const { quizes }: IQuizState = useSelector(quizSelector);
-  const dispatch = useDispatch();
+  // const { quizes }: IQuizState = useSelector(quizSelector);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchQuizes());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchQuizzes());
+  // }, []);
 
   return (
     <>
       <StyledContainer>
-        <StyledLastQuizzes>
+        {/* <StyledLastQuizzes>
           <StyledSubTitle>Last viewed quizzes</StyledSubTitle>
           <QuizesList items={quizes} />
-        </StyledLastQuizzes>
+        </StyledLastQuizzes> */}
       </StyledContainer>
     </>
   );

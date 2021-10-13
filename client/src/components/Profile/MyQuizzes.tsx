@@ -1,40 +1,24 @@
-import React from "react";
-import styled from "styled-components";
-import MyQuizzesListItem from "./MyQuizzesListItem";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const StyledQuizzesList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
+import { IQuizState } from "../../redux/interfaces";
+import { quizSelector } from "../../redux/selectors";
+import { fetchUserQuizzes } from "../../redux/actions/quiz";
 
-const StyledTitle = styled.h1`
-  font-size: 24px;
-`;
-
-export interface IMyQuiz {
-  id: number;
-  name: string;
-  questionsCount: number;
-  time: number;
-  players: number;
-}
+import MyQuizzesList from "./MyQuizzesList";
 
 function MyQuizzes() {
-  const myQuizzes: IMyQuiz[] = [
-    { id: 1, name: "Item", questionsCount: 4, time: 2, players: 1 },
-    { id: 2, name: "Item", questionsCount: 8, time: 4, players: 99 },
-    { id: 3, name: "Item", questionsCount: 12, time: 6, players: 100 },
-  ];
+  const owner = localStorage.getItem("username") || "";
+  const { quizes }: IQuizState = useSelector(quizSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserQuizzes(owner));
+  }, []);
 
   return (
     <>
-      <StyledTitle>My quizzes:</StyledTitle>
-      <StyledQuizzesList>
-        {myQuizzes.map((item) => {
-          return <MyQuizzesListItem item={item} />;
-        })}
-      </StyledQuizzesList>
+      <MyQuizzesList items={quizes} />
     </>
   );
 }

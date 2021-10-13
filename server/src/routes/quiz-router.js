@@ -8,4 +8,6 @@ router.patch("/quiz/:id", QuizCtrl.updateQuiz);
 router.delete("/quiz/:id", QuizCtrl.deleteQuiz);
 router.get("/quizzes", QuizCtrl.getQuizzes);
 
+router.get("/quizzes/:owner", QuizCtrl.getQuizByOwner);
+
 module.exports = router;

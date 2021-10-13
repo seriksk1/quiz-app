@@ -3,23 +3,32 @@ import styled from "styled-components";
 export const StyledQuizzesListItem = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
 
-  box-shadow: rgb(0 0 0 / 15%) 0px 0px 0.5rem 0px;
+  box-shadow: rgb(0 0 0 / 50%) 0px 0px 0.5rem 0px;
   border-radius: 0.25rem;
   cursor: pointer;
+  background: rgb(255, 255, 255);
+  flex: 0 0 100%;
 
-  margin: 0 7px 15px;
+  max-width: 100%;
+  min-width: auto;
+  width: 100%;
+  margin: 0px;
 
   &:hover {
-    box-shadow: rgb(0 0 0 / 50%) 0px 0px 0.5rem 0px;
   }
+`;
+
+export const StyledQuizItemWrapper = styled.div`
+  padding: 0.5rem;
+  box-sizing: border-box;
+  width: 25%;
+  min-width: 300px;
 `;
 
 export const StyledQuizPreview = styled.div`
   position: relative;
-  width: 300px;
+  width: 100%;
   height: 200px;
   background-image: url("https://images-cdn.kahoot.it/4b0d02b9-f99c-4069-bd00-6ef409b1f1dd?auto=webp&width=350");
   background-position: center;
@@ -56,16 +65,35 @@ export const StyledCreatorImage = styled.div`
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  background: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background: url(https://images-cdn.kahoot.it/359229c4-9119-443f-8cb0-cacf34d209cb?auto=webp&width=32&crop=800,800,x0,y0);
 `;
 
-export const StyledAboutQuiz = styled.div``;
+export const StyledAboutQuiz = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 60%;
+  flex-direction: column;
+  max-height: 3.5rem;
+`;
 
 export const StyledQuizName = styled.h4`
+  display: inline-block;
+  max-height: 2.25rem;
+  overflow: hidden;
+  line-height: 1.18rem;
+  font-weight: 700;
+  color: rgb(51, 51, 51);
+  width: 100%;
+  flex: 1 1 0%;
+  text-overflow: ellipsis;
+  align-self: flex-start;
   font-size: 18px;
+  text-decoration: none;
   margin: 0;
 `;
 
@@ -89,10 +117,4 @@ export const StyledPlayers = styled.div`
   &:last-of-type {
     padding-left: 5px;
   }
-`;
-
-export const StyledQuizMenu = styled.div`
-  position: absolute;
-  top: 5px;
-  right: 5px;
 `;

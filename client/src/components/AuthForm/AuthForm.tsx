@@ -41,6 +41,7 @@ const schema = yup
 const AuthForm: FC<AuthFormProps> = ({ name, onSubmit }) => {
   const defaultValues: AuthFormValues = {
     email: "",
+    username: "",
     password: "",
   };
 
@@ -57,6 +58,7 @@ const AuthForm: FC<AuthFormProps> = ({ name, onSubmit }) => {
         <StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
           <StyledTitle>{name} Form</StyledTitle>
 
+          <p>Email</p>
           <StyledInput
             {...methods.register("email")}
             variant="outlined"
@@ -67,6 +69,18 @@ const AuthForm: FC<AuthFormProps> = ({ name, onSubmit }) => {
             <StyledErrorMessage>{errors.email?.message}</StyledErrorMessage>
           )}
 
+          <p>Username</p>
+          <StyledInput
+            {...methods.register("username")}
+            variant="outlined"
+            type="username"
+            error={!!errors.username}
+          />
+          {errors.username && (
+            <StyledErrorMessage>{errors.username?.message}</StyledErrorMessage>
+          )}
+
+          <p>Password</p>
           <StyledInput
             {...methods.register("password")}
             variant="outlined"

@@ -24,6 +24,7 @@ export interface IUserState {
 export interface IQuiz {
   _id?: ID;
   name: string;
+  owner: string;
   questions: IQuestion[];
 }
 

@@ -10,6 +10,7 @@ const api = axios.create({
 interface ICredentials {
   email: string;
   password: string;
+  username: string;
 }
 
 export const register =
@@ -17,8 +18,8 @@ export const register =
     try {
       const { data } = await api.post("/register", credentials);
 
-      console.log(data.token);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("username", credentials.username);
 
       dispatch({
         type: ACTION_USER.REGISTERED,
@@ -32,8 +33,9 @@ export const login = (credentials: ICredentials) => async (dispatch: any) => {
   try {
     const { data } = await api.post("/login", credentials);
 
-    console.log(data.token);
     localStorage.setItem("token", data.token);
+    localStorage.setItem("username", credentials.username);
+
     dispatch({
       type: ACTION_USER.LOGGED_IN,
     });
@@ -44,6 +46,8 @@ export const login = (credentials: ICredentials) => async (dispatch: any) => {
 
 export const logout = () => (dispatch: any) => {
   localStorage.removeItem("token");
+  localStorage.removeItem("username");
+
   dispatch({
     type: ACTION_USER.LOGGED_OUT,
   });
