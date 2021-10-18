@@ -4,7 +4,7 @@ import {
   getDeadTime,
   getTimeRemaining,
   getTransformedTime,
-} from "../redux/helpers/timer";
+} from "../../redux/helpers/timer";
 
 interface TimeCounterProps {
   nextQuestion: Function;

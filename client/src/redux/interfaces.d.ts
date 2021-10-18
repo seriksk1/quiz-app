@@ -1,7 +1,7 @@
 import { Text, Answer, ID } from "./types";
 
 export interface IQuizState {
-  quizes: IQuiz[] | null;
+  quizzes: IQuiz[] | null;
 
   currentQuiz: IQuiz | null;
   currentQuestion: {

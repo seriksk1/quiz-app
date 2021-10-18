@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { useFieldArray } from "react-hook-form";
 
-import { AddQuestionItem } from "../../components";
-import { StyledButton } from "../../components/styled-components";
+import { AddQuestionItem } from ".";
+import { StyledButton } from "../styled-components";
 
 const StyledControlBtn = styled(StyledButton)`
   width: fit-content;
@@ -24,7 +24,7 @@ const StyledControlBtn = styled(StyledButton)`
 
 interface AddQuestionListProps {}
 
-const AddQuestionList: FC<AddQuestionListProps> = ({}) => {
+const AddQuestionList: FC<AddQuestionListProps> = () => {
   const { fields, append, remove } = useFieldArray({
     name: "questions",
   });

@@ -3,7 +3,7 @@ import { IQuizState } from "../interfaces";
 import { AnyAction } from "../types";
 
 const initialState: IQuizState = {
-  quizes: null,
+  quizzes: null,
 
   currentQuiz: null,
   currentQuestion: {
@@ -18,14 +18,20 @@ const initialState: IQuizState = {
 
 const quiz = (state = initialState, { type, payload }: AnyAction) => {
   switch (type) {
-    case ACTION_QUIZ.SET_QUIZES: {
+    case ACTION_QUIZ.SET_QUIZZES: {
       return {
         ...state,
-        quizes: payload,
+        quizzes: payload,
       };
     }
 
     case ACTION_QUIZ.START_QUIZ:
+      return {
+        ...state,
+        currentQuiz: payload,
+      };
+
+    case ACTION_QUIZ.SET_CURRENT_QUIZ:
       return {
         ...state,
         currentQuiz: payload,

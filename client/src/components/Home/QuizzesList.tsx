@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 
-import { IQuiz } from "../redux/interfaces";
-import { QuizItem } from "../components";
+import { IQuiz } from "../../redux/interfaces";
+import { QuizItem } from "../";
 
 const StyledQuizesList = styled.div`
   display: flex;

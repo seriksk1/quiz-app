@@ -41,7 +41,7 @@ const MyQuizzesListItem: FC<Props> = ({ item }) => {
             </StyledAboutQuizCreator>
           </StyledAboutQuiz>
 
-          <QuizMenu />
+          <QuizMenu item={item} />
         </StyledQuizDescription>
       </StyledQuizzesListItem>
     </StyledQuizItemWrapper>

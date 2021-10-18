@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-import { QuizCreatorForm } from "../components";
-import { createQuiz } from "../redux/actions/quizCreation";
+import { updateQuiz } from "../redux/actions/quizCreation";
 import { IQuiz } from "../redux/interfaces";
+
+import QuizCreatorForm from "../components/QuizCreatorForm/QuizCreatorForm";
 
 const StyledTitle = styled.h1`
   margin: 0;
@@ -11,9 +12,9 @@ const StyledTitle = styled.h1`
   text-align: center;
 `;
 
-function CreateQuiz() {
+function EditQuiz() {
   const handleSubmit = (quiz: IQuiz) => {
-    createQuiz(quiz);
+    updateQuiz(quiz);
   };
 
   useEffect(() => {
@@ -23,9 +24,9 @@ function CreateQuiz() {
   return (
     <>
       <StyledTitle>Quiz Creator</StyledTitle>
-      <QuizCreatorForm onSubmit={handleSubmit} submitText="Create quiz" />
+      <QuizCreatorForm onSubmit={handleSubmit} submitText="Save changes" />
     </>
   );
 }
 
-export default CreateQuiz;
+export default EditQuiz;

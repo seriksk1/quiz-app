@@ -1,6 +1,10 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+
+import { setCurrentQuiz, startQuiz } from "../../redux/actions/quiz";
+import { IQuiz } from "../../redux/interfaces";
 
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import {
@@ -20,9 +24,12 @@ const StyledMenuIcon = styled.div`
   margin-right: 10px;
 `;
 
-interface Props {}
+interface Props {
+  item: IQuiz;
+}
 
-const QuizMenu: FC<Props> = ({}) => {
+const QuizMenu: FC<Props> = ({ item }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -36,11 +43,13 @@ const QuizMenu: FC<Props> = ({}) => {
   };
 
   const handlePlay = () => {
+    dispatch(startQuiz(item));
     history.push("/quiz");
   };
 
   const handleEdit = () => {
-    history.push("/create");
+    dispatch(setCurrentQuiz(item));
+    history.push(`/edit/${item._id}`);
   };
 
   return (

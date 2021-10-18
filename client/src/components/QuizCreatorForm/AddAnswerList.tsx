@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useFieldArray } from "react-hook-form";
 
-import { AddAnswerItem } from "../../components";
+import { AddAnswerItem } from ".";
 import MockAnswer from "./MockAnswer";
 
 interface AddAnswerListProps {

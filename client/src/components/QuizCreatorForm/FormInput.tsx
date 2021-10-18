@@ -22,10 +22,19 @@ const FormInput: FC<FormInputProps> = ({
   onClick,
 }) => {
   const { register } = useFormContext();
+
+  const handleRegister = () => {
+    if (name !== "mockAnswer") {
+      return register(name);
+    } else {
+      return null;
+    }
+  };
+
   return (
     <>
       <StyledAnswerInput
-        {...register(name)}
+        {...handleRegister()}
         placeholder={placeholder}
         onClick={onClick}
         type={type}

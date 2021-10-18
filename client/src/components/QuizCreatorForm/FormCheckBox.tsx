@@ -10,11 +10,20 @@ type FormCheckBoxProps = {
 
 const FormCheckBox: FC<FormCheckBoxProps> = (props) => {
   const { register } = useFormContext();
+
+  const handleRegister = () => {
+    if (props.name !== "mockAnswer") {
+      return register(props.name);
+    } else {
+      return null;
+    }
+  };
+
   return (
     <>
       <StyledCheckBox
-        type={props.type}
-        {...register(props.name)}
+        {...handleRegister()}
+        type="checkbox"
         variant="primary"
         disabled={!props?.selected}
       />

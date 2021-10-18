@@ -7,7 +7,7 @@ export const StyledCard = styled.div`
   flex-direction: column;
   position: relative;
   max-width: 768px;
-  width: 98%;
+  width: 95%;
 
   box-sizing: border-box;
   background-color: #f1f1f1;
@@ -115,15 +115,13 @@ export const StyledAnswerInput = styled(TextField)`
         
 `;
 
-export const StyledCheckBox = styled(Checkbox)`
+export const StyledCheckBox = styled.input`
   display: flex;
   align-self: center;
 
-  width: fit-content;
-  height: fit-content;
-
-  margin-right: 15px !important;
-  padding: 0px !important;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
 `;
 
 export const StyledRemoveBtn = styled(IconButton)`

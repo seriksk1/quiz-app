@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useFormContext } from "react-hook-form";
 
 import DeleteIcon from "@material-ui/icons/Delete";
-import { FormInput, FormCheckBox } from "../";
+import { FormInput, FormCheckBox } from ".";
 
 import { StyledAddAnswer, StyledRemoveBtn } from "./style";
 import { useEffect } from "react";

@@ -25,14 +25,17 @@ const createQuestion = async (quizId, question) => {
   }
 };
 
-const updateQuestion = async (questionId) => {
+const updateQuestion = async (question) => {
   try {
-    const updatedQuestion = Question.findByIdAndUpdate(
-      { _id: questionId },
-      { $push: { answers: newAnswerId } },
-      { new: true, upsert: true }
-    );
-    return updatedQuestion;
+    // const { _id, text, answers } = question;
+    // await Question.findByIdAndUpdate(_id, { text });
+    // await answers.forEach(async (answer) => {
+    //   if (answer._id) {
+    //     await AnswerService.updateAnswer(answer);
+    //   } else {
+    //     await AnswerService.createAnswer(_id, question);
+    //   }
+    // });
   } catch (err) {
     throw err;
   }

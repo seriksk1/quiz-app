@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import StatisticsItem from "./StatisticsItem";
 
@@ -46,7 +46,7 @@ interface Props {}
 
 const ProfileInfo: FC<Props> = () => {
   const history = useHistory();
-  const owner = localStorage.getItem("username");
+  const { username } = useParams();
 
   const statictics = [
     { id: 1, name: "Wins", value: 1 },
@@ -62,7 +62,7 @@ const ProfileInfo: FC<Props> = () => {
     <StyledProfileInfoContainer>
       <StyledProfileMainInfo>
         <StyledProfileImage />
-        <StyledProfileName>{owner}</StyledProfileName>
+        <StyledProfileName>{username}</StyledProfileName>
 
         <IconButton onClick={handleSettings}>
           <SettingsIcon />

@@ -13,9 +13,14 @@ api.interceptors.request.use((req) => {
   return req;
 });
 
-export const setQuizzes = (quizes: IQuiz[]) => ({
-  type: ACTION_QUIZ.SET_QUIZES,
-  payload: quizes,
+export const setQuizzes = (quizzes: IQuiz[]) => ({
+  type: ACTION_QUIZ.SET_QUIZZES,
+  payload: quizzes,
+});
+
+export const setCurrentQuiz = (quiz: IQuiz) => ({
+  type: ACTION_QUIZ.SET_CURRENT_QUIZ,
+  payload: quiz,
 });
 
 export const startQuiz = (quiz: IQuiz) => ({
@@ -45,7 +50,6 @@ export const fetchQuizzes = () => async (dispatch: any) => {
   try {
     const { data } = await api.get(`/quizzes`);
     const items = data.data;
-    console.log(items);
 
     dispatch(setQuizzes(items));
   } catch (err) {
@@ -58,15 +62,14 @@ export const fetchQuizzes = () => async (dispatch: any) => {
 
 export const fetchUserQuizzes = (owner: string) => async (dispatch: any) => {
   try {
-    const { data } = await api.get (`/quizzes/${owner}`)
-    const items = data.data
-    console.log(items)
-    dispatch(setQuizzes(items));
+    const { data } = await api.get(`/quizzes/${owner}`);
+    const items = data.data;
 
+    dispatch(setQuizzes(items));
   } catch (err) {
     dispatch({
       type: ACTION_USER.LOGGED_OUT,
     });
     console.log(err);
   }
-}
+};

@@ -5,7 +5,7 @@ import { IQuizState } from "../../redux/interfaces";
 import { quizSelector } from "../../redux/selectors";
 import { setSelectedCard } from "../../redux/actions/quizCreation";
 
-import { AddAnswerList, FormInput } from "../";
+import { AddAnswerList, FormInput } from ".";
 
 import {
   StyledCard,

@@ -23,14 +23,19 @@ const createQuiz = async (body) => {
   }
 };
 
-const updateQuiz = async (quizId) => {
+const updateQuiz = async (body) => {
   try {
-    const updatedQuiz = Quiz.findByIdAndUpdate(
-      { _id: quizId },
-      { $push: { questions: newQuestion._id } },
-      { new: true, upsert: true }
-    );
-    return updatedQuiz;
+    // const { _id, name, owner, questions } = body;
+    // await Quiz.findByIdAndUpdate(_id, { name, owner });
+    // await questions.forEach(async (question) => {
+    //   if (question._id) {
+    //     await QuestionService.updateQuestion(question);
+    //   } else {
+    //     await QuestionService.createQuestion(_id, question);
+    //   }
+    // });
+    // const updatedQuiz = await Quiz.findById(_id);
+    // return updatedQuiz;
   } catch (err) {
     throw err;
   }
@@ -38,7 +43,7 @@ const updateQuiz = async (quizId) => {
 
 const deleteQuiz = async (id) => {
   try {
-    await Quiz.findByIdAndRemove(id);
+    await Quiz.findByIdAndDelete(id);
   } catch (err) {
     throw err;
   }

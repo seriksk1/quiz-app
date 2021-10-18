@@ -18,14 +18,10 @@ const createAnswer = async (questionId, answer) => {
   }
 };
 
-const updateAnswer = async (answerId, isRight) => {
+const updateAnswer = async (answer) => {
   try {
-    const updatedAnswer = Answer.findByIdAndUpdate(
-      { _id: answerId },
-      { isRight: isRight },
-      { new: true, upsert: true }
-    );
-    return updatedAnswer;
+    // const { _id, text, isRight } = answer;
+    // await Answer.findByIdAndUpdate(_id, { text, isRight });
   } catch (err) {
     throw err;
   }

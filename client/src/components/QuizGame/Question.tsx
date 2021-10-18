@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import { setIsAnswered, setNextQuestion } from "../redux/actions/quiz";
+import { setIsAnswered, setNextQuestion } from "../../redux/actions/quiz";
 
-import { quizSelector } from "../redux/selectors";
-import { IQuizState } from "../redux/interfaces";
+import { quizSelector } from "../../redux/selectors";
+import { IQuizState } from "../../redux/interfaces";
 
 import AnswersList from "./AnswersList";
 import TimeCounter from "./TimeCounter";

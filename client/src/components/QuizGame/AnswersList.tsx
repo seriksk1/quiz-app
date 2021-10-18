@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 
-import { IAnswer } from "../redux/interfaces";
+import { IAnswer } from "../../redux/interfaces";
 import AnswerItem from "./AnswerItem";
 
 interface AnswersListProps {

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Route, Switch } from "react-router-dom";
+
 import ProtectedRoute from "./hocs/ProtectedRoute";
 
 import { Header } from "./components";
@@ -12,6 +13,7 @@ import {
   SignIn,
   SignUp,
   Profile,
+  EditQuiz,
 } from "./pages";
 
 const StyledContainer = styled.div`
@@ -32,8 +34,10 @@ const App = () => {
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/quiz" component={Quiz} />
           <ProtectedRoute exact path="/results" component={Results} />
-          <ProtectedRoute exact path="/profile" component={Profile} />
+          <ProtectedRoute exact path="/profile/:username" component={Profile} />
+
           <ProtectedRoute exact path="/create" component={CreateQuiz} />
+          <ProtectedRoute exact path="/edit/:quizId" component={EditQuiz} />
         </Switch>
       </StyledContainer>
     </>

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { IQuizState } from "../../redux/interfaces";
@@ -8,17 +9,18 @@ import { fetchUserQuizzes } from "../../redux/actions/quiz";
 import MyQuizzesList from "./MyQuizzesList";
 
 function MyQuizzes() {
-  const owner = localStorage.getItem("username") || "";
-  const { quizes }: IQuizState = useSelector(quizSelector);
+  const { quizzes }: IQuizState = useSelector(quizSelector);
   const dispatch = useDispatch();
 
+  const { username } = useParams();
+
   useEffect(() => {
-    dispatch(fetchUserQuizzes(owner));
+    dispatch(fetchUserQuizzes(username));
   }, []);
 
   return (
     <>
-      <MyQuizzesList items={quizes} />
+      <MyQuizzesList items={quizzes} />
     </>
   );
 }

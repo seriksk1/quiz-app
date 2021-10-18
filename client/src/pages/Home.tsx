@@ -6,7 +6,7 @@ import { fetchQuizzes } from "../redux/actions/quiz";
 import { quizSelector } from "../redux/selectors";
 import { IQuizState } from "../redux/interfaces";
 
-import { QuizesList } from "../components";
+import { QuizzesList } from "../components";
 
 const StyledContainer = styled.div`
   margin: 0 auto;
@@ -30,20 +30,20 @@ const StyledSubTitle = styled.div`
 `;
 
 const Home: FC = () => {
-  // const { quizes }: IQuizState = useSelector(quizSelector);
-  // const dispatch = useDispatch();
+  const { quizzes }: IQuizState = useSelector(quizSelector);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchQuizzes());
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchQuizzes());
+  }, []);
 
   return (
     <>
       <StyledContainer>
-        {/* <StyledLastQuizzes>
+        <StyledLastQuizzes>
           <StyledSubTitle>Last viewed quizzes</StyledSubTitle>
-          <QuizesList items={quizes} />
-        </StyledLastQuizzes> */}
+          <QuizzesList items={quizzes} />
+        </StyledLastQuizzes>
       </StyledContainer>
     </>
   );

@@ -12,9 +12,12 @@ const createQuiz = async (req, res) => {
   }
 };
 
-const updateQuiz = async () => {
+const updateQuiz = async (req, res) => {
   try {
-    await QuizService.updateQuiz();
+    // const body = req.body;
+    // const updatedQuiz = await QuizService.updateQuiz(body);
+    // console.log("updatedQuiz:", updatedQuiz);
+    // res.status(HTTP_STATUS.OK).json({ success: true, data: updatedQuiz });
   } catch (err) {
     console.log(err);
   }

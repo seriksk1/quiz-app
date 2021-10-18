@@ -114,3 +114,13 @@ export const createQuiz = async (data: IQuiz) => {
     console.log(err);
   }
 };
+
+export const updateQuiz = async (data: IQuiz) => {
+  try {
+    // console.log("Send data:", data);
+    const updatedQuiz = await api.put("/quiz", data);
+    // console.log(updatedQuiz);
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { FormInput, FormCheckBox } from "../";
+import { FormInput, FormCheckBox } from ".";
 import { StyledAddAnswer } from "./style";
 
 interface MockAnswerProps {
@@ -18,16 +18,12 @@ const MockAnswer: FC<MockAnswerProps> = ({
 }) => {
   return (
     <StyledAddAnswer>
-      <FormCheckBox
-        type="checkbox"
-        selected={selected}
-        name={`questions[${questionIndex}].answers[${index}].isRight`}
-      />
+      <FormCheckBox type="checkbox" selected={selected} name={`mockAnswer`} />
 
       <FormInput
         type="text"
         placeholder={`Answer`}
-        name={`questions[${questionIndex}].answers[${index}].text`}
+        name={`mockAnswer`}
         maxRows={4}
         selected={selected}
         onClick={addAnswer}

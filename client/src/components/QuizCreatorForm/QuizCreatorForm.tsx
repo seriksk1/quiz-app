@@ -2,11 +2,13 @@ import React, { FC } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "styled-components";
-import * as yup from "yup";
 
+import { schema } from "./validation";
 import { IQuestion, IQuiz } from "../../redux/interfaces";
-import { createQuiz } from "../../redux/actions/quizCreation";
-import { AddQuestionList, AddQuestionItem } from "../";
+
+import { AddQuestionList, AddQuestionItem } from ".";
+import { quizSelector } from "../../redux/selectors";
+import { useSelector } from "react-redux";
 
 const Column = styled.div`
   display: flex;
@@ -36,48 +38,30 @@ const StyledControls = styled.div`
   justify-content: center;
 `;
 
-interface QuizFormProps {}
+interface QuizFormProps {
+  onSubmit: (quiz: IQuiz) => void;
+  submitText: string;
+}
 
 type FormValues = {
   name: string;
   questions: IQuestion[];
 };
 
-const schema = yup
-  .object({
-    name: yup.string().required("Quiz name is required"),
-    questions: yup.array().of(
-      yup.object().shape({
-        text: yup.string().required("Question name is required"),
-        answers: yup.array().of(
-          yup.object().shape({
-            text: yup.string().required("Answer text is required"),
-            isRight: yup.boolean(),
-          })
-        ),
-      })
-    ),
-  })
-  .required();
-
-const QuizForm: FC<QuizFormProps> = () => {
+const QuizCreatorForm: FC<QuizFormProps> = ({ onSubmit, submitText }) => {
+  const { currentQuiz } = useSelector(quizSelector);
   const owner: string = localStorage.getItem("username") || "";
 
-  const defaultValues: IQuiz = {
+  const defaultValues: IQuiz = currentQuiz || {
     name: "",
     questions: [],
-    owner: owner,
+    owner,
   };
 
   const methods = useForm<FormValues>({
     defaultValues,
     resolver: yupResolver(schema),
   });
-
-  const onSubmit = (quiz: IQuiz) => {
-    console.log(quiz);
-    createQuiz(quiz);
-  };
 
   return (
     <>
@@ -89,7 +73,7 @@ const QuizForm: FC<QuizFormProps> = () => {
           </Column>
 
           <StyledControls>
-            <StyledSubmitBtn type="submit">Create quiz</StyledSubmitBtn>
+            <StyledSubmitBtn type="submit">{submitText}</StyledSubmitBtn>
           </StyledControls>
         </form>
       </FormProvider>
@@ -97,4 +81,4 @@ const QuizForm: FC<QuizFormProps> = () => {
   );
 };
 
-export default QuizForm;
+export default QuizCreatorForm;
