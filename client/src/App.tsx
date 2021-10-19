@@ -14,6 +14,7 @@ import {
   SignUp,
   Profile,
   EditQuiz,
+  Settings,
 } from "./pages";
 
 const StyledContainer = styled.div`
@@ -35,6 +36,7 @@ const App = () => {
           <ProtectedRoute exact path="/quiz" component={Quiz} />
           <ProtectedRoute exact path="/results" component={Results} />
           <ProtectedRoute exact path="/profile/:username" component={Profile} />
+          <ProtectedRoute exact path="/settings" component={Settings} />
 
           <ProtectedRoute exact path="/create" component={CreateQuiz} />
           <ProtectedRoute exact path="/edit/:quizId" component={EditQuiz} />

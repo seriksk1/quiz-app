@@ -47,3 +47,28 @@ export const ACTION_USER = {
 };
 
 export const TIME_TO_ANSWER = 10;
+
+// For media queries
+const deviceSize = {
+  mobileS: "320px",
+  mobileM: "375px",
+  mobileL: "425px",
+  tablet: "768px",
+  laptopS: "1024px",
+  laptopM: "1440px",
+  laptopL: "1600px",
+  desktop: "1920px",
+  desktopL: "2560px",
+};
+
+export const device = {
+  mobileS: `(max-width: ${deviceSize.mobileS})`,
+  mobileM: `(max-width: ${deviceSize.mobileM})`,
+  mobileL: `(max-width: ${deviceSize.mobileL})`,
+  tablet: `(max-width: ${deviceSize.tablet})`,
+  laptopS: `(max-width: ${deviceSize.laptopS})`,
+  laptopM: `(max-width: ${deviceSize.laptopS})`,
+  laptopL: `(max-width: ${deviceSize.laptopL})`,
+  desktop: `(max-width: ${deviceSize.desktop})`,
+  desktopL: `(max-width: ${deviceSize.desktop})`,
+};

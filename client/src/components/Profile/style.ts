@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../redux/contants";
 
 export const StyledQuizzesListItem = styled.div`
   display: flex;
@@ -22,8 +23,24 @@ export const StyledQuizzesListItem = styled.div`
 export const StyledQuizItemWrapper = styled.div`
   padding: 0.5rem;
   box-sizing: border-box;
-  width: 25%;
+  width: 20%;
   min-width: 300px;
+
+  @media ${device.desktopL} {
+    width: 25%;
+  }
+
+  @media ${device.laptopL} {
+    width: 33.3%;
+  }
+
+  @media ${device.laptopS} {
+    width: 50%;
+  }
+
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 
 export const StyledQuizPreview = styled.div`
