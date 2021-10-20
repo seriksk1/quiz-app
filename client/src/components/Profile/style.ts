@@ -24,7 +24,7 @@ export const StyledQuizItemWrapper = styled.div`
   padding: 0.5rem;
   box-sizing: border-box;
   width: 20%;
-  min-width: 300px;
+  min-width: 270px;
 
   @media ${device.desktopL} {
     width: 25%;
@@ -38,7 +38,7 @@ export const StyledQuizItemWrapper = styled.div`
     width: 50%;
   }
 
-  @media ${device.tablet} {
+  @media ${device.tabletS} {
     width: 100%;
   }
 `;

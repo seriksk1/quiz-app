@@ -19,9 +19,33 @@ const StyledButtons = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
 
   & button {
     margin: 10px;
+  }
+`;
+
+const StyledChooseFile = styled.input`
+  height: fit-content;
+  display: none;
+`;
+
+const StyledLabel = styled.label`
+  width: fit-content;
+
+  padding: 10px 15px;
+  background-color: #309d8f;
+  cursor: pointer;
+  border-radius: 15px;
+  border: none;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  margin: 10px;
+
+  &:hover {
+    background-color: #25796e;
   }
 `;
 
@@ -60,10 +84,17 @@ const AvatarForm: FC<Props> = ({ name, onSubmit }) => {
           <StyledTitle>{name}</StyledTitle>
 
           <StyledContent>
-            <AvatarImage />
+            <AvatarImage image={file} />
 
             <StyledButtons>
-              <input type="file" onChange={handleUploadFile} />
+              <StyledLabel htmlFor="upload-avatar">
+                Upload
+                <StyledChooseFile
+                  id="upload-avatar"
+                  type="file"
+                  onChange={handleUploadFile}
+                />
+              </StyledLabel>
               <StyledSubmitBtn type="submit">Save</StyledSubmitBtn>
             </StyledButtons>
           </StyledContent>

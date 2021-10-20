@@ -7,7 +7,7 @@ const StyledStatisticsItem = styled.div`
   box-sizing: border-box;
   min-width: 80px;
   min-height: 50px;
-  padding: 0 0.5rem;
+  padding: 0 1.5rem;
 `;
 
 const StyledStatisticsName = styled.div`

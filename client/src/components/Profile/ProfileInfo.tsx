@@ -5,6 +5,7 @@ import StatisticsItem from "./StatisticsItem";
 
 import { IconButton } from "@material-ui/core";
 import { SettingsOutlined as SettingsIcon } from "@material-ui/icons";
+import { device } from "../../redux/contants";
 
 const StyledProfileInfoContainer = styled.div`
   display: flex;
@@ -14,6 +15,10 @@ const StyledProfileInfoContainer = styled.div`
   box-sizing: border-box;
   padding: 0 0.5em;
   box-shadow: 0px 1px 0px 0px #dcdcdc;
+
+  @media ${device.tabletS} {
+    flex-direction: column;
+  }
 `;
 
 const StyledProfileImage = styled.div`
@@ -35,6 +40,7 @@ const StyledProfileName = styled.h4`
 const StyledProfileStatistics = styled.div`
   display: flex;
   align-items: center;
+  margin: 10px 0;
 `;
 
 const StyledProfileMainInfo = styled.div`

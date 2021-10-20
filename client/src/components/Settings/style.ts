@@ -49,7 +49,7 @@ export const StyledContainer = styled.div`
   max-width: 600px;
   height: fit-content;
 
-  @media ${device.tablet} {
+  @media ${device.tabletL} {
     max-width: 100%;
     width: 100%;
 
@@ -77,7 +77,8 @@ export const StyledTitle = styled.p`
   font-weight: 700;
 `;
 
-export const AvatarImage = styled.div`
+export const AvatarImage = styled.div(
+  ({ image }: any) => `
   border-radius: 50%;
   width: 200px;
   height: 200px;
@@ -85,5 +86,14 @@ export const AvatarImage = styled.div`
   margin: 15px 0;
 
   background-size: cover;
-  background-image: url("https://html5css.ru/howto/img_avatar.png");
-`;
+  background-position-x: center;
+  background-position-y: bottom;
+  background-repeat: no-repeat;
+  
+  background-image: url(${
+    image
+      ? URL.createObjectURL(image)
+      : "https://html5css.ru/howto/img_avatar.png"
+  });
+`
+);

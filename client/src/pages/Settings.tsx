@@ -13,12 +13,10 @@ const StyledContainer = styled.div`
 const StyledPanelsWrapper = styled.div`
   display: flex;
 
-  @media ${device.tablet} {
+  @media ${device.tabletL} {
     flex-wrap: wrap;
   }
 `;
-
-const StyledTitle = styled.h1``;
 
 const StyledTabListWrapper = styled.div`
   display: flex;
@@ -60,13 +58,14 @@ function Settings() {
 
   return (
     <StyledContainer>
-      <StyledTitle>Settings</StyledTitle>
+      <h1>Settings</h1>
 
       <StyledTabListWrapper>
         <StyledTabList>
           <StyledTabListItem to="/settings/user-info">
             User info
           </StyledTabListItem>
+
           <StyledTabListItem to="/settings/change-password">
             Change password
           </StyledTabListItem>
