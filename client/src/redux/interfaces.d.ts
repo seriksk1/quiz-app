@@ -16,6 +16,8 @@ export interface IQuizState {
 }
 
 export interface IUserState {
+  avatar: string;
+
   answers: any[];
   result: number | null;
   isAuthorized: boolean;

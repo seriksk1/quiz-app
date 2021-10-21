@@ -52,3 +52,8 @@ export const logout = () => (dispatch: any) => {
     type: ACTION_USER.LOGGED_OUT,
   });
 };
+
+export const setAvatar = (avatar: string) => ({
+  type: ACTION_USER.SET_AVATAR,
+  payload: avatar,
+});

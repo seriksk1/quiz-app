@@ -1,5 +1,9 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { uploadFile } from "../../redux/actions/file";
+import { setAvatar } from "../../redux/actions/user";
+import { userSelector } from "../../redux/selectors";
 
 import {
   AvatarImage,
@@ -54,45 +58,50 @@ interface Props {
   onSubmit: any;
 }
 
-const AvatarForm: FC<Props> = ({ name, onSubmit }) => {
-  const [file, setFile] = useState<File>();
+const AvatarForm: FC<Props> = ({ name }) => {
+  const dispatch = useDispatch();
 
-  const handleUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [file, setFile] = useState<File>();
+  const { avatar } = useSelector(userSelector);
+
+  const handleSetFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
 
-    if (!fileList) return;
-
-    setFile(fileList[0]);
-    uploadFile();
-  };
-
-  const uploadFile = () => {
-    if (file) {
-      const formData = new FormData();
-      formData.append("image", file, file.name);
+    if (fileList) {
+      setFile(fileList[0]);
+      dispatch(setAvatar(URL.createObjectURL(fileList[0])));
     }
   };
 
-  useEffect(() => {
-    console.log("file:", file);
-  }, [file]);
+  const upload = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file, file.name);
+      formData.append("username", localStorage.getItem("username") as string);
+
+      dispatch(uploadFile(formData));
+    }
+  };
 
   return (
     <>
       <StyledContainer>
-        <StyledForm onSubmit={onSubmit}>
+        <StyledForm onSubmit={upload} encType="multipart/form-data">
           <StyledTitle>{name}</StyledTitle>
 
           <StyledContent>
-            <AvatarImage image={file} />
+            <AvatarImage image={avatar} />
 
             <StyledButtons>
-              <StyledLabel htmlFor="upload-avatar">
+              <StyledLabel htmlFor="file">
                 Upload
                 <StyledChooseFile
-                  id="upload-avatar"
                   type="file"
-                  onChange={handleUploadFile}
+                  id="file"
+                  name="file"
+                  onChange={handleSetFile}
                 />
               </StyledLabel>
               <StyledSubmitBtn type="submit">Save</StyledSubmitBtn>

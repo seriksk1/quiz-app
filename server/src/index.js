@@ -1,9 +1,19 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 require("./db");
+
+const quizRouter = require("./routes/quiz-router");
+const questionRouter = require("./routes/question-router");
+const answerRouter = require("./routes/answer-router");
+const authRouter = require("./routes/user-router");
+const fileRouter = require("./routes/file-router");
+
+const { verifyToken } = require("./middleware/jwt-verify");
+const { handleError } = require("./middleware/error");
 
 const app = express();
 app.use(cors());
@@ -11,13 +21,11 @@ app.use(express.json());
 
 const port = process.env.PORT;
 
-const quizRouter = require("./routes/quiz-router");
-const questionRouter = require("./routes/question-router");
-const answerRouter = require("./routes/answer-router");
-const authRouter = require("./routes/user-router");
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-const { verifyToken } = require("./middleware/jwt-verify");
-const { handleError } = require("./middleware/error");
+app.use(express.static(path.join("public")));
+app.use("/files", express.static("files"));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -25,8 +33,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", [verifyToken]);
+app.use("/api", [quizRouter, questionRouter, answerRouter, fileRouter]);
 app.use("/auth", authRouter);
-app.use("/api", [quizRouter, questionRouter, answerRouter]);
 
 app.use((err, req, res, next) => {
   handleError(err, res);
