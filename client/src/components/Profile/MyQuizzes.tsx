@@ -2,17 +2,18 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { IQuizState } from "../../redux/interfaces";
-import { quizSelector } from "../../redux/selectors";
+import { IQuizState, IUserState } from "../../redux/interfaces";
+import { quizSelector, userSelector } from "../../redux/selectors";
 import { fetchUserQuizzes } from "../../redux/actions/quiz";
 
 import MyQuizzesList from "./MyQuizzesList";
 
 function MyQuizzes() {
-  const { quizzes }: IQuizState = useSelector(quizSelector);
   const dispatch = useDispatch();
 
   const { username } = useParams();
+  const { quizzes }: IQuizState = useSelector(quizSelector);
+  const { avatar }: IUserState = useSelector(userSelector);
 
   useEffect(() => {
     dispatch(fetchUserQuizzes(username));
@@ -20,7 +21,7 @@ function MyQuizzes() {
 
   return (
     <>
-      <MyQuizzesList items={quizzes} />
+      <MyQuizzesList avatar={avatar} items={quizzes} />
     </>
   );
 }

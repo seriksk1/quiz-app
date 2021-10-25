@@ -28,6 +28,7 @@ export interface IQuiz {
   name: string;
   owner: string;
   questions: IQuestion[];
+  previewImage?: File;
 }
 
 export interface IQuestion {

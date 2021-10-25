@@ -22,7 +22,6 @@ const createUser = async (email, password, username) => {
     );
 
     newUser.token = token;
-
     await newUser.save();
 
     return newUser;
@@ -51,4 +50,16 @@ const getUserToken = async (username, password, user) => {
   }
 };
 
-module.exports = { createUser, getUserToken };
+const updateUserImage = async (username, image) => {
+  try {
+    console.log("image:", image);
+    console.log("username:", username);
+
+    await User.findOneAndUpdate({ username }, { image });
+    console.log("update user avatar");
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = { createUser, getUserToken, updateUserImage };

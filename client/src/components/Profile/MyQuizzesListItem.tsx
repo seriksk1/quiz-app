@@ -19,9 +19,10 @@ import {
 
 interface Props {
   item: IQuiz;
+  avatar: string;
 }
 
-const MyQuizzesListItem: FC<Props> = ({ item }) => {
+const MyQuizzesListItem: FC<Props> = ({ item, avatar }) => {
   return (
     <StyledQuizItemWrapper>
       <StyledQuizzesListItem>
@@ -30,7 +31,7 @@ const MyQuizzesListItem: FC<Props> = ({ item }) => {
         </StyledQuizPreview>
 
         <StyledQuizDescription>
-          <StyledCreatorImage />
+          <StyledCreatorImage image={avatar} />
 
           <StyledAboutQuiz>
             <StyledQuizName>{item.name}</StyledQuizName>

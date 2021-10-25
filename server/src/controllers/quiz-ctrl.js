@@ -3,6 +3,8 @@ const { HTTP_STATUS } = require("../constants");
 
 const createQuiz = async (req, res) => {
   try {
+    // console.log("file:", req.file);
+    // const image = req.file.filename;
     const body = req.body;
     const newQuiz = await QuizService.createQuiz(body);
 
@@ -53,10 +55,22 @@ const getQuizByOwner = async (req, res) => {
   }
 };
 
+const updateQuizImage = async (req, res) => {
+  try {
+    const quizId = req.params.quizId;
+    const image = req.body.image;
+
+    await QuizService.updateQuizImage(quizId, image);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   createQuiz,
   updateQuiz,
   deleteQuiz,
   getQuizzes,
   getQuizByOwner,
+  updateQuizImage,
 };

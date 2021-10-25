@@ -10,7 +10,6 @@ const quizRouter = require("./routes/quiz-router");
 const questionRouter = require("./routes/question-router");
 const answerRouter = require("./routes/answer-router");
 const authRouter = require("./routes/user-router");
-const fileRouter = require("./routes/file-router");
 
 const { verifyToken } = require("./middleware/jwt-verify");
 const { handleError } = require("./middleware/error");
@@ -33,7 +32,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api", [verifyToken]);
-app.use("/api", [quizRouter, questionRouter, answerRouter, fileRouter]);
+app.use("/api", [quizRouter, questionRouter, answerRouter]);
 app.use("/auth", authRouter);
 
 app.use((err, req, res, next) => {

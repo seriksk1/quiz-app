@@ -107,9 +107,9 @@ export const deleteAnswer = (id: any) => async (dispatch: any) => {
   }
 };
 
-export const createQuiz = async (data: IQuiz) => {
+export const createQuiz = async (data: IQuiz, formData: FormData) => {
   try {
-    await api.post("/quiz", data);
+    await api.post("/quiz", { formData, data });
   } catch (err) {
     console.log(err);
   }

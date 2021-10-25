@@ -1,9 +1,11 @@
 import React, { FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+
 import { uploadFile } from "../../redux/actions/file";
 import { setAvatar } from "../../redux/actions/user";
 import { userSelector } from "../../redux/selectors";
+
+import styled from "styled-components";
 
 import {
   AvatarImage,
@@ -81,7 +83,9 @@ const AvatarForm: FC<Props> = ({ name }) => {
       formData.append("file", file, file.name);
       formData.append("username", localStorage.getItem("username") as string);
 
-      dispatch(uploadFile(formData));
+      dispatch(
+        uploadFile(formData, localStorage.getItem("username") || "seriksk1")
+      );
     }
   };
 

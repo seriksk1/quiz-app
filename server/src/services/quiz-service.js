@@ -5,6 +5,8 @@ const createQuiz = async (body) => {
   try {
     const { name, owner, questions } = body;
 
+    console.log("body:", body);
+
     const newQuiz = await new Quiz({ name, owner });
     await newQuiz.save();
 
@@ -75,10 +77,19 @@ const getQuizByOwner = async (owner) => {
   }
 };
 
+const updateQuizImage = async (id, image) => {
+  try {
+    await Quiz.findByIdAndUpdate(id, { image });
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
   createQuiz,
   updateQuiz,
   deleteQuiz,
   getQuizzes,
   getQuizByOwner,
+  updateQuizImage,
 };

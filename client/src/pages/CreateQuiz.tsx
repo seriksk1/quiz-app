@@ -13,7 +13,18 @@ const StyledTitle = styled.h1`
 
 function CreateQuiz() {
   const handleSubmit = (quiz: IQuiz) => {
-    createQuiz(quiz);
+    const formData = new FormData();
+
+    if (quiz.previewImage) {
+      formData.append(
+        "previewImage",
+        quiz.previewImage,
+        quiz.previewImage.name
+      );
+    }
+
+    console.log(quiz);
+    createQuiz(quiz, formData);
   };
 
   useEffect(() => {

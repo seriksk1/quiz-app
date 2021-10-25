@@ -4,7 +4,7 @@ import { setAvatar } from "./user";
 const API_URI = process.env.REACT_APP_URI;
 
 const api = axios.create({
-  baseURL: API_URI + "/api",
+  baseURL: API_URI + "/auth",
 });
 
 api.interceptors.request.use((req) => {
@@ -12,14 +12,16 @@ api.interceptors.request.use((req) => {
   return req;
 });
 
-export const uploadFile = (formdata: FormData) => async (dispatch: any) => {
-  try {
-    console.log("Upload file to server");
-    const { data } = await api.post("/upload", formdata);
-    const avatarUrl = `${API_URI}/${data.data.name}`;
+export const uploadFile =
+  (formdata: FormData, username: string) => async (dispatch: any) => {
+    try {
+      console.log("Uploading file to server", formdata);
 
-    dispatch(setAvatar(avatarUrl));
-  } catch (err) {
-    console.log("Upload error");
-  }
-};
+      const { data } = await api.put(`/upload-avatar/${username}`, formdata);
+      const avatarUrl = `${API_URI}/${data.file}`;
+
+      dispatch(setAvatar(avatarUrl));
+    } catch (err) {
+      console.log("Upload error");
+    }
+  };
