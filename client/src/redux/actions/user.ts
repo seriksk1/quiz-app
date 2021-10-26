@@ -19,6 +19,7 @@ export const register =
       const { data } = await api.post("/register", credentials);
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("avatar", data.image);
       localStorage.setItem("username", credentials.username);
 
       dispatch({
@@ -34,6 +35,7 @@ export const login = (credentials: ICredentials) => async (dispatch: any) => {
     const { data } = await api.post("/login", credentials);
 
     localStorage.setItem("token", data.token);
+    localStorage.setItem("avatar", data.image);
     localStorage.setItem("username", credentials.username);
 
     dispatch({
@@ -46,6 +48,7 @@ export const login = (credentials: ICredentials) => async (dispatch: any) => {
 
 export const logout = () => (dispatch: any) => {
   localStorage.removeItem("token");
+  localStorage.removeItem("avatar");
   localStorage.removeItem("username");
 
   dispatch({

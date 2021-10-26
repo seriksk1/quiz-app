@@ -19,6 +19,7 @@ export const uploadFile =
 
       const { data } = await api.put(`/upload-avatar/${username}`, formdata);
       const avatarUrl = `${API_URI}/${data.file}`;
+      localStorage.setItem("avatar", data.file);
 
       dispatch(setAvatar(avatarUrl));
     } catch (err) {

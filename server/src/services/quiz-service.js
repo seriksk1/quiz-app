@@ -3,11 +3,9 @@ const QuestionService = require("../services/question-service");
 
 const createQuiz = async (body) => {
   try {
-    const { name, owner, questions } = body;
+    const { name, owner, questions, image } = body;
 
-    console.log("body:", body);
-
-    const newQuiz = await new Quiz({ name, owner });
+    const newQuiz = await new Quiz({ name, owner, image });
     await newQuiz.save();
 
     await questions.forEach(async (question) => {

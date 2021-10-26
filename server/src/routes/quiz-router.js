@@ -4,8 +4,8 @@ const QuizCtrl = require("../controllers/quiz-ctrl");
 const upload = require("../middleware/upload");
 const router = express.Router();
 
-router.post("/quiz", upload.single("previewImage"), QuizCtrl.createQuiz);
-router.put("/quiz", upload.single("previewImage"), QuizCtrl.updateQuiz);
+router.post("/quiz", upload.single("image"), QuizCtrl.createQuiz);
+router.put("/quiz", upload.single("image"), QuizCtrl.updateQuiz);
 router.delete("/quiz/:id", QuizCtrl.deleteQuiz);
 router.get("/quizzes", QuizCtrl.getQuizzes);
 

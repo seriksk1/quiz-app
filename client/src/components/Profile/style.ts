@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { device } from "../../redux/contants";
 
+const API_URI = process.env.REACT_APP_URI;
+
 export const StyledQuizzesListItem = styled.div`
   display: flex;
   flex-direction: column;
@@ -47,9 +49,14 @@ export const StyledQuizPreview = styled.div`
   position: relative;
   width: 100%;
   height: 200px;
-  background-image: url("https://images-cdn.kahoot.it/4b0d02b9-f99c-4069-bd00-6ef409b1f1dd?auto=webp&width=350");
+  background-image: url(${({ image }: any) =>
+    image
+      ? `${API_URI}/${image}`
+      : "https://images-cdn.kahoot.it/4b0d02b9-f99c-4069-bd00-6ef409b1f1dd?auto=webp&width=350"});
+
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 export const StyledText = styled.p`

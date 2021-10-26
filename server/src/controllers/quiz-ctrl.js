@@ -3,9 +3,9 @@ const { HTTP_STATUS } = require("../constants");
 
 const createQuiz = async (req, res) => {
   try {
-    // console.log("file:", req.file);
-    // const image = req.file.filename;
-    const body = req.body;
+    const body = { ...JSON.parse(req.body.data), image: req.file.filename };
+    console.log("body:", body);
+
     const newQuiz = await QuizService.createQuiz(body);
 
     res.status(HTTP_STATUS.OK).json({ success: true, data: newQuiz });
@@ -16,10 +16,14 @@ const createQuiz = async (req, res) => {
 
 const updateQuiz = async (req, res) => {
   try {
-    // const body = req.body;
-    // const updatedQuiz = await QuizService.updateQuiz(body);
-    // console.log("updatedQuiz:", updatedQuiz);
-    // res.status(HTTP_STATUS.OK).json({ success: true, data: updatedQuiz });
+    const body = { ...JSON.parse(req.body.data), image: req.file.filename };
+    console.log("body:", body);
+
+    await QuizService.deleteQuiz(body._id);
+    const newQuiz = await QuizService.createQuiz(body);
+
+    console.log("updatedQuiz:", newQuiz);
+    res.status(HTTP_STATUS.OK).json({ success: true, data: newQuiz });
   } catch (err) {
     console.log(err);
   }

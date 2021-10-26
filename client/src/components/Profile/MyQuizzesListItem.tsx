@@ -26,7 +26,7 @@ const MyQuizzesListItem: FC<Props> = ({ item, avatar }) => {
   return (
     <StyledQuizItemWrapper>
       <StyledQuizzesListItem>
-        <StyledQuizPreview>
+        <StyledQuizPreview image={item.image}>
           <StyledText>{item.questions.length} questions</StyledText>
         </StyledQuizPreview>
 

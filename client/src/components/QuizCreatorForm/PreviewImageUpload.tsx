@@ -4,6 +4,11 @@ import styled from "styled-components";
 
 import { PhotoCamera } from "@material-ui/icons";
 import { StyledCard } from "./style";
+import { useSelector } from "react-redux";
+import { quizSelector } from "../../redux/selectors";
+import { IQuizState } from "../../redux/interfaces";
+
+const API_URI = process.env.REACT_APP_URI;
 
 const StyledContent = styled(StyledCard)`
   display: flex;
@@ -46,6 +51,7 @@ const StyledLabel = styled.label`
 interface Props {}
 
 const PreviewImageUpload: FC<Props> = () => {
+  const { currentQuiz }: IQuizState = useSelector(quizSelector);
   const { setValue } = useFormContext();
 
   const [file, setFile] = useState<string>();
@@ -55,17 +61,19 @@ const PreviewImageUpload: FC<Props> = () => {
 
     if (fileList) {
       setFile(URL.createObjectURL(fileList[0]));
-      setValue("previewImage", fileList[0]);
+      setValue("image", fileList[0]);
     }
   };
 
   return (
-    <StyledContent image={file}>
+    <StyledContent
+      image={file || (currentQuiz?.image && `${API_URI}/${currentQuiz?.image}`)}
+    >
       <StyledLabel htmlFor="file">
         <StyledChooseFile
           id="file"
           type="file"
-          name="previewImage"
+          name="image"
           onChange={handleSetFile}
         />
         <PhotoCamera />

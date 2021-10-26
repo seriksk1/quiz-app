@@ -9,6 +9,7 @@ import { IQuestion, IQuiz } from "../../redux/interfaces";
 import { AddQuestionList, AddQuestionItem, PreviewImageUpload } from ".";
 import { quizSelector } from "../../redux/selectors";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Column = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ interface QuizFormProps {
 type FormValues = {
   name: string;
   questions: IQuestion[];
-  previewImage: File;
+  image: File;
 };
 
 const QuizCreatorForm: FC<QuizFormProps> = ({ onSubmit, submitText }) => {
@@ -64,6 +65,10 @@ const QuizCreatorForm: FC<QuizFormProps> = ({ onSubmit, submitText }) => {
     defaultValues,
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    methods.reset(defaultValues);
+  }, []);
 
   return (
     <>
