@@ -3,7 +3,11 @@ const Question = require("../models/question-model");
 
 const createAnswer = async (questionId, answer) => {
   try {
-    const newAnswer = await new Answer({ questionId, ...answer });
+    const newAnswer = await new Answer({
+      questionId,
+      text: answer.text,
+      isRight: answer.isRight,
+    });
     await newAnswer.save();
 
     await Question.findByIdAndUpdate(

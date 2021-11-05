@@ -66,9 +66,9 @@ const QuizCreatorForm: FC<QuizFormProps> = ({ onSubmit, submitText }) => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    methods.reset(defaultValues);
-  }, []);
+  // useEffect(() => {
+  //   methods.reset(defaultValues);
+  // }, []);
 
   return (
     <>

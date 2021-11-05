@@ -19,14 +19,14 @@ function EditQuiz() {
 
   const handleSubmit = (quiz: IQuiz) => {
     console.log(quiz);
-    // const formData = new FormData();
+    const formData = new FormData();
 
-    // if (quiz.image) {
-    //   formData.append("image", quiz.image, quiz.image.name);
-    // }
+    if (quiz.image?.name) {
+      formData.append("image", quiz.image, quiz.image.name);
+    }
 
-    // formData.append("data", JSON.stringify(quiz));
-    // updateQuiz(formData);
+    formData.append("data", JSON.stringify(quiz));
+    updateQuiz(formData);
   };
 
   return (

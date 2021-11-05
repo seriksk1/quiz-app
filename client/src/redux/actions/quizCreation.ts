@@ -1,7 +1,6 @@
 import axios from "axios";
 
 import { ACTION_QUIZ } from "../contants";
-import { IQuiz } from "../interfaces";
 
 const API_URI = process.env.REACT_APP_URI;
 

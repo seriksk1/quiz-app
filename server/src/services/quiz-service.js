@@ -25,17 +25,6 @@ const createQuiz = async (body) => {
 
 const updateQuiz = async (body) => {
   try {
-    // const { _id, name, owner, questions } = body;
-    // await Quiz.findByIdAndUpdate(_id, { name, owner });
-    // await questions.forEach(async (question) => {
-    //   if (question._id) {
-    //     await QuestionService.updateQuestion(question);
-    //   } else {
-    //     await QuestionService.createQuestion(_id, question);
-    //   }
-    // });
-    // const updatedQuiz = await Quiz.findById(_id);
-    // return updatedQuiz;
   } catch (err) {
     throw err;
   }
@@ -43,7 +32,12 @@ const updateQuiz = async (body) => {
 
 const deleteQuiz = async (id) => {
   try {
-    await Quiz.findByIdAndDelete(id);
+    const quiz = await Quiz.findById(id).populate({
+      path: "questions",
+      populate: { path: "answers" },
+    });
+
+    console.log(`Quiz ${id} is deleted`);
   } catch (err) {
     throw err;
   }
