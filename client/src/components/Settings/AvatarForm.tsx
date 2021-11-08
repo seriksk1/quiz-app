@@ -97,7 +97,13 @@ const AvatarForm: FC<Props> = ({ name }) => {
 
           <StyledContent>
             <AvatarImage
-              image={file ? URL.createObjectURL(file) : `${API_URI}/${avatar}`}
+              image={
+                file
+                  ? URL.createObjectURL(file)
+                  : avatar
+                  ? `${API_URI}/${avatar}`
+                  : "https://html5css.ru/howto/img_avatar.png"
+              }
             />
 
             <StyledButtons>
