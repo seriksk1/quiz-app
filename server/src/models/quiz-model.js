@@ -1,13 +1,19 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
+const Question = require('./question-model');
 
 const Quiz = new Schema(
   {
-    name: { type: String, default: "New quiz" },
+    name: { type: String, default: 'New quiz' },
     owner: { type: String, required: true },
-    questions: [{ type: Schema.Types.ObjectId, ref: "Question" }],
+    questions: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
     image: { type: String },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-module.exports = model("Quiz", Quiz);
+Quiz.pre('deleteOne', { document: true, query: false }, async function (next) {
+  let id = this.getQuery()['_id'];
+  await this.model('Question').deleteMany({ quizId: id }, next);
+});
+
+module.exports = model('Quiz', Quiz);

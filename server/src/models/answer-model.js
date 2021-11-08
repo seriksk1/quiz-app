@@ -1,12 +1,12 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const Answer = new Schema(
   {
-    questionId: { type: Schema.Types.ObjectId, ref: "Question" },
-    text: { type: String, default: "New answer" },
+    questionId: { type: Schema.Types.ObjectId, ref: 'Question' },
+    text: { type: String, default: 'New answer' },
     isRight: { type: Boolean, default: false },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-module.exports = model("Answer", Answer);
+module.exports = model('Answer', Answer);
