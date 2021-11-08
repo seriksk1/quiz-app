@@ -26,8 +26,9 @@ const updateQuiz = async (req, res) => {
     }
 
     await QuizService.deleteQuiz(body._id);
+
     const newQuiz = await QuizService.createQuiz(body);
-    
+
     console.log("Quiz updated:");
 
     res.status(HTTP_STATUS.OK).json({ success: true, data: newQuiz });

@@ -5,7 +5,7 @@ import { IUserState } from "../interfaces";
 const initialState: IUserState = {
   avatar: localStorage.getItem("avatar")
     ? `${localStorage.getItem("avatar")}`
-    : "https://html5css.ru/howto/img_avatar.png",
+    : "",
   answers: [],
   result: null,
   isAuthorized: localStorage.getItem("token") ? true : false,

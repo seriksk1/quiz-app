@@ -20,12 +20,12 @@ function EditQuiz() {
   const handleSubmit = (quiz: IQuiz) => {
     console.log(quiz);
     const formData = new FormData();
+    formData.append("data", JSON.stringify(quiz));
 
     if (quiz.image?.name) {
       formData.append("image", quiz.image, quiz.image.name);
     }
 
-    formData.append("data", JSON.stringify(quiz));
     updateQuiz(formData);
   };
 

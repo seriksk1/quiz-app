@@ -2,13 +2,12 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import { API_URI } from "../../redux/contants";
 import { IQuizState, IUserState } from "../../redux/interfaces";
 import { quizSelector, userSelector } from "../../redux/selectors";
 import { fetchUserQuizzes } from "../../redux/actions/quiz";
 
 import MyQuizzesList from "./MyQuizzesList";
-
-const API_URI = process.env.REACT_APP_URI;
 
 function MyQuizzes() {
   const dispatch = useDispatch();
@@ -23,10 +22,7 @@ function MyQuizzes() {
 
   return (
     <>
-      <MyQuizzesList
-        avatar={`${API_URI}/uploads/${username}/${avatar}`}
-        items={quizzes}
-      />
+      <MyQuizzesList avatar={`${API_URI}/${avatar}`} items={quizzes} />
     </>
   );
 }

@@ -6,7 +6,7 @@ import StatisticsItem from "./StatisticsItem";
 
 import { IconButton } from "@material-ui/core";
 import { SettingsOutlined as SettingsIcon } from "@material-ui/icons";
-import { device } from "../../redux/contants";
+import { API_URI, device } from "../../redux/contants";
 import { userSelector } from "../../redux/selectors";
 
 const StyledProfileInfoContainer = styled.div`
@@ -29,9 +29,7 @@ const StyledProfileImage = styled.div(
   width: 50px;
   height: 50px;
   background: url(${
-    image
-      ? image
-      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+    image ? `${API_URI}/${image}` : "https://html5css.ru/howto/img_avatar.png"
   });
   background-size: cover;
   background-position-x: center;
@@ -62,8 +60,6 @@ const StyledProfileMainInfo = styled.div`
 
 interface Props {}
 
-const API_URI = process.env.REACT_APP_URI;
-
 const ProfileInfo: FC<Props> = () => {
   const history = useHistory();
   const { avatar } = useSelector(userSelector);
@@ -82,9 +78,7 @@ const ProfileInfo: FC<Props> = () => {
   return (
     <StyledProfileInfoContainer>
       <StyledProfileMainInfo>
-        <StyledProfileImage
-          image={`${API_URI}/uploads/${username}/${avatar}`}
-        />
+        <StyledProfileImage image={avatar} />
         <StyledProfileName>{username}</StyledProfileName>
 
         <IconButton onClick={handleSettings}>
@@ -92,7 +86,7 @@ const ProfileInfo: FC<Props> = () => {
         </IconButton>
       </StyledProfileMainInfo>
 
-      <StyledProfileStatistics>
+      {/* <StyledProfileStatistics>
         {statictics.map((item) => {
           return (
             <StatisticsItem
@@ -102,7 +96,7 @@ const ProfileInfo: FC<Props> = () => {
             />
           );
         })}
-      </StyledProfileStatistics>
+      </StyledProfileStatistics> */}
     </StyledProfileInfoContainer>
   );
 };

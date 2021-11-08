@@ -1,8 +1,5 @@
 import axios from "axios";
-
-import { ACTION_QUIZ } from "../contants";
-
-const API_URI = process.env.REACT_APP_URI;
+import { ACTION_QUIZ, API_URI } from "../contants";
 
 const api = axios.create({
   baseURL: API_URI + "/api",

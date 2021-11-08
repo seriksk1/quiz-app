@@ -7,8 +7,7 @@ import { StyledCard } from "./style";
 import { useSelector } from "react-redux";
 import { quizSelector } from "../../redux/selectors";
 import { IQuizState } from "../../redux/interfaces";
-
-const API_URI = process.env.REACT_APP_URI;
+import { API_URI } from "../../redux/contants";
 
 const StyledContent = styled(StyledCard)`
   display: flex;

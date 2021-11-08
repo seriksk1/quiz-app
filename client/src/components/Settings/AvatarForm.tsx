@@ -14,6 +14,7 @@ import {
   StyledSubmitBtn,
   StyledTitle,
 } from "./style";
+import { API_URI } from "../../redux/contants";
 
 const StyledContent = styled.div`
   display: flex;
@@ -71,7 +72,6 @@ const AvatarForm: FC<Props> = ({ name }) => {
 
     if (fileList) {
       setFile(fileList[0]);
-      dispatch(setAvatar(URL.createObjectURL(fileList[0])));
     }
   };
 
@@ -96,7 +96,9 @@ const AvatarForm: FC<Props> = ({ name }) => {
           <StyledTitle>{name}</StyledTitle>
 
           <StyledContent>
-            <AvatarImage image={avatar} />
+            <AvatarImage
+              image={file ? URL.createObjectURL(file) : `${API_URI}/${avatar}`}
+            />
 
             <StyledButtons>
               <StyledLabel htmlFor="file">

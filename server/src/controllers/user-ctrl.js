@@ -60,6 +60,7 @@ const updateUserImage = async (req, res, next) => {
 
     console.log("file", file);
     console.log("username", username);
+
     await AuthService.updateUserImage(username, file);
 
     res.status(HTTP_STATUS.OK).json({

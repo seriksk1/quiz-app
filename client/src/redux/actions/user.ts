@@ -1,7 +1,5 @@
 import axios from "axios";
-import { ACTION_USER } from "../contants";
-
-const API_URI = process.env.REACT_APP_URI;
+import { ACTION_USER, API_URI } from "../contants";
 
 const api = axios.create({
   baseURL: API_URI + "/auth",

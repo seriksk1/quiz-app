@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { API_URI } from "../../redux/contants";
 import { IQuiz } from "../../redux/interfaces";
 
 import QuizMenu from "./QuizMenu";
@@ -22,15 +23,11 @@ interface Props {
   avatar: string;
 }
 
-const API_URI = process.env.REACT_APP_URI;
-
 const MyQuizzesListItem: FC<Props> = ({ item, avatar }) => {
   return (
     <StyledQuizItemWrapper>
       <StyledQuizzesListItem>
-        <StyledQuizPreview
-          image={`${API_URI}/uploads/${item.owner}/quizzes/${item.image}`}
-        >
+        <StyledQuizPreview image={`${API_URI}/${item.image}`}>
           <StyledText>{item.questions.length} questions</StyledText>
         </StyledQuizPreview>
 

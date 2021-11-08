@@ -1,9 +1,11 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const fs = require("fs");
 
 const User = require("../models/user-model");
 const { HTTP_STATUS } = require("../constants");
 const { QueryError } = require("../helpers/errorHandler");
+const { deleteFile } = require("../helpers/fileSystem");
 
 const createUser = async (email, password, username) => {
   try {
@@ -52,11 +54,12 @@ const getUserToken = async (username, password, user) => {
 
 const updateUserImage = async (username, image) => {
   try {
-    console.log("image:", image);
-    console.log("username:", username);
+    const { image: prevAvatar } = await User.findOne({ username });
+    deleteFile(prevAvatar);
 
     await User.findOneAndUpdate({ username }, { image });
-    console.log("update user avatar");
+
+    console.log("Update user avatar:", image);
   } catch (err) {
     throw err;
   }

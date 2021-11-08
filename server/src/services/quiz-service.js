@@ -1,5 +1,6 @@
 const Quiz = require("../models/quiz-model");
 const QuestionService = require("../services/question-service");
+const { deleteFile } = require("../helpers/fileSystem");
 
 const createQuiz = async (body) => {
   try {
@@ -36,6 +37,8 @@ const deleteQuiz = async (id) => {
       path: "questions",
       populate: { path: "answers" },
     });
+
+    deleteFile(quiz.image);
 
     console.log(`Quiz ${id} is deleted`);
   } catch (err) {

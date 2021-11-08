@@ -90,6 +90,6 @@ export const AvatarImage = styled.div(
   background-position-y: bottom;
   background-repeat: no-repeat;
   
-  background-image: url(${image});
+  background-image: url(${image || "https://html5css.ru/howto/img_avatar.png"});
 `
 );

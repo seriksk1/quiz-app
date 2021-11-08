@@ -1,29 +1,29 @@
 const multer = require("multer");
 const fs = require("fs");
+// const { createFoldersByPath } = require("../helpers/fileSystem");
 
 const multerStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    let body = {};
-    let dir = "";
+    let dir = "public";
+
+    return cb(null, dir);
+  },
+  filename: (req, file, cb) => {
+    let path = "";
+    let prefix = "";
 
     if (Object.keys(req.body) && req.body.data) {
       body = JSON.parse(req.body.data);
-      dir = `public/uploads/${body.owner}/quizzes`;
+      path = `uploads/${body.owner}/quizzes/`;
     } else if (req.body.username) {
-      dir = `public/uploads/${req.body.username}`;
+      path = `uploads/${req.body.username}/`;
     } else {
-      dir = `public/uploads/trash`;
+      path = `uploads/trash`;
     }
 
-    fs.exists(dir, (exist) => {
-      if (!exist) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
-      return cb(null, dir);
-    });
-  },
-  filename: (req, file, cb) => {
-    let prefix = "";
+    if (!fs.existsSync(`public/${path}`)) {
+      fs.mkdirSync(`public/${path}`, { recursive: true });
+    }
 
     if (file.fieldname === "avatar") {
       prefix = "user";
@@ -32,7 +32,8 @@ const multerStorage = multer.diskStorage({
     }
 
     const ext = file.mimetype.split("/")[1];
-    cb(null, `${prefix}-${file.fieldname}-${Date.now()}.${ext}`);
+    path = `${path}${prefix}-${Date.now()}.${ext}`;
+    cb(null, path);
   },
 });
 

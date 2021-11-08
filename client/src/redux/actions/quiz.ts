@@ -1,9 +1,7 @@
 import axios from "axios";
-import { ACTION_QUIZ } from "../contants";
+import { ACTION_QUIZ, API_URI } from "../contants";
 import { IQuiz } from "../interfaces";
 import { logout } from "./user";
-
-const API_URI = process.env.REACT_APP_URI;
 
 const api = axios.create({
   baseURL: API_URI + "/api",

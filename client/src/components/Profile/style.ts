@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../redux/contants";
 
-const API_URI = process.env.REACT_APP_URI;
-
 export const StyledQuizzesListItem = styled.div`
   display: flex;
   flex-direction: column;
@@ -94,9 +92,7 @@ export const StyledCreatorImage = styled.div(
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
-
-}
-`
+}`
 );
 
 export const StyledAboutQuiz = styled.div`
