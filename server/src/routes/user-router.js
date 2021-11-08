@@ -8,7 +8,7 @@ router.post("/register", AuthCtrl.createUser);
 router.post("/login", AuthCtrl.getUserToken);
 router.put(
   "/upload-avatar/:username",
-  upload.single("file"),
+  upload.single("avatar"),
   AuthCtrl.updateUserImage
 );
 

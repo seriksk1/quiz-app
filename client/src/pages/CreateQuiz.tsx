@@ -17,12 +17,14 @@ function CreateQuiz() {
   const dispatch = useDispatch();
   const handleSubmit = (quiz: IQuiz) => {
     const formData = new FormData();
+    console.log(quiz);
+
+    formData.append("data", JSON.stringify(quiz));
 
     if (quiz.image) {
       formData.append("image", quiz.image, quiz.image.name);
     }
 
-    formData.append("data", JSON.stringify(quiz));
     createQuiz(formData);
   };
 

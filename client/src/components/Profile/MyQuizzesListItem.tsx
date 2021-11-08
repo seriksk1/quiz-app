@@ -22,11 +22,15 @@ interface Props {
   avatar: string;
 }
 
+const API_URI = process.env.REACT_APP_URI;
+
 const MyQuizzesListItem: FC<Props> = ({ item, avatar }) => {
   return (
     <StyledQuizItemWrapper>
       <StyledQuizzesListItem>
-        <StyledQuizPreview image={item.image}>
+        <StyledQuizPreview
+          image={`${API_URI}/uploads/${item.owner}/quizzes/${item.image}`}
+        >
           <StyledText>{item.questions.length} questions</StyledText>
         </StyledQuizPreview>
 

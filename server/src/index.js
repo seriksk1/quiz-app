@@ -24,7 +24,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join("public")));
-app.use("/files", express.static("files"));
+app.use("/uploads", express.static("uploads"));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

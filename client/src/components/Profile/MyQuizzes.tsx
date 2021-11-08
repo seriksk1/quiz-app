@@ -8,6 +8,8 @@ import { fetchUserQuizzes } from "../../redux/actions/quiz";
 
 import MyQuizzesList from "./MyQuizzesList";
 
+const API_URI = process.env.REACT_APP_URI;
+
 function MyQuizzes() {
   const dispatch = useDispatch();
 
@@ -21,7 +23,10 @@ function MyQuizzes() {
 
   return (
     <>
-      <MyQuizzesList avatar={avatar} items={quizzes} />
+      <MyQuizzesList
+        avatar={`${API_URI}/uploads/${username}/${avatar}`}
+        items={quizzes}
+      />
     </>
   );
 }

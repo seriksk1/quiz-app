@@ -2,11 +2,9 @@ import { ACTION_USER } from "../contants";
 import { AnyAction } from "../types";
 import { IUserState } from "../interfaces";
 
-const API_URI = process.env.REACT_APP_URI;
-
 const initialState: IUserState = {
   avatar: localStorage.getItem("avatar")
-    ? `${API_URI}/${localStorage.getItem("avatar")}`
+    ? `${localStorage.getItem("avatar")}`
     : "https://html5css.ru/howto/img_avatar.png",
   answers: [],
   result: null,

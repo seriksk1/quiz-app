@@ -62,6 +62,8 @@ const StyledProfileMainInfo = styled.div`
 
 interface Props {}
 
+const API_URI = process.env.REACT_APP_URI;
+
 const ProfileInfo: FC<Props> = () => {
   const history = useHistory();
   const { avatar } = useSelector(userSelector);
@@ -80,7 +82,9 @@ const ProfileInfo: FC<Props> = () => {
   return (
     <StyledProfileInfoContainer>
       <StyledProfileMainInfo>
-        <StyledProfileImage image={avatar} />
+        <StyledProfileImage
+          image={`${API_URI}/uploads/${username}/${avatar}`}
+        />
         <StyledProfileName>{username}</StyledProfileName>
 
         <IconButton onClick={handleSettings}>

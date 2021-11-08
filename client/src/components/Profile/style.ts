@@ -51,7 +51,7 @@ export const StyledQuizPreview = styled.div`
   height: 200px;
   background-image: url(${({ image }: any) =>
     image
-      ? `${API_URI}/${image}`
+      ? `${image}`
       : "https://images-cdn.kahoot.it/4b0d02b9-f99c-4069-bd00-6ef409b1f1dd?auto=webp&width=350"});
 
   background-position: center;

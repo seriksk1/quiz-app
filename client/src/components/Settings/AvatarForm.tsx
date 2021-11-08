@@ -80,8 +80,8 @@ const AvatarForm: FC<Props> = ({ name }) => {
 
     if (file) {
       const formData = new FormData();
-      formData.append("file", file, file.name);
       formData.append("username", localStorage.getItem("username") as string);
+      formData.append("avatar", file, file.name);
 
       dispatch(
         uploadFile(formData, localStorage.getItem("username") || "seriksk1")
