@@ -1,5 +1,5 @@
-const QuizService = require('../services/quiz-service');
-const { HTTP_STATUS } = require('../constants');
+const QuizService = require("../services/quiz-service");
+const { HTTP_STATUS } = require("../constants");
 
 const createQuiz = async (req, res) => {
   try {
@@ -27,8 +27,6 @@ const updateQuiz = async (req, res) => {
 
     await QuizService.deleteQuiz(body._id);
     const newQuiz = await QuizService.createQuiz(body);
-
-    console.log('Quiz updated:');
 
     res.status(HTTP_STATUS.OK).json({ success: true, data: newQuiz });
   } catch (err) {

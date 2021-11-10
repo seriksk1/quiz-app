@@ -1,6 +1,6 @@
-const Quiz = require('../models/quiz-model');
-const QuestionService = require('../services/question-service');
-const { deleteFile } = require('../helpers/fileSystem');
+const Quiz = require("../models/quiz-model");
+const QuestionService = require("../services/question-service");
+const { deleteFile } = require("../helpers/fileSystem");
 
 const createQuiz = async (body) => {
   try {
@@ -14,8 +14,8 @@ const createQuiz = async (body) => {
     });
 
     const populatedQuiz = await Quiz.findOne({ _id: newQuiz._id }).populate({
-      path: 'questions',
-      populate: { path: 'answers' },
+      path: "questions",
+      populate: { path: "answers" },
     });
 
     return populatedQuiz;
@@ -46,8 +46,8 @@ const deleteQuiz = async (id) => {
 const getQuizzes = async () => {
   try {
     const items = await Quiz.find({}).populate({
-      path: 'questions',
-      populate: { path: 'answers' },
+      path: "questions",
+      populate: { path: "answers" },
     });
 
     return items;
@@ -59,8 +59,8 @@ const getQuizzes = async () => {
 const getQuizByOwner = async (owner) => {
   try {
     const items = await Quiz.find({ owner }).populate({
-      path: 'questions',
-      populate: { path: 'answers' },
+      path: "questions",
+      populate: { path: "answers" },
     });
 
     return items;
