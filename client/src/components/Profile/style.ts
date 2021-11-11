@@ -47,9 +47,14 @@ export const StyledQuizPreview = styled.div`
   position: relative;
   width: 100%;
   height: 200px;
-  background-image: url("https://images-cdn.kahoot.it/4b0d02b9-f99c-4069-bd00-6ef409b1f1dd?auto=webp&width=350");
+  background-image: url(${({ image }: any) =>
+    image
+      ? `${image}`
+      : "https://images-cdn.kahoot.it/4b0d02b9-f99c-4069-bd00-6ef409b1f1dd?auto=webp&width=350"});
+
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 export const StyledText = styled.p`
@@ -76,17 +81,19 @@ export const StyledQuizDescription = styled.div`
   box-sizing: border-box;
 `;
 
-export const StyledCreatorImage = styled.div`
+export const StyledCreatorImage = styled.div(
+  ({ image }: any) => `
   margin: 0 10px 0 0;
   padding: 0;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png);
+  background: url(${image});
   background-size: cover;
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
-`;
+}`
+);
 
 export const StyledAboutQuiz = styled.div`
   display: flex;

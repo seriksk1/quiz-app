@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TextField, IconButton, Checkbox } from "@material-ui/core";
+import { TextField, IconButton } from "@material-ui/core";
 import { StyledButton } from "../styled-components";
 
 export const StyledCard = styled.div`

@@ -1,11 +1,12 @@
 const Quiz = require("../models/quiz-model");
 const QuestionService = require("../services/question-service");
+const { deleteFile } = require("../helpers/fileSystem");
 
 const createQuiz = async (body) => {
   try {
-    const { name, owner, questions } = body;
+    const { name, owner, questions, image } = body;
 
-    const newQuiz = await new Quiz({ name, owner });
+    const newQuiz = await new Quiz({ name, owner, image });
     await newQuiz.save();
 
     await questions.forEach(async (question) => {
@@ -25,17 +26,6 @@ const createQuiz = async (body) => {
 
 const updateQuiz = async (body) => {
   try {
-    // const { _id, name, owner, questions } = body;
-    // await Quiz.findByIdAndUpdate(_id, { name, owner });
-    // await questions.forEach(async (question) => {
-    //   if (question._id) {
-    //     await QuestionService.updateQuestion(question);
-    //   } else {
-    //     await QuestionService.createQuestion(_id, question);
-    //   }
-    // });
-    // const updatedQuiz = await Quiz.findById(_id);
-    // return updatedQuiz;
   } catch (err) {
     throw err;
   }
@@ -43,7 +33,11 @@ const updateQuiz = async (body) => {
 
 const deleteQuiz = async (id) => {
   try {
-    await Quiz.findByIdAndDelete(id);
+    const quiz = await Quiz.findById(id);
+    deleteFile(quiz.image);
+
+    await Quiz.deleteOne({ _id: id });
+    console.log(`Quiz ${id} is deleted`);
   } catch (err) {
     throw err;
   }
@@ -75,10 +69,19 @@ const getQuizByOwner = async (owner) => {
   }
 };
 
+const updateQuizImage = async (id, image) => {
+  try {
+    await Quiz.findByIdAndUpdate(id, { image });
+  } catch (err) {
+    throw err;
+  }
+};
+
 module.exports = {
   createQuiz,
   updateQuiz,
   deleteQuiz,
   getQuizzes,
   getQuizByOwner,
+  updateQuizImage,
 };

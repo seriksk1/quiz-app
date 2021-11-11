@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { QuizCreatorForm } from "../components";
+import { clearQuiz } from "../redux/actions/quiz";
 import { createQuiz } from "../redux/actions/quizCreation";
 import { IQuiz } from "../redux/interfaces";
 
@@ -12,13 +14,19 @@ const StyledTitle = styled.h1`
 `;
 
 function CreateQuiz() {
+  const dispatch = useDispatch();
   const handleSubmit = (quiz: IQuiz) => {
-    createQuiz(quiz);
-  };
+    const formData = new FormData();
+    console.log(quiz);
 
-  useEffect(() => {
-    console.log("Quiz Creator");
-  }, []);
+    formData.append("data", JSON.stringify(quiz));
+
+    if (quiz.image) {
+      formData.append("image", quiz.image, quiz.image.name);
+    }
+
+    createQuiz(formData);
+  };
 
   return (
     <>

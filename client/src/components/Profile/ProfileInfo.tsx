@@ -1,11 +1,13 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import StatisticsItem from "./StatisticsItem";
 
 import { IconButton } from "@material-ui/core";
 import { SettingsOutlined as SettingsIcon } from "@material-ui/icons";
-import { device } from "../../redux/contants";
+import { API_URI, device } from "../../redux/contants";
+import { userSelector } from "../../redux/selectors";
 
 const StyledProfileInfoContainer = styled.div`
   display: flex;
@@ -21,15 +23,23 @@ const StyledProfileInfoContainer = styled.div`
   }
 `;
 
-const StyledProfileImage = styled.div`
+const StyledProfileImage = styled.div(
+  ({ image }: any) => `
+
   width: 50px;
   height: 50px;
-  background: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png);
-  background-position: center;
+  background: url(${
+    image ? `${API_URI}/${image}` : "https://html5css.ru/howto/img_avatar.png"
+  });
   background-size: cover;
+  background-position-x: center;
+  background-position-y: bottom;
+  background-repeat: no-repeat;
+  
   border-radius: 50%;
   margin-right: 20px;
-`;
+  `
+);
 
 const StyledProfileName = styled.h4`
   font-size: 20px;
@@ -52,6 +62,7 @@ interface Props {}
 
 const ProfileInfo: FC<Props> = () => {
   const history = useHistory();
+  const { avatar } = useSelector(userSelector);
   const { username } = useParams();
 
   const statictics = [
@@ -67,7 +78,7 @@ const ProfileInfo: FC<Props> = () => {
   return (
     <StyledProfileInfoContainer>
       <StyledProfileMainInfo>
-        <StyledProfileImage />
+        <StyledProfileImage image={avatar} />
         <StyledProfileName>{username}</StyledProfileName>
 
         <IconButton onClick={handleSettings}>
@@ -75,7 +86,7 @@ const ProfileInfo: FC<Props> = () => {
         </IconButton>
       </StyledProfileMainInfo>
 
-      <StyledProfileStatistics>
+      {/* <StyledProfileStatistics>
         {statictics.map((item) => {
           return (
             <StatisticsItem
@@ -85,7 +96,7 @@ const ProfileInfo: FC<Props> = () => {
             />
           );
         })}
-      </StyledProfileStatistics>
+      </StyledProfileStatistics> */}
     </StyledProfileInfoContainer>
   );
 };

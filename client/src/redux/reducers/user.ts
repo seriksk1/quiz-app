@@ -3,6 +3,9 @@ import { AnyAction } from "../types";
 import { IUserState } from "../interfaces";
 
 const initialState: IUserState = {
+  avatar: localStorage.getItem("avatar")
+    ? `${localStorage.getItem("avatar")}`
+    : "",
   answers: [],
   result: null,
   isAuthorized: localStorage.getItem("token") ? true : false,
@@ -28,6 +31,13 @@ const user = (state = initialState, { type, payload }: AnyAction) => {
       return {
         ...state,
         isAuthorized: false,
+      };
+    }
+
+    case ACTION_USER.SET_AVATAR: {
+      return {
+        ...state,
+        avatar: payload,
       };
     }
 

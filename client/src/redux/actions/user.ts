@@ -1,7 +1,5 @@
 import axios from "axios";
-import { ACTION_USER } from "../contants";
-
-const API_URI = process.env.REACT_APP_URI;
+import { ACTION_USER, API_URI } from "../contants";
 
 const api = axios.create({
   baseURL: API_URI + "/auth",
@@ -19,6 +17,7 @@ export const register =
       const { data } = await api.post("/register", credentials);
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("avatar", data.image);
       localStorage.setItem("username", credentials.username);
 
       dispatch({
@@ -34,6 +33,7 @@ export const login = (credentials: ICredentials) => async (dispatch: any) => {
     const { data } = await api.post("/login", credentials);
 
     localStorage.setItem("token", data.token);
+    localStorage.setItem("avatar", data.image);
     localStorage.setItem("username", credentials.username);
 
     dispatch({
@@ -46,9 +46,15 @@ export const login = (credentials: ICredentials) => async (dispatch: any) => {
 
 export const logout = () => (dispatch: any) => {
   localStorage.removeItem("token");
+  localStorage.removeItem("avatar");
   localStorage.removeItem("username");
 
   dispatch({
     type: ACTION_USER.LOGGED_OUT,
   });
 };
+
+export const setAvatar = (avatar: string) => ({
+  type: ACTION_USER.SET_AVATAR,
+  payload: avatar,
+});

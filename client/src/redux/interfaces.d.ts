@@ -16,6 +16,8 @@ export interface IQuizState {
 }
 
 export interface IUserState {
+  avatar: string;
+
   answers: any[];
   result: number | null;
   isAuthorized: boolean;
@@ -26,6 +28,7 @@ export interface IQuiz {
   name: string;
   owner: string;
   questions: IQuestion[];
+  image?: File;
 }
 
 export interface IQuestion {

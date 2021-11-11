@@ -1,3 +1,5 @@
+export const API_URI = process.env.REACT_APP_URI;
+
 // Quiz
 
 export const ACTION_QUIZ = {
@@ -39,6 +41,7 @@ export const ACTION_USER = {
   LOGGED_OUT: "LOGGED_OUT",
 
   SET_USER: "SET_USER",
+  SET_AVATAR: "SET_AVATAR",
   ADD_ANSWER: "USER_ADD_ANSWER",
   NEXT_QUESTION: "NEXT_QUESTION",
   FINISH_QUIZ: "FINISH_QUIZ",

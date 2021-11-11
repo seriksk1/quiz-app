@@ -2,8 +2,8 @@ const { HTTP_STATUS } = require("../constants");
 
 const handleError = (err, res) => {
   const { statusCode, message } = err;
-  console.log(message);
-  res.status(statusCode).json({
+  console.log("HandleError message:", message);
+  res.status(statusCode || HTTP_STATUS.NOT_FOUND).json({
     err: err,
     statusCode: statusCode,
     message: message,

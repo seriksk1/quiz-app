@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const Answer = require("./answer-model");
 
 const Question = new Schema(
   {
@@ -8,6 +9,15 @@ const Question = new Schema(
     isAnswered: { type: Boolean, default: false },
   },
   { timestamps: true }
+);
+
+Question.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function (next) {
+    const id = this._id;
+    await Answer.deleteMany({ questionId: id }, next);
+  }
 );
 
 module.exports = model("Question", Question);

@@ -1,8 +1,7 @@
-import { ACTION_QUIZ, ACTION_USER } from "../contants";
-import { IQuiz } from "../interfaces";
 import axios from "axios";
-
-const API_URI = process.env.REACT_APP_URI;
+import { ACTION_QUIZ, API_URI } from "../contants";
+import { IQuiz } from "../interfaces";
+import { logout } from "./user";
 
 const api = axios.create({
   baseURL: API_URI + "/api",
@@ -53,9 +52,7 @@ export const fetchQuizzes = () => async (dispatch: any) => {
 
     dispatch(setQuizzes(items));
   } catch (err) {
-    dispatch({
-      type: ACTION_USER.LOGGED_OUT,
-    });
+    dispatch(logout());
     console.log(err);
   }
 };
@@ -67,9 +64,7 @@ export const fetchUserQuizzes = (owner: string) => async (dispatch: any) => {
 
     dispatch(setQuizzes(items));
   } catch (err) {
-    dispatch({
-      type: ACTION_USER.LOGGED_OUT,
-    });
+    dispatch(logout());
     console.log(err);
   }
 };

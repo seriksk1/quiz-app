@@ -6,14 +6,16 @@ import styled from "styled-components";
 import { schema } from "./validation";
 import { IQuestion, IQuiz } from "../../redux/interfaces";
 
-import { AddQuestionList, AddQuestionItem } from ".";
+import { AddQuestionList, AddQuestionItem, PreviewImageUpload } from ".";
 import { quizSelector } from "../../redux/selectors";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Column = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 15px 0 0;
 `;
 
 const StyledSubmitBtn = styled.button`
@@ -46,6 +48,7 @@ interface QuizFormProps {
 type FormValues = {
   name: string;
   questions: IQuestion[];
+  image: File;
 };
 
 const QuizCreatorForm: FC<QuizFormProps> = ({ onSubmit, submitText }) => {
@@ -63,12 +66,21 @@ const QuizCreatorForm: FC<QuizFormProps> = ({ onSubmit, submitText }) => {
     resolver: yupResolver(schema),
   });
 
+  // useEffect(() => {
+  //   methods.reset(defaultValues);
+  // }, []);
+
   return (
     <>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} autoComplete="off">
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          autoComplete="off"
+          encType="multipart/form-data"
+        >
           <Column>
             <AddQuestionItem type="quiz" />
+            <PreviewImageUpload />
             <AddQuestionList />
           </Column>
 

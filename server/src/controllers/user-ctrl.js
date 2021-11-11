@@ -45,7 +45,27 @@ const getUserToken = async (req, res, next) => {
     res.status(HTTP_STATUS.OK).json({
       success: true,
       token: user.token,
+      image: user.image,
       message: "User logged in!",
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const updateUserImage = async (req, res, next) => {
+  try {
+    const file = req.file.filename;
+    const username = req.params.username;
+
+    console.log("file", file);
+    console.log("username", username);
+
+    await AuthService.updateUserImage(username, file);
+
+    res.status(HTTP_STATUS.OK).json({
+      success: true,
+      file: file,
     });
   } catch (err) {
     next(err);
@@ -55,4 +75,5 @@ const getUserToken = async (req, res, next) => {
 module.exports = {
   createUser,
   getUserToken,
+  updateUserImage,
 };

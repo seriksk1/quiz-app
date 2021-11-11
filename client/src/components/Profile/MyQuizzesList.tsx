@@ -12,15 +12,18 @@ const StyledQuizzesList = styled.div`
 `;
 
 interface Props {
+  avatar: string;
   items: IQuiz[] | null;
 }
 
-const MyQuizzesList: FC<Props> = ({ items }) => {
+const MyQuizzesList: FC<Props> = ({ items, avatar }) => {
   return (
     <StyledQuizzesList>
       {items &&
         items.map((item) => {
-          return <MyQuizzesListItem key={item._id} item={item} />;
+          return (
+            <MyQuizzesListItem key={item._id} avatar={avatar} item={item} />
+          );
         })}
     </StyledQuizzesList>
   );
