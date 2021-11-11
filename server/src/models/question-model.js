@@ -11,10 +11,13 @@ const Question = new Schema(
   { timestamps: true }
 );
 
-Question.pre("remove", { document: true, query: false }, async function (next) {
-  let id = this._id;
-  console.log("deleting answers of question:", id);
-  await Answer.deleteMany({ questionId: id }, next);
-});
+Question.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function (next) {
+    const id = this._id;
+    await Answer.deleteMany({ questionId: id }, next);
+  }
+);
 
 module.exports = model("Question", Question);

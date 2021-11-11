@@ -13,8 +13,11 @@ const Quiz = new Schema(
 
 Quiz.pre("deleteOne", { document: true, query: true }, async function (next) {
   let id = this.getQuery()["_id"];
-  console.log("Delete questions");
-  await Question.find({ quizId: id }, next);
+  let questions = await Question.find({ quizId: id });
+
+  questions.forEach(async (question) => {
+    await question.deleteOne({ _id: question._id }, next);
+  });
 });
 
 module.exports = model("Quiz", Quiz);
