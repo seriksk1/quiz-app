@@ -1,8 +1,8 @@
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const fs = require("fs");
 
 const User = require("../models/user-model");
+const AuthService = require("./auth-service");
+
 const { HTTP_STATUS } = require("../constants");
 const { QueryError } = require("../helpers/errorHandler");
 const { deleteFile } = require("../helpers/fileSystem");
@@ -17,13 +17,7 @@ const createUser = async (email, password, username) => {
       username,
     });
 
-    const token = await jwt.sign(
-      { user_id: newUser._id, username },
-      process.env.TOKEN_KEY,
-      { expiresIn: "2h" }
-    );
-
-    newUser.token = token;
+    newUser.token = await AuthService.getSignedToken(newUser._id, username);
     await newUser.save();
 
     return newUser;
@@ -32,37 +26,24 @@ const createUser = async (email, password, username) => {
   }
 };
 
-const getUserToken = async (username, password, user) => {
-  try {
-    if (await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign(
-        { user_id: user._id, username },
-        process.env.TOKEN_KEY,
-        { expiresIn: "2h" }
-      );
-      return token;
-    } else {
-      throw new QueryError(
-        HTTP_STATUS.BAD_REQUEST,
-        "Wrong password or username"
-      );
-    }
-  } catch (err) {
-    throw err;
-  }
-};
-
 const updateUserImage = async (username, image) => {
   try {
-    const { image: prevAvatar } = await User.findOne({ username });
+    const { avatar: prevAvatar } = await User.findOne({ username });
     deleteFile(prevAvatar);
 
-    await User.findOneAndUpdate({ username }, { image });
-
-    console.log("Update user avatar:", image);
+    await User.findOneAndUpdate({ username }, { avatar: image });
+    // console.log("Update user avatar:", image);
   } catch (err) {
     throw err;
   }
 };
 
-module.exports = { createUser, getUserToken, updateUserImage };
+const getUsersByName = async (searchName) => {
+  try {
+    return await User.find({ username: { $regex: searchName } });
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = { createUser, updateUserImage, getUsersByName };
