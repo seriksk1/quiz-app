@@ -30,9 +30,7 @@ const updateUserImage = async (username, image) => {
   try {
     const { avatar: prevAvatar } = await User.findOne({ username });
     deleteFile(prevAvatar);
-
     await User.findOneAndUpdate({ username }, { avatar: image });
-    // console.log("Update user avatar:", image);
   } catch (err) {
     throw err;
   }
@@ -46,4 +44,14 @@ const getUsersByName = async (searchName) => {
   }
 };
 
-module.exports = { createUser, updateUserImage, getUsersByName };
+const getUser = async (name) => {
+  try {
+    const { username, avatar, email } = await User.findOne({ username: name });
+    const publicUserData = { username, avatar, email };
+    return publicUserData;
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = { createUser, updateUserImage, getUsersByName, getUser };

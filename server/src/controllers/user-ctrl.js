@@ -33,9 +33,6 @@ const updateUserImage = async (req, res, next) => {
     const file = req.file.filename;
     const username = req.params.username;
 
-    // console.log("file", file);
-    // console.log("username", username);
-
     await UserService.updateUserImage(username, file);
 
     res.status(HTTP_STATUS.OK).json({

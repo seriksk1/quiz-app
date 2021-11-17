@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { API_URI } from "../redux/contants";
 
@@ -14,7 +15,7 @@ const StyledContainer = styled.div`
 
 const SearchBar = styled.div`
   display: flex;
-  margin: 0 auto;
+  margin: 20px auto;
 `;
 
 const StyledSearchInput = styled.input`
@@ -41,7 +42,8 @@ const StyledButton = styled.button`
 const StyledUsersList = styled.ul`
   display: flex;
   flex-direction: column;
-
+  align-items: center;
+  width: 95%;
   list-style: none;
   padding: 20px 0;
   margin: 0;
@@ -50,12 +52,31 @@ const StyledUsersList = styled.ul`
 const StyledUsersListItem = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  width: 250px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  max-width: 680px;
+  width: 100%;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 2px 2px #cfcfcfba;
 
   span {
     font-size: 18px;
+  }
+
+  .wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  a {
+    color: #000;
+    text-decoration: none;
+
+    &:hover {
+      color: #aaa;
+    }
   }
 `;
 
@@ -64,6 +85,13 @@ const StyledUserAvatar = styled.img`
   height: 40px;
   border-radius: 50%;
   margin-right: 15px;
+`;
+
+const ErrorMessage = styled.h2`
+  margin: 0;
+  padding: 0;
+  color: crimson;
+  text-align: center;
 `;
 
 interface IUser {
@@ -83,6 +111,7 @@ api.interceptors.request.use((req) => {
 const Home: React.FC = () => {
   const [searchName, setSearchName] = React.useState("");
   const [foundUsers, setFoundUsers] = React.useState<IUser[]>([]);
+  const [searchError, setSearchError] = React.useState<boolean>(false);
 
   const handleSearchValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchName(e.target.value);
@@ -95,7 +124,11 @@ const Home: React.FC = () => {
       const { data } = await api.get(`/users/${searchName}`);
       const users = data.data;
 
-      setFoundUsers(users);
+      if (users.length <= 0) {
+        setSearchError(true);
+      } else {
+        setFoundUsers(users);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -115,24 +148,28 @@ const Home: React.FC = () => {
             value={searchName}
             placeholder="Search user"
             onChange={handleSearchValueChange}
+            onFocus={() => setSearchError(false)}
           />
           <StyledButton onClick={onSearchButtonClick}>Find</StyledButton>
         </SearchBar>
 
         <StyledUsersList>
-          {foundUsers.length > 0
-            ? foundUsers.map((user) => {
-                return (
-                  <StyledUsersListItem>
+          {foundUsers.length > 0 &&
+            foundUsers.map((user) => {
+              return (
+                <StyledUsersListItem key={user.username}>
+                  <div className="wrap">
                     <StyledUserAvatar
                       src={`${API_URI}/${user.avatar}`}
                       alt=""
                     />
                     <span>{user.username}</span>
-                  </StyledUsersListItem>
-                );
-              })
-            : null}
+                  </div>
+                  <Link to={`/profile/${user.username}`}>Go to profile</Link>
+                </StyledUsersListItem>
+              );
+            })}
+          {searchError && <ErrorMessage>Users not found</ErrorMessage>}
         </StyledUsersList>
       </StyledContainer>
     </>

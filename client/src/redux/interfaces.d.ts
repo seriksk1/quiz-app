@@ -1,4 +1,4 @@
-import { Text, Answer, ID } from "./types";
+import { Text, Answer, ID, Profile } from "./types";
 
 export interface IQuizState {
   quizzes: IQuiz[] | null;
@@ -16,11 +16,11 @@ export interface IQuizState {
 }
 
 export interface IUserState {
-  avatar: string;
-
+  currentUser: IUser;
   answers: any[];
   result: number | null;
   isAuthorized: boolean;
+  profile: IUser;
 }
 
 export interface IQuiz {
@@ -41,4 +41,10 @@ export interface IAnswer {
   _id?: ID;
   text: Text;
   isRight?: boolean;
+}
+
+export interface IUser {
+  email: string;
+  username: string;
+  avatar: string;
 }

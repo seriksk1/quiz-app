@@ -76,8 +76,7 @@ const QuizCreatorForm: FC<QuizFormProps> = ({ onSubmit, submitText }) => {
         <form
           onSubmit={methods.handleSubmit(onSubmit)}
           autoComplete="off"
-          encType="multipart/form-data"
-        >
+          encType="multipart/form-data">
           <Column>
             <AddQuestionItem type="quiz" />
             <PreviewImageUpload />

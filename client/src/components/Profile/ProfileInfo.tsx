@@ -62,14 +62,14 @@ interface Props {}
 
 const ProfileInfo: FC<Props> = () => {
   const history = useHistory();
-  const { avatar } = useSelector(userSelector);
+  const { profile } = useSelector(userSelector);
   const { username } = useParams();
 
-  const statictics = [
-    { id: 1, name: "Wins", value: 1 },
-    { id: 2, name: "Plays", value: 10 },
-    { id: 3, name: "Players", value: 100 },
-  ];
+  // const statictics = [
+  //   { id: 1, name: "Wins", value: 1 },
+  //   { id: 2, name: "Plays", value: 10 },
+  //   { id: 3, name: "Players", value: 100 },
+  // ];
 
   const handleSettings = () => {
     history.push("/settings");
@@ -78,7 +78,7 @@ const ProfileInfo: FC<Props> = () => {
   return (
     <StyledProfileInfoContainer>
       <StyledProfileMainInfo>
-        <StyledProfileImage image={avatar} />
+        <StyledProfileImage image={profile.avatar} />
         <StyledProfileName>{username}</StyledProfileName>
 
         <IconButton onClick={handleSettings}>

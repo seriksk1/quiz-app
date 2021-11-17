@@ -24,7 +24,11 @@ const getUserToken = async (req, res, next) => {
     res.status(HTTP_STATUS.OK).json({
       success: true,
       token: user.token,
-      image: user.image,
+      user: {
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+      },
       message: "User logged in!",
     });
   } catch (err) {
