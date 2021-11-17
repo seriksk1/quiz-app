@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 
@@ -18,6 +17,7 @@ const verifyToken = async (req, res, next) => {
   const token = req.headers["x-access-token"];
 
   if (!token) {
+    console.log("No token!");
     return res
       .status(HTTP_STATUS.FORBIDDEN)
       .send("A token is required for authentication");

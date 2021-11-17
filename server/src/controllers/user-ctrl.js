@@ -1,8 +1,9 @@
-const AuthService = require("../services/user-service");
 const User = require("../models/user-model");
-const bodyValidator = require("../helpers/bodyValidator");
+const UserService = require("../services/user-service");
+
 const { HTTP_STATUS } = require("../constants");
 const { QueryError } = require("../helpers/errorHandler");
+const bodyValidator = require("../helpers/bodyValidator");
 
 const createUser = async (req, res, next) => {
   try {
@@ -15,38 +16,12 @@ const createUser = async (req, res, next) => {
       throw new QueryError(HTTP_STATUS.CONFLICT, "User already exist!");
     }
 
-    const newUser = await AuthService.createUser(email, password, username);
+    const newUser = await UserService.createUser(email, password, username);
 
     res.status(HTTP_STATUS.CREATED).json({
       success: true,
       token: newUser.token,
       message: "User created!",
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-const getUserToken = async (req, res, next) => {
-  try {
-    const { password, username } = req.body;
-    bodyValidator(req.body, "You must provide a body to get token");
-
-    const user = await User.findOne({ username });
-
-    if (user) {
-      user.token = await AuthService.getUserToken(username, password, user);
-    } else {
-      throw new QueryError(
-        HTTP_STATUS.NOT_FOUND,
-        "You are not registered yet!"
-      );
-    }
-
-    res.status(HTTP_STATUS.OK).json({
-      success: true,
-      token: user.token,
-      image: user.image,
-      message: "User logged in!",
     });
   } catch (err) {
     next(err);
@@ -58,10 +33,7 @@ const updateUserImage = async (req, res, next) => {
     const file = req.file.filename;
     const username = req.params.username;
 
-    console.log("file", file);
-    console.log("username", username);
-
-    await AuthService.updateUserImage(username, file);
+    await UserService.updateUserImage(username, file);
 
     res.status(HTTP_STATUS.OK).json({
       success: true,
@@ -72,8 +44,24 @@ const updateUserImage = async (req, res, next) => {
   }
 };
 
+const getUsersByName = async (req, res, next) => {
+  try {
+    const searchName = req.params.searchName;
+
+    const foundUsers = await UserService.getUsersByName(searchName);
+    console.log("getUsersByName:", foundUsers);
+
+    res.status(HTTP_STATUS.OK).json({
+      success: true,
+      data: foundUsers,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createUser,
-  getUserToken,
   updateUserImage,
+  getUsersByName,
 };

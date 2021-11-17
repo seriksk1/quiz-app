@@ -38,8 +38,8 @@ const MyQuizzesListItem: FC<Props> = ({ item, avatar }) => {
             <StyledQuizName>{item.name}</StyledQuizName>
             <StyledAboutQuizCreator>
               <StyledQuizCreator>{item.owner}</StyledQuizCreator>
-              <span>*</span>
-              <StyledPlayers>{10}k players</StyledPlayers>
+              {/* <span>*</span> */}
+              {/* <StyledPlayers>{10}k players</StyledPlayers> */}
             </StyledAboutQuizCreator>
           </StyledAboutQuiz>
 

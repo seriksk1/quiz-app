@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 const upload = require("../middleware/upload");
-const AuthCtrl = require("../controllers/user-ctrl");
+const UserController = require("../controllers/user-ctrl");
 
-router.post("/register", AuthCtrl.createUser);
-router.post("/login", AuthCtrl.getUserToken);
+router.get("/users/:searchName", UserController.getUsersByName);
 router.put(
   "/upload-avatar/:username",
   upload.single("avatar"),
-  AuthCtrl.updateUserImage
+  UserController.updateUserImage
 );
 
 module.exports = router;

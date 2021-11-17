@@ -65,7 +65,7 @@ const AvatarForm: FC<Props> = ({ name }) => {
   const dispatch = useDispatch();
 
   const [file, setFile] = useState<File>();
-  const { avatar } = useSelector(userSelector);
+  const { currentUser } = useSelector(userSelector);
 
   const handleSetFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
@@ -80,12 +80,10 @@ const AvatarForm: FC<Props> = ({ name }) => {
 
     if (file) {
       const formData = new FormData();
-      formData.append("username", localStorage.getItem("username") as string);
+      formData.append("username", currentUser.username);
       formData.append("avatar", file, file.name);
 
-      dispatch(
-        uploadFile(formData, localStorage.getItem("username") || "seriksk1")
-      );
+      dispatch(uploadFile(formData, currentUser.username));
     }
   };
 
@@ -100,8 +98,8 @@ const AvatarForm: FC<Props> = ({ name }) => {
               image={
                 file
                   ? URL.createObjectURL(file)
-                  : avatar
-                  ? `${API_URI}/${avatar}`
+                  : currentUser.avatar
+                  ? `${API_URI}/${currentUser.avatar}`
                   : "https://html5css.ru/howto/img_avatar.png"
               }
             />

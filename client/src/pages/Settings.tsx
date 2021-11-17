@@ -8,10 +8,15 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 5%;
+
+  h1 {
+    margin: 20px 0 10px;
+  }
 `;
 
 const StyledPanelsWrapper = styled.div`
   display: flex;
+  padding-top: 10px;
 
   @media ${device.tabletL} {
     flex-wrap: wrap;
@@ -21,11 +26,10 @@ const StyledPanelsWrapper = styled.div`
 const StyledTabListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 0 20px;
 
   &::after {
     content: "";
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #dcdcdc;
     margin-top: 10px;
     width: 100%;
   }
@@ -61,7 +65,7 @@ function Settings() {
       <h1>Settings</h1>
 
       <StyledTabListWrapper>
-        <StyledTabList>
+        {/* <StyledTabList>
           <StyledTabListItem to="/settings/user-info">
             User info
           </StyledTabListItem>
@@ -69,11 +73,11 @@ function Settings() {
           <StyledTabListItem to="/settings/change-password">
             Change password
           </StyledTabListItem>
-        </StyledTabList>
+        </StyledTabList> */}
       </StyledTabListWrapper>
 
       <StyledPanelsWrapper>
-        <ProfileInfoForm name="User Information" onSubmit={handleSubmit} />
+        {/* <ProfileInfoForm name="User Information" onSubmit={handleSubmit} /> */}
         <AvatarForm name="Avatar" onSubmit={handleSubmit} />
       </StyledPanelsWrapper>
     </StyledContainer>

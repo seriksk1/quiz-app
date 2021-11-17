@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { logout } from "../../redux/actions/user";
@@ -12,9 +12,11 @@ import {
 } from "@material-ui/icons";
 
 import { StyledMenuIcon, StyledNavBtn } from "./style";
+import { userSelector } from "../../redux/selectors";
+import { IUserState } from "../../redux/interfaces";
 
 function NavMenu() {
-  const owner = localStorage.getItem("username") || "";
+  const { currentUser }: IUserState = useSelector(userSelector);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -41,7 +43,7 @@ function NavMenu() {
 
   const handleProfile = () => {
     handleClose();
-    history.push(`/profile/${owner}`);
+    history.push(`/profile/${currentUser.username}`);
   };
 
   const menuItems = [
@@ -66,8 +68,7 @@ function NavMenu() {
         MenuListProps={{
           "aria-labelledby": "nav-button",
         }}
-        onClose={handleClose}
-      >
+        onClose={handleClose}>
         {menuItems &&
           menuItems.map((item) => {
             return (

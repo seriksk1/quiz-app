@@ -1,4 +1,5 @@
 const QuizService = require("../services/quiz-service");
+const UserService = require("../services/user-service");
 const { HTTP_STATUS } = require("../constants");
 
 const createQuiz = async (req, res) => {
@@ -58,8 +59,9 @@ const getQuizByOwner = async (req, res) => {
   try {
     const owner = req.params.owner;
     const items = await QuizService.getQuizByOwner(owner);
+    const user = await UserService.getUser(owner);
 
-    res.status(HTTP_STATUS.OK).json({ success: true, data: items });
+    res.status(HTTP_STATUS.OK).json({ success: true, data: items, user: user });
   } catch (err) {
     console.log(err);
   }

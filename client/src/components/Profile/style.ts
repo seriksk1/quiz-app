@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../redux/contants";
+import { device, API_URI } from "../../redux/contants";
 
 export const StyledQuizzesListItem = styled.div`
   display: flex;
@@ -88,7 +88,9 @@ export const StyledCreatorImage = styled.div(
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: url(${image});
+  background: url(${
+    image ? `${API_URI}/${image}` : "https://html5css.ru/howto/img_avatar.png"
+  });
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ACTION_QUIZ, API_URI } from "../contants";
 import { IQuiz } from "../interfaces";
-import { logout } from "./user";
+import { logout, setUserProfile } from "./user";
 
 const api = axios.create({
   baseURL: API_URI + "/api",
@@ -61,7 +61,9 @@ export const fetchUserQuizzes = (owner: string) => async (dispatch: any) => {
   try {
     const { data } = await api.get(`/quizzes/${owner}`);
     const items = data.data;
+    const user = data.user;
 
+    dispatch(setUserProfile(user));
     dispatch(setQuizzes(items));
   } catch (err) {
     dispatch(logout());

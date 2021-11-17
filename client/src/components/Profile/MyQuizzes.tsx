@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { API_URI } from "../../redux/contants";
 import { IQuizState, IUserState } from "../../redux/interfaces";
 import { quizSelector, userSelector } from "../../redux/selectors";
 import { fetchUserQuizzes } from "../../redux/actions/quiz";
@@ -14,15 +13,15 @@ function MyQuizzes() {
 
   const { username } = useParams();
   const { quizzes }: IQuizState = useSelector(quizSelector);
-  const { avatar }: IUserState = useSelector(userSelector);
+  const { profile }: IUserState = useSelector(userSelector);
 
   useEffect(() => {
     dispatch(fetchUserQuizzes(username));
-  }, []);
+  }, [username]);
 
   return (
     <>
-      <MyQuizzesList avatar={`${API_URI}/${avatar}`} items={quizzes} />
+      <MyQuizzesList avatar={profile.avatar} items={quizzes} />
     </>
   );
 }
