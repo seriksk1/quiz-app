@@ -1,9 +1,42 @@
 import React from "react";
+import * as yup from "yup";
 import { useDispatch } from "react-redux";
 
-import { AuthForm } from "../components";
 import { register } from "../redux/actions/user";
 import withAuth from "../hocs/withAuth";
+
+import { Form } from "../containers";
+import { AuthForm } from "../components";
+
+const schema = yup
+  .object({
+    email: yup.string().email().required(),
+    username: yup.string().min(6).max(20).required(),
+    password: yup.string().min(6).max(20).required(),
+  })
+  .required();
+
+const defaultValues = {
+  email: "",
+  username: "",
+  password: "",
+};
+
+type Field = {
+  type: string;
+};
+
+const fields: Field[] = [
+  {
+    type: "email",
+  },
+  {
+    type: "username",
+  },
+  {
+    type: "password",
+  },
+];
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -15,7 +48,16 @@ function SignUp() {
 
   return (
     <>
-      <AuthForm name="Register" onSubmit={handleSubmit} />
+      <Form
+        name="Register"
+        fields={fields}
+        schema={schema}
+        defaultValues={defaultValues}
+        onSubmit={handleSubmit}
+        helperText="Have account already?"
+        helperPath="/signin"
+        View={AuthForm}
+      />
     </>
   );
 }

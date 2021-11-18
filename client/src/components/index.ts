@@ -15,4 +15,4 @@ export { default as FormInput } from "./QuizCreatorForm/FormInput";
 export { default as FormCheckBox } from "./QuizCreatorForm/FormCheckBox";
 export { default as MockAnswer } from "./QuizCreatorForm/MockAnswer";
 
-export { default as AuthForm } from "./AuthForm/AuthForm";
+export { default as AuthForm } from "./AuthForm";

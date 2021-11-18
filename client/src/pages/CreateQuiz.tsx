@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { QuizCreatorForm } from "../components";
-import { clearQuiz } from "../redux/actions/quiz";
 import { createQuiz } from "../redux/actions/quizCreation";
 import { IQuiz } from "../redux/interfaces";
 
@@ -14,7 +13,8 @@ const StyledTitle = styled.h1`
 `;
 
 function CreateQuiz() {
-  const dispatch = useDispatch();
+  const history = useHistory();
+
   const handleSubmit = (quiz: IQuiz) => {
     const formData = new FormData();
     console.log(quiz);
@@ -26,6 +26,7 @@ function CreateQuiz() {
     }
 
     createQuiz(formData);
+    history.push(`/profile/${quiz.owner}`);
   };
 
   return (
