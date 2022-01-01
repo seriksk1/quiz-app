@@ -54,7 +54,7 @@ function SignUp() {
         schema={schema}
         defaultValues={defaultValues}
         onSubmit={handleSubmit}
-        helperText="Have account already?"
+        helperText="Already have an account?"
         helperPath="/signin"
         View={AuthForm}
       />

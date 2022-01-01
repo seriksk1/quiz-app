@@ -16,7 +16,7 @@ const StyledTitle = styled.h1`
 function EditQuiz() {
   const history = useHistory();
 
-  const handleSubmit = (quiz: IQuiz) => {
+  const handleSubmit = async (quiz: IQuiz) => {
     console.log(quiz);
     const formData = new FormData();
     formData.append("data", JSON.stringify(quiz));
@@ -25,8 +25,11 @@ function EditQuiz() {
       formData.append("image", quiz.image, quiz.image.name);
     }
 
-    updateQuiz(formData);
-    history.push(`/profile/${quiz.owner}`);
+    const created = await updateQuiz(formData);
+
+    if (created) {
+      history.push(`/profile/${quiz.owner}`);
+    }
   };
 
   return (

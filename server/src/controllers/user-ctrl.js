@@ -20,6 +20,11 @@ const createUser = async (req, res, next) => {
 
     res.status(HTTP_STATUS.CREATED).json({
       success: true,
+      user: {
+        username: newUser.username,
+        email: newUser.email,
+        avatar: newUser.avatar,
+      },
       token: newUser.token,
       message: "User created!",
     });

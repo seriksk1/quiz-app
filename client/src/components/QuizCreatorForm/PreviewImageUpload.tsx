@@ -14,13 +14,13 @@ const StyledContent = styled(StyledCard)`
   position: relative;
   height: 250px;
 
-  background-size: cover;
+  background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
   background-image: url(${({ image }: any) =>
     image
       ? image
-      : "https://res.cloudinary.com/practicaldev/image/fetch/s--FHfKveEJ--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/cy30ufd18lsrm45ji5pw.jpg"});
+      : "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/themes/2448615/assets/placeholder.png?1611814583819943"});
 `;
 
 const StyledChooseFile = styled.input`
@@ -66,8 +66,9 @@ const PreviewImageUpload: FC<Props> = () => {
 
   return (
     <StyledContent
-      image={file || (currentQuiz?.image && `${API_URI}/${currentQuiz?.image}`)}
-    >
+      image={
+        file || (currentQuiz?.image && `${API_URI}/${currentQuiz?.image}`)
+      }>
       <StyledLabel htmlFor="file">
         <StyledChooseFile
           id="file"

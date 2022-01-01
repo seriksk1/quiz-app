@@ -48,7 +48,7 @@ function SignIn() {
         fields={fields}
         schema={schema}
         defaultValues={defaultValues}
-        helperText="Not registered yet?"
+        helperText="Haven't registered yet?"
         helperPath="/signup"
         onSubmit={handleSubmit}
         View={AuthForm}

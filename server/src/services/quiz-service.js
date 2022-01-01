@@ -1,6 +1,6 @@
+const { deleteFile } = require("../helpers/fileSystem");
 const Quiz = require("../models/quiz-model");
 const QuestionService = require("../services/question-service");
-const { deleteFile } = require("../helpers/fileSystem");
 
 const createQuiz = async (body) => {
   try {
@@ -26,15 +26,28 @@ const createQuiz = async (body) => {
 
 const updateQuiz = async (body) => {
   try {
+    // const newQuiz = Quiz.findOneAndUpdate(
+    //   { _id: body._id },
+    //   {
+    //     $set: { name: body.name },
+    //     $set: { image: body.image },
+    //     $set: { questions: body.questions },
+    //   },
+    //   { new: true, upsert: true }
+    // );
+    // return newQuiz;
   } catch (err) {
     throw err;
   }
 };
 
-const deleteQuiz = async (id) => {
+const deleteQuiz = async (id, haveImage) => {
   try {
     const quiz = await Quiz.findById(id);
-    deleteFile(quiz.image);
+
+    if (haveImage) {
+      deleteFile(quiz.image);
+    }
 
     await Quiz.deleteOne({ _id: id });
     console.log(`Quiz ${id} is deleted`);

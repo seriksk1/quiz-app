@@ -23,8 +23,10 @@ export const setSelectedCard = (data: any) => ({
 export const createQuiz = async (formData: FormData) => {
   try {
     await api.post("/quiz", formData);
+    return true;
   } catch (err) {
     console.log(err);
+    return false;
   }
 };
 
@@ -32,7 +34,9 @@ export const updateQuiz = async (formData: FormData) => {
   try {
     const updatedQuiz = await api.put("/quiz", formData);
     console.log(updatedQuiz);
+    return true;
   } catch (err) {
     console.log(err);
+    return false;
   }
 };

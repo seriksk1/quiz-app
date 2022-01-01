@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { setCurrentQuiz, startQuiz } from "../../redux/actions/quiz";
-import { IQuiz } from "../../redux/interfaces";
+import { IQuiz, IUserState } from "../../redux/interfaces";
 
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import {
@@ -12,6 +12,7 @@ import {
   Edit as EditIcon,
   PlayArrow as PlayIcon,
 } from "@material-ui/icons";
+import { userSelector } from "../../redux/selectors";
 
 const StyledMenuButton = styled.div`
   position: absolute;
@@ -31,7 +32,10 @@ interface Props {
 const QuizMenu: FC<Props> = ({ item }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { currentUser }: IUserState = useSelector(userSelector);
+
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -61,8 +65,7 @@ const QuizMenu: FC<Props> = ({ item }) => {
           aria-haspopup="true"
           aria-controls="long-menu"
           aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-        >
+          onClick={handleClick}>
           <MoreVert />
         </IconButton>
       </StyledMenuButton>
@@ -77,20 +80,22 @@ const QuizMenu: FC<Props> = ({ item }) => {
         MenuListProps={{
           "aria-labelledby": "long-button",
         }}
-        onClose={handleClose}
-      >
+        onClose={handleClose}>
         <MenuItem onClick={handlePlay}>
           <StyledMenuIcon>
             <PlayIcon />
           </StyledMenuIcon>
           Play
         </MenuItem>
-        <MenuItem onClick={handleEdit}>
-          <StyledMenuIcon>
-            <EditIcon />
-          </StyledMenuIcon>
-          Edit
-        </MenuItem>
+
+        {item.owner === currentUser.username && (
+          <MenuItem onClick={handleEdit}>
+            <StyledMenuIcon>
+              <EditIcon />
+            </StyledMenuIcon>
+            Edit
+          </MenuItem>
+        )}
       </Menu>
     </>
   );

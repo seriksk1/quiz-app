@@ -7,7 +7,7 @@ import { schema } from "./validation";
 import { IQuestion, IQuiz } from "../../redux/interfaces";
 
 import { AddQuestionList, AddQuestionItem, PreviewImageUpload } from ".";
-import { quizSelector } from "../../redux/selectors";
+import { quizSelector, userSelector } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -53,7 +53,8 @@ type FormValues = {
 
 const QuizCreatorForm: FC<QuizFormProps> = ({ onSubmit, submitText }) => {
   const { currentQuiz } = useSelector(quizSelector);
-  const owner: string = localStorage.getItem("username") || "";
+  const { currentUser } = useSelector(userSelector);
+  const owner: string = currentUser.username;
 
   const defaultValues: IQuiz = currentQuiz || {
     name: "",

@@ -155,17 +155,21 @@ const Home: React.FC = () => {
 
         <StyledUsersList>
           {foundUsers.length > 0 &&
-            foundUsers.map((user) => {
+            foundUsers.map(({ username, avatar }) => {
               return (
-                <StyledUsersListItem key={user.username}>
+                <StyledUsersListItem key={username}>
                   <div className="wrap">
                     <StyledUserAvatar
-                      src={`${API_URI}/${user.avatar}`}
+                      src={
+                        avatar
+                          ? `${API_URI}/${avatar}`
+                          : "https://html5css.ru/howto/img_avatar.png"
+                      }
                       alt=""
                     />
-                    <span>{user.username}</span>
+                    <span>{username}</span>
                   </div>
-                  <Link to={`/profile/${user.username}`}>Go to profile</Link>
+                  <Link to={`/profile/${username}`}>Go to profile</Link>
                 </StyledUsersListItem>
               );
             })}

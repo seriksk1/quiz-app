@@ -8,6 +8,7 @@ import { IconButton } from "@material-ui/core";
 import { SettingsOutlined as SettingsIcon } from "@material-ui/icons";
 import { API_URI, device } from "../../redux/contants";
 import { userSelector } from "../../redux/selectors";
+import { IUserState } from "../../redux/interfaces";
 
 const StyledProfileInfoContainer = styled.div`
   display: flex;
@@ -62,7 +63,7 @@ interface Props {}
 
 const ProfileInfo: FC<Props> = () => {
   const history = useHistory();
-  const { profile } = useSelector(userSelector);
+  const { profile, currentUser } = useSelector(userSelector);
   const { username } = useParams();
 
   // const statictics = [
@@ -81,9 +82,11 @@ const ProfileInfo: FC<Props> = () => {
         <StyledProfileImage image={profile.avatar} />
         <StyledProfileName>{username}</StyledProfileName>
 
-        <IconButton onClick={handleSettings}>
-          <SettingsIcon />
-        </IconButton>
+        {username === currentUser.username && (
+          <IconButton onClick={handleSettings}>
+            <SettingsIcon />
+          </IconButton>
+        )}
       </StyledProfileMainInfo>
 
       {/* <StyledProfileStatistics>

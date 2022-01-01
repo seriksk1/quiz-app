@@ -1,6 +1,7 @@
 const QuizService = require("../services/quiz-service");
 const UserService = require("../services/user-service");
 const { HTTP_STATUS } = require("../constants");
+const { deleteFile } = require("../helpers/fileSystem");
 
 const createQuiz = async (req, res) => {
   try {
@@ -21,12 +22,16 @@ const createQuiz = async (req, res) => {
 const updateQuiz = async (req, res) => {
   try {
     let body = { ...JSON.parse(req.body.data) };
+    let haveImage = false;
 
     if (req.file) {
       body = { ...body, image: req.file.filename };
+      haveImage = Boolean(req.file);
     }
+    // const newQuiz = await QuizService.updateQuiz(body);
 
-    await QuizService.deleteQuiz(body._id);
+    await QuizService.deleteQuiz(body._id, haveImage);
+
     const newQuiz = await QuizService.createQuiz(body);
 
     res.status(HTTP_STATUS.OK).json({ success: true, data: newQuiz });
