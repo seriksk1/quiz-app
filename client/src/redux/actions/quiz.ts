@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ACTION_QUIZ, API_URI } from "../contants";
+import { ACTION_QUIZ, API_URI, TOAST_OPTION } from "../contants";
 import { IQuiz } from "../interfaces";
+import { showNotification } from "./notification";
 import { logout, setUserProfile } from "./user";
 
 const api = axios.create({
@@ -52,7 +53,7 @@ export const fetchQuizzes = () => async (dispatch: any) => {
 
     dispatch(setQuizzes(items));
   } catch (err) {
-    dispatch(logout());
+    dispatch([logout(), showNotification(TOAST_OPTION.USER.SESSION_TIMEOUT)]);
     console.log(err);
   }
 };
@@ -66,7 +67,7 @@ export const fetchUserQuizzes = (owner: string) => async (dispatch: any) => {
     dispatch(setUserProfile(user));
     dispatch(setQuizzes(items));
   } catch (err) {
-    dispatch(logout());
+    dispatch([logout(), showNotification(TOAST_OPTION.USER.SESSION_TIMEOUT)]);
     console.log(err);
   }
 };

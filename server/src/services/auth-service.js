@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const { QueryError } = require("../helpers/errorHandler");
+const { HTTP_STATUS } = require("../constants");
 
 const getSignedToken = async (user_id, username) => {
   return await jwt.sign({ user_id, username }, process.env.TOKEN_KEY, {

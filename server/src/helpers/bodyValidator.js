@@ -1,4 +1,4 @@
-const { QueryError } = require("../middleware/error");
+const { QueryError } = require("./errorHandler");
 const { HTTP_STATUS } = require("../constants");
 
 const bodyValidator = (obj, errMessage) => {

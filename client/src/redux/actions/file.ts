@@ -1,6 +1,7 @@
 import axios from "axios";
-import { API_URI } from "../contants";
+import { API_URI, TOAST_OPTION } from "../contants";
 import { IUser } from "../interfaces";
+import { showNotification } from "./notification";
 import { setAvatar } from "./user";
 
 const api = axios.create({
@@ -27,8 +28,12 @@ export const uploadFile =
 
       localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      dispatch(setAvatar(avatarUrl));
+      dispatch([
+        setAvatar(avatarUrl),
+        showNotification(TOAST_OPTION.SETTINGS.AVATAR_CHANGE),
+      ]);
     } catch (err) {
+      dispatch(showNotification(TOAST_OPTION.SETTINGS.AVATAR_CHANGE_ERROR));
       console.log("Upload error");
     }
   };

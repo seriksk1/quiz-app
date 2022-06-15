@@ -23,6 +23,16 @@ export interface IUserState {
   profile: IUser;
 }
 
+export interface INotificationState {
+  notification: INotification;
+  isActive: boolean;
+}
+
+export interface INotification {
+  message: string;
+  type: NotificationType;
+}
+
 export interface IQuiz {
   _id?: ID;
   name: string;

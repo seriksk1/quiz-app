@@ -1,9 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { QuizCreatorForm } from "../components";
+import { showNotification } from "../redux/actions/notification";
 import { createQuiz } from "../redux/actions/quizCreation";
+import { TOAST_OPTION } from "../redux/contants";
 import { IQuiz } from "../redux/interfaces";
 
 const StyledTitle = styled.h1`
@@ -14,6 +17,7 @@ const StyledTitle = styled.h1`
 
 function CreateQuiz() {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (quiz: IQuiz) => {
     const formData = new FormData();
@@ -29,6 +33,9 @@ function CreateQuiz() {
 
     if (created) {
       history.push(`/profile/${quiz.owner}`);
+      dispatch(showNotification(TOAST_OPTION.QUIZ.CREATE));
+    } else {
+      dispatch(showNotification(TOAST_OPTION.QUIZ.ERROR_CREATE));
     }
   };
 

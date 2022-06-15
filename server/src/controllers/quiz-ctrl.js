@@ -54,6 +54,7 @@ const deleteQuiz = async (req, res) => {
 const getQuizzes = async (req, res) => {
   try {
     const items = await QuizService.getQuizzes();
+
     res.status(HTTP_STATUS.OK).json({ success: true, data: items });
   } catch (err) {
     console.log(err);

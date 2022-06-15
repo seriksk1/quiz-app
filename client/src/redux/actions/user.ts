@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ACTION_USER, API_URI } from "../contants";
+import { ACTION_USER, API_URI, HTTP_STATUS, TOAST_OPTION } from "../contants";
 import { IUser } from "../interfaces";
+import { showNotification } from "./notification";
 
 const api = axios.create({
   baseURL: API_URI + "/auth",
@@ -47,8 +48,13 @@ export const register =
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      dispatch([setUser(data.user), registerSuccess()]);
+      dispatch([
+        setUser(data.user),
+        registerSuccess(),
+        showNotification(TOAST_OPTION.USER.REGISTER_SUCCESS),
+      ]);
     } catch (err) {
+      showNotification(TOAST_OPTION.USER.REGISTER_ERROR);
       console.log(err);
     }
   };
@@ -60,8 +66,19 @@ export const login = (credentials: ICredentials) => async (dispatch: any) => {
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
 
-    dispatch([setUser(data.user), loginSuccess()]);
-  } catch (err) {
+    dispatch([
+      setUser(data.user),
+      loginSuccess(),
+      showNotification(TOAST_OPTION.USER.LOGIN_SUCCESS),
+    ]);
+  } catch (err: any) {
+    const status = err?.response?.data?.statusCode;
+
+    if (status === HTTP_STATUS.BAD_REQUEST) {
+      dispatch(showNotification(TOAST_OPTION.USER.LOGIN_WRONG_PASSWORD));
+    } else if (status === HTTP_STATUS.NOT_FOUND) {
+      dispatch(showNotification(TOAST_OPTION.USER.LOGIN_NOT_FOUND));
+    }
     console.log(err);
   }
 };
@@ -70,5 +87,5 @@ export const logout = () => (dispatch: any) => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
 
-  dispatch(logoutSuccess());
+  dispatch([logoutSuccess(), showNotification(TOAST_OPTION.USER.LOGOUT)]);
 };

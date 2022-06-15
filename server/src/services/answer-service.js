@@ -8,6 +8,7 @@ const createAnswer = async (questionId, answer) => {
       text: answer.text,
       isRight: answer.isRight,
     });
+
     await newAnswer.save();
 
     await Question.findByIdAndUpdate(

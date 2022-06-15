@@ -23,7 +23,9 @@ const updateQuestion = async () => {
 const deleteQuestion = async (req, res) => {
   try {
     const id = req.params.id;
+
     await QuestionService.deleteQuestion(id);
+
     res.status(HTTP_STATUS.OK).json({ success: true });
   } catch (err) {
     console.log(err);

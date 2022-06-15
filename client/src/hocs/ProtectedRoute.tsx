@@ -5,6 +5,7 @@ import { userSelector } from "../redux/selectors";
 
 const ProtectedRoute = ({ component: Component, ...props }: any) => {
   const { isAuthorized } = useSelector(userSelector);
+
   return isAuthorized ? (
     <Route {...props} component={Component} />
   ) : (

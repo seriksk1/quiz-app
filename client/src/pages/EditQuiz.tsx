@@ -6,6 +6,9 @@ import { updateQuiz } from "../redux/actions/quizCreation";
 import { IQuiz } from "../redux/interfaces";
 
 import QuizCreatorForm from "../components/QuizCreatorForm/QuizCreatorForm";
+import { useDispatch } from "react-redux";
+import { showNotification } from "../redux/actions/notification";
+import { TOAST_OPTION } from "../redux/contants";
 
 const StyledTitle = styled.h1`
   margin: 0;
@@ -15,6 +18,7 @@ const StyledTitle = styled.h1`
 
 function EditQuiz() {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (quiz: IQuiz) => {
     console.log(quiz);
@@ -29,6 +33,9 @@ function EditQuiz() {
 
     if (created) {
       history.push(`/profile/${quiz.owner}`);
+      dispatch(showNotification(TOAST_OPTION.QUIZ.CHANGE));
+    } else {
+      dispatch(showNotification(TOAST_OPTION.QUIZ.ERROR_CHANGE));
     }
   };
 

@@ -1,6 +1,5 @@
 const User = require("../models/user-model");
 const UserService = require("../services/user-service");
-
 const { HTTP_STATUS } = require("../constants");
 const { QueryError } = require("../helpers/errorHandler");
 const bodyValidator = require("../helpers/bodyValidator");
@@ -8,11 +7,12 @@ const bodyValidator = require("../helpers/bodyValidator");
 const createUser = async (req, res, next) => {
   try {
     const { email, password, username } = req.body;
-    bodyValidator(req.body, "You must provide a body to create create");
+    bodyValidator(req.body, "You must provide a body to create user");
 
-    const oldUser =
+    const isUserExists =
       (await User.findOne({ email })) || (await User.findOne({ username }));
-    if (oldUser) {
+
+    if (isUserExists) {
       throw new QueryError(HTTP_STATUS.CONFLICT, "User already exist!");
     }
 
@@ -52,7 +52,6 @@ const updateUserImage = async (req, res, next) => {
 const getUsersByName = async (req, res, next) => {
   try {
     const searchName = req.params.searchName;
-
     const foundUsers = await UserService.getUsersByName(searchName);
     console.log("getUsersByName:", foundUsers);
 

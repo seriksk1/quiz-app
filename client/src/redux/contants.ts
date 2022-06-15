@@ -51,6 +51,88 @@ export const ACTION_USER = {
   CLEAR_ANSWERS: "CLEAR_ANSWERS",
 };
 
+export const ACTION_NOTIFICATIONS = {
+  SET_NOTIFICATION: "SET_MESSAGE",
+  CLEAN: "CLEAN_NOTIFICATION",
+};
+
+export const TOAST_OPTION = {
+  QUIZ: {
+    CREATE: {
+      type: "success",
+      message: "Quiz has been created successfully!",
+    },
+    ERROR_CREATE: {
+      type: "error",
+      message: "Error! Quiz hasn't been created!",
+    },
+    REMOVE: {
+      type: "success",
+      message: "Quiz has been removed successfully!",
+    },
+    ERROR_REMOVE: {
+      type: "error",
+      message: "Error! Quiz hasn't been removed!",
+    },
+    CHANGE: {
+      type: "success",
+      message: "Quiz status has been changed successfully!",
+    },
+    ERROR_CHANGE: {
+      type: "error",
+      message: "Error! Quiz status hasn't changed!",
+    },
+  },
+  SETTINGS: {
+    AVATAR_CHANGE: {
+      type: "success",
+      message: "Your avatar has been changed successfully!",
+    },
+    AVATAR_CHANGE_ERROR: {
+      type: "error",
+      message: "Your avatar hasn't been changed!",
+    },
+  },
+  USER: {
+    LOGIN_SUCCESS: {
+      type: "info",
+      message: "You are logged in!",
+    },
+    LOGIN_NOT_FOUND: {
+      type: "error",
+      message: "You are not registered yet!",
+    },
+    LOGIN_WRONG_PASSWORD: {
+      type: "error",
+      message: "Wrong password!",
+    },
+    REGISTER_SUCCESS: {
+      type: "success",
+      message: "Registration success!",
+    },
+    REGISTER_ERROR: {
+      type: "error",
+      message: "User already exists!",
+    },
+    LOGOUT: {
+      type: "info",
+      message: "You are logged out!",
+    },
+    SESSION_TIMEOUT: {
+      type: "error",
+      message: "Your session has timed out. Please login again.",
+    },
+    ACTION_ERROR: {
+      type: "error",
+      message: "It doesn't seem to work...",
+    },
+  },
+  INTERNAL_SERVER: {
+    type: "error",
+    message: "Service is not working now!",
+  },
+};
+
 export const TIME_TO_ANSWER = 10;
 
 // For media queries
@@ -80,4 +162,15 @@ export const device = {
   laptopL: `(max-width: ${deviceSize.laptopL})`,
   desktop: `(max-width: ${deviceSize.desktop})`,
   desktopL: `(max-width: ${deviceSize.desktop})`,
+};
+
+export const HTTP_STATUS = {
+  OK: 200,
+  CREATED: 201,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+  INTERNAL_SERVER: 500,
 };
