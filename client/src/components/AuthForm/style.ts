@@ -7,7 +7,7 @@ export const SubmitButton = styled.button`
   width: fit-content;
   margin: 0px 10px 25px;
   padding: 10px 15px;
-  background-color: #309d8f;
+  background-color: red;
   cursor: pointer;
   border-radius: 5px;
   border: none;
@@ -34,7 +34,7 @@ export const Container = styled.div`
 export const Field = styled(TextField)`
   & input {
     font-size: 16px;
-    width: 260px;
+    width: 280px;
   }
 `;
 

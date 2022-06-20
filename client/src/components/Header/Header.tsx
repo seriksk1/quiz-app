@@ -6,7 +6,7 @@ import { StyledHeader, StyledLinkTitle } from "./style";
 const Header: FC = () => {
   return (
     <StyledHeader>
-      <StyledLinkTitle to="/">Quiz Time</StyledLinkTitle>
+      <StyledLinkTitle to="/">Quiz Times</StyledLinkTitle>
       <NavBar />
     </StyledHeader>
   );
